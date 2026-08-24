@@ -86,8 +86,10 @@
   --rung-5: var(--leaf-900);
 
   --trunk:   452px;   /* the middle column: node cards sit on the rail */
-  --wingmin: 210px;
-  --chainmax: 1000px; /* the figure is a drawing, not a page width */
+  --wingmin: 268px;
+  --chainmax: 1148px; /* the figure is a drawing, not a page width */
+  --shot-w:  104px;   /* the margin photographs */
+  --shot-h:  78px;
   --v2-ease: cubic-bezier(.16, 1, .3, 1);
   --v2-dur:  190ms;
 }
@@ -120,6 +122,10 @@
   display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sp-4); row-gap: var(--sp-2);
   max-width: var(--chainmax); margin: 0 auto var(--sp-6);
   padding-bottom: var(--sp-3); border-bottom: 1px solid var(--gray-200);
+}
+.key__note {
+  order: 9; flex-basis: 100%; margin: 0;
+  font-size: var(--text-sm); line-height: 1.5; color: var(--gray-600); max-width: 78ch;
 }
 .key__lab {
   margin-right: auto;
@@ -215,9 +221,62 @@
 
 /* ── the wings ─────────────────────────────────────────────────────────── */
 
-.wing { display: flex; flex-direction: column; row-gap: var(--sp-2); }
-.wing--l { grid-column: 1; align-items: flex-end; }
-.wing--r { grid-column: 3; align-items: flex-start; }
+.wing { display: flex; flex-direction: column; row-gap: var(--sp-3); }
+.wing--l { grid-column: 1; }
+.wing--r { grid-column: 3; }
+
+/* A piece of work is a card and, outboard of it in the margin, a photograph of
+   the day it happened. Markup order is always figure then card; the right wing
+   reverses so the photograph always sits on the outside and the cards stay
+   flush against the trunk. */
+/* Two fixed columns per wing, so every photograph in a margin shares one edge
+   and every card sits flush against the trunk. Ragged margins were the thing
+   that made an earlier pass of this look like clutter. */
+.feed { width: 100%; display: grid; column-gap: var(--sp-3); align-items: center; }
+.wing--l .feed { grid-template-columns: var(--shot-w) minmax(0, 1fr); }
+.wing--r .feed { grid-template-columns: minmax(0, 1fr) var(--shot-w); }
+.wing--l .feed > .chip { grid-column: 2; justify-self: end; }
+.wing--r .feed > .shot { grid-column: 2; grid-row: 1; }
+.wing--r .feed > .chip { grid-column: 1; grid-row: 1; justify-self: start; }
+.feed[data-zone="bio"] { --zone: var(--leaf-100);  --zone-ink: var(--leaf-700);  --zone-line: var(--leaf-200); }
+.feed[data-zone="eng"] { --zone: var(--slate-100); --zone-ink: var(--slate-700); --zone-line: #c3d4e2; }
+.feed[data-zone="dep"] { --zone: var(--amber-100); --zone-ink: var(--amber-700); --zone-line: #ecd7a4; }
+
+/* ── the margin photographs ────────────────────────────────────────────
+   Ours, from the day the work happened. They sit quiet by default, held back
+   in saturation and opacity so they read as a contact sheet beside the figure
+   rather than competing with it, and they come up to full when the card they
+   belong to is pointed at. No captions: a caption per photograph would be the
+   mess this arrangement is trying to avoid, and the card beside each one
+   already names it. The detail lives in alt text, where a screen reader gets
+   it and the drawing does not have to carry it. */
+.shot { flex: none; width: var(--shot-w); margin: 0; }
+.shot img,
+.shot .mdanim {
+  display: block; width: var(--shot-w); height: var(--shot-h);
+  border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+  background: var(--gray-100);
+  transition: opacity var(--v2-dur) var(--v2-ease),
+              filter  var(--v2-dur) var(--v2-ease),
+              border-color var(--v2-dur) var(--v2-ease);
+}
+.shot img { object-fit: cover; filter: saturate(.8) contrast(1.02); opacity: .84; }
+.shot .mdanim { background: var(--leaf-50); opacity: .9; }
+
+.feed:has(.chip[data-lit]) .shot img,
+.bridgerow:has(.bridge[data-lit]) .shot img {
+  filter: none; opacity: 1; border-color: var(--zone-ink, var(--leaf-700));
+}
+.feed:has(.chip[data-lit]) .shot .mdanim { opacity: 1; border-color: var(--leaf-700); }
+.feed:has(.chip[data-rel]) .shot img { opacity: .9; border-color: var(--amber-700); }
+
+/* the trajectory, drawn from our own run. Colours come through the icon
+   palette so the animation is in the same voice as the glyphs. */
+.md-band   { stroke: var(--i-s2); stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
+.md-pocket { fill: #8fa6ba; opacity: .5; }
+.md-anchor { fill: var(--i-a7); }
+.md-chain  { stroke: var(--i-g7); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.md-tip    { fill: var(--i-lt); stroke: var(--i-g9); stroke-width: 1.6; }
 
 .chip {
   position: relative;
@@ -246,9 +305,6 @@
 .wing--l .chip::after { left: 100%; }
 .wing--r .chip::after { right: 100%; }
 
-.chip[data-feeds="bio"] { --zone: var(--leaf-100);  --zone-ink: var(--leaf-700);  --zone-line: var(--leaf-200); }
-.chip[data-feeds="eng"] { --zone: var(--slate-100); --zone-ink: var(--slate-700); --zone-line: #c3d4e2; }
-.chip[data-feeds="dep"] { --zone: var(--amber-100); --zone-ink: var(--amber-700); --zone-line: #ecd7a4; }
 
 .chip[data-lit] {
   background: var(--white); border-color: var(--zone-ink, var(--leaf-700));
@@ -448,7 +504,8 @@
 .spine[data-focus] .node:not([data-lit]) .node__core,
 .spine[data-focus] .chip:not([data-lit]):not([data-rel]),
 .spine[data-focus] .bridge:not([data-lit]) { opacity: .42; }
-.node__core, .chip, .bridge, .moment { transition: opacity var(--v2-dur) var(--v2-ease); }
+.spine[data-focus] .feed:not(:has(.chip[data-lit])):not(:has(.chip[data-rel])) .shot { opacity: .34; }
+.node__core, .chip, .bridge, .moment, .shot { transition: opacity var(--v2-dur) var(--v2-ease); }
 
 /* =============================================================================
    ENTRANCE. One shot, added by script so the page is complete without it.
@@ -456,9 +513,11 @@
 
 .will-rise .node__core,
 .will-rise .chip,
+.will-rise .shot,
 .will-rise .bridge { opacity: 0; transform: translateY(10px); }
 .will-rise.in .node__core,
 .will-rise.in .chip,
+.will-rise.in .shot,
 .will-rise.in .bridge {
   opacity: 1; transform: none;
   transition: opacity 460ms var(--v2-ease), transform 460ms var(--v2-ease);
@@ -472,10 +531,11 @@
 .will-rise.in .node:nth-child(9)  .node__core,
 .will-rise.in .node:nth-child(9)  .chip { transition-delay: 280ms; }
 .will-rise.in .bridge { transition-delay: 350ms; }
+.will-rise.in .shot { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
-  .will-rise .node__core, .will-rise .chip, .will-rise .bridge { opacity: 1; transform: none; }
+  .will-rise .node__core, .will-rise .chip, .will-rise .shot, .will-rise .bridge { opacity: 1; transform: none; }
 }
 
 /* =============================================================================
@@ -497,9 +557,15 @@
   .node__core { order: -1; margin-left: calc(var(--sp-5) * -1 - 2px); }
   .link { height: 26px; padding-left: var(--sp-5); border-left: 2px solid var(--leaf-200); }
   .link__rail { display: none; }
-  .wing { flex-direction: row; flex-wrap: wrap; align-items: flex-start; column-gap: var(--sp-2); }
+  .wing { flex-direction: row; flex-wrap: wrap; align-items: flex-start; column-gap: var(--sp-4); }
   .wing--l, .wing--r { justify-content: flex-start; }
+  .feed { width: auto; grid-template-columns: var(--shot-w) auto; }
+  .wing--l .feed, .wing--r .feed { grid-template-columns: var(--shot-w) auto; }
+  .wing--l .feed > .chip, .wing--r .feed > .chip { grid-column: 2; grid-row: 1; justify-self: start; }
+  .wing--r .feed > .shot { grid-column: 1; grid-row: 1; }
   .chip::after { display: none; }
+  :root { --shot-w: 64px; --shot-h: 48px; }
+  .bridgerow .wing--r { margin-top: var(--sp-3); }
   .moment { grid-template-columns: 1fr; row-gap: var(--sp-2); }
   .moment__mark { grid-template-columns: 15px auto; }
   .week::before { left: 7px; }

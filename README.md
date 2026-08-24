@@ -69,8 +69,53 @@ on ink, sits **the week**, which is the payoff.
   V1 did not need, because V1 had labelled zone bands behind its lanes and a vertical trunk has no
   lanes to label. It is a key that does something, which is the only kind worth having.
 - **Point at a moment in the week** and the verb it came out of lights, up the page.
+- **Point at anything and the photographs follow it.** A card's picture comes up to full colour with
+  it, a marked cross-link's comes part way, and the rest of the contact sheet steps back.
 
 Keyboard reaches all of it: thirty focusable elements, and focus runs the same code path as hover.
+
+## The margins
+
+Every card carries a photograph of the work, outboard of it in the margin, from
+`iGEM2026_Images` (filenames are `YYYYMMDD_Subteam_Type_Description`, and the date is the day the
+photograph was taken). Fifteen of them, plus the trajectory below.
+
+Four decisions keep this from turning into clutter, and they are the point of the arrangement:
+
+1. **Two fixed columns per wing.** Every picture in a margin shares one edge and every card sits
+   flush against the trunk. An earlier pass let each pair size itself, and the ragged inner edge was
+   the thing that read as mess.
+2. **They sit quiet until they are wanted.** Held back in saturation and opacity, they read as a
+   contact sheet running down the sides rather than as fifteen pictures competing with the figure.
+   The card being pointed at brings its own up to full.
+3. **No captions.** A caption under each one is exactly the mess this is trying to avoid, and the
+   card beside it already names the work. The detail, including the date, lives in `alt`, where a
+   screen reader gets it and the drawing does not have to carry it.
+4. **The dark act has no photographs at all.** The light half is the record and the pictures are
+   evidence for it. The week at the end is a projection: none of it has happened, so there is
+   nothing to photograph, and putting real pictures beside a hypothetical week would be the one
+   dishonest thing on the page.
+
+## The trajectory
+
+The margin of **Design and docking** is not a photograph. It is 46 frames of our own MD run,
+`R1_BoPep4_WT_PEPR1`: 30 ns of production, BoPep4 in the PEPR1 groove, drawn straight out of
+`21_MD_Simulation/results/R1_BoPep4_WT_PEPR1_out/stripped.dcd`.
+
+- Every frame is superposed on the receptor Cα, so what moves is the peptide and not the view.
+- The pale band behind the chain is the envelope the backbone stays inside across the window, which
+  is the picture of the acceptance criterion: receptor Cα RMSD 1.59 Å, peptide backbone RMSD 2.77 Å.
+- **Green is Asn23, amber is Arg487.** They stay together for the whole loop because in the run they
+  were within 4 Å in 100 % of frames. That is the result, drawn rather than asserted.
+- The 46 frames are the window whose last frame is closest to its first, so the loop closes without
+  a jump. Closure is 0.68 Å in the projection.
+
+It is **still until it is pointed at**. The frames live in `data-frames` on the SVG and are stepped
+by the script, so with scripting off it is one frame and nothing on this page moves on its own.
+Under `prefers-reduced-motion` it never steps. Regenerating it is two scripts kept
+beside the page: `tools_md_extract.py` reads the parm7 and the DCD with no MD libraries installed
+and writes the Cα coordinates, and `tools_md_svg.py` superposes, projects, picks the loop window and
+emits the SVG. Neither runs at page load; the reader only ever gets the finished drawing.
 
 ## The week at the end
 
@@ -121,7 +166,9 @@ the key, so a card's home is legible before a word on it is read.
 **The ramp** says direction. The five node badges walk light to dark down the trunk, and so does the
 accent bar on each card. It is the only cue in the figure that says which way to read it.
 
-**The icons** are coloured by what the object actually is.
+**The icons** are coloured by what the object actually is. So is the trajectory: its chain, its
+envelope and its two marked residues all come through the same icon palette, so the one moving thing
+on the page is in the same voice as the glyphs.
 
 Amber has one more job, and only one: **marking a cross-link**. It never means anything else.
 
@@ -148,21 +195,27 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 ## Behaviour worth keeping
 
 - **Readable with no JavaScript and no motion.** The hidden state of the entrance is added by
-  script, never by the stylesheet, so with scripting off the drawing is simply there. There is also
-  a 1400 ms fallback that reveals the figure if the observer never fires, because a figure is never
-  allowed to stay invisible.
+  script, never by the stylesheet, so with scripting off the drawing is simply there, photographs
+  and all, with the trajectory on its first frame. There is also a 1400 ms fallback that reveals the
+  figure if the observer never fires, because a figure is never allowed to stay invisible.
 - **No horizontal scroll, and no drag gesture to explain.** The trunk is vertical, so the drawing is
   never wider than the column. V1 needed a scroll frame and a line of text telling you to drag it;
   this one does not, which is the quiet practical win of turning the figure ninety degrees.
 - **Under 900px** the trunk moves to the left edge and each node's work stacks underneath it, node
   first. Same markup, no second copy of the content to keep in sync.
-- **Two motion primitives only**: one entrance on first sight, one highlight on point. Nothing
-  scales, nothing bounces, and focus rings are never transitioned.
+- **Two motion primitives only**: one entrance on first sight, one highlight on point. The
+  trajectory belongs to the second of those, because it runs only while its card is pointed at. It
+  is deliberately not a third, always-on animation. Nothing scales, nothing bounces, and focus rings
+  are never transitioned.
+- The trajectory is stepped on `requestAnimationFrame`, so a background tab costs nothing. SMIL was
+  tried first and dropped: pausing a SMIL timeline before it has ever run wedges it at zero.
 - `prefers-reduced-motion` turns every transition off, including the entrance.
 
 ## Merging into the homepage
 
-1. Copy `assets/css/big-picture-v2.css` and `assets/js/big-picture-v2.js` into the wiki's `assets/`.
+1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js` and the fifteen files in
+   `assets/img/` into the wiki's `assets/`. The image paths in the markup are relative
+   (`assets/img/*.jpg`), so they need no edit if the wiki keeps the same layout.
 2. Paste **both** `<section>` elements into `index.html`: the white `section.bpv2` and the ink
    `section.band--dark.act` that follows it. Include the `<svg class="sprite">` block at the top of
    the first one. The sprite has to travel with the section: a `<use href="external.svg#id">` does
@@ -193,6 +246,10 @@ Everything readable is in `index.html`. The script holds no content of its own.
 - **A card** is a `.chip` with an `id`, `data-feeds="bio|eng|dep"`, `data-at="<node number>"`, an
   optional `data-with="<space separated ids>"`, and an `<svg class="ico">` pointing at a symbol in
   the sprite. Adding a piece of work is one element and no JavaScript.
+- **A card and its photograph** are a `.feed` with `data-zone` matching the card's `data-feeds`,
+  holding a `<figure class="shot">` and then the `.chip`, in that order. The right wing puts the
+  figure back on the outside itself, so the markup order never changes. Swapping a photograph is one
+  `src` and one `alt`; the `alt` should name what is in the frame and the date, and nothing more.
 - **A segment** is a `.link` with `data-seg`, matching the node it leaves.
 - **A moment** in the week is a `.moment` with `data-node`, naming the verb it came out of.
 - **A slot** is a `.slot` with a `<b>` label and one sentence saying what would fill it.

@@ -43,10 +43,58 @@
   var moments = [].slice.call(document.querySelectorAll(".moment"));
   var keys    = [].slice.call(spine.querySelectorAll(".key__item"));
 
+  /* The trajectory in the margin of "Design and docking". Forty-six frames of
+     our own 30 ns run live in data attributes on the SVG, so with scripting off
+     the drawing is a still frame and nothing on this page moves on its own. The
+     frames are stepped here rather than by SMIL, which turned out to wedge its
+     timeline if you pause it before it has ever run. It plays only while the
+     card it belongs to is pointed at or focused, which folds it into the
+     highlight primitive rather than adding a third one that never stops. */
+  var mdSvg   = document.querySelector(".shot--md .mdanim");
+  var mdOwner = document.getElementById("c-docking");
+  var mdOn    = false;
+
   /* ---------------------------------------------------------- 1  reveal --- */
 
   var reduced = window.matchMedia &&
                 window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var mdFrames, mdChain, mdTip, mdX, mdY, mdRaf = 0, mdT0 = 0, mdAt = -1;
+  if (mdSvg && !reduced) {
+    mdFrames = (mdSvg.getAttribute("data-frames") || "").split(";");
+    mdX      = (mdSvg.getAttribute("data-tipx")   || "").split(";");
+    mdY      = (mdSvg.getAttribute("data-tipy")   || "").split(";");
+    mdChain  = mdSvg.querySelector(".md-chain");
+    mdTip    = mdSvg.querySelector(".md-tip");
+    if (mdFrames.length < 2 || !mdChain) mdSvg = null;
+  }
+
+  var MD_MS = 74;                        /* per frame; 46 frames is a 3.4 s loop */
+
+  function mdStep(ts) {
+    if (!mdT0) mdT0 = ts;
+    var i = Math.floor((ts - mdT0) / MD_MS) % mdFrames.length;
+    if (i !== mdAt) {
+      mdAt = i;
+      mdChain.setAttribute("d", mdFrames[i]);
+      if (mdTip) { mdTip.setAttribute("cx", mdX[i]); mdTip.setAttribute("cy", mdY[i]); }
+    }
+    mdRaf = window.requestAnimationFrame(mdStep);
+  }
+
+  function md(run) {
+    if (!mdSvg || reduced || mdOn === run) return;
+    mdOn = run;
+    if (run) {
+      mdT0 = 0;
+      mdRaf = window.requestAnimationFrame(mdStep);
+    } else {
+      window.cancelAnimationFrame(mdRaf);
+      mdRaf = 0; mdAt = 0;
+      mdChain.setAttribute("d", mdFrames[0]);          /* back to the first frame */
+      if (mdTip) { mdTip.setAttribute("cx", mdX[0]); mdTip.setAttribute("cy", mdY[0]); }
+    }
+  }
 
   if (!reduced && "IntersectionObserver" in window) {
     spine.classList.add("will-rise");
@@ -67,6 +115,7 @@
   /* -------------------------------------------------------- 2  emphasis --- */
 
   function clear() {
+    md(false);
     spine.removeAttribute("data-focus");
     nodes.forEach(function (n) { n.removeAttribute("data-lit"); });
     links.forEach(function (l) { l.removeAttribute("data-flow"); });
@@ -136,6 +185,7 @@
 
     if (el.classList.contains("chip")) {                  /* a piece of work */
       el.setAttribute("data-lit", "");
+      if (el === mdOwner && !reduced) md(true);
       runOut(at(el));
       relate(el);                  /* after, so a lit node is never also marked */
     }
