@@ -1,0 +1,517 @@
+/* Hallmark · component: homepage section (interactive figure) · genre: editorial
+ * theme: releaf-wiki project system (assets/css/tokens.css, copied verbatim)
+ * states: default · hover · focus-visible · lit · rel · dimmed · reduced-motion
+ * motion primitives: 2 (one entrance, one highlight) · contrast: pass
+ * =============================================================================
+ * ReLeaf: the big picture, V2
+ * -----------------------------------------------------------------------------
+ * V1 drew eight concrete steps on two horizontal lines. This is the same
+ * material one level up: FIVE THINGS THE SYSTEM DOES, running down a vertical
+ * trunk, with the work that feeds each of them entering from both sides, and
+ * one week on one plot at the end.
+ *
+ *   01 See it coming     02 Pick what to make     03 Make it
+ *   04 Hand it over      05 Do it again
+ *
+ * Every node is a verb, so a piece of work hangs off whichever node it serves
+ * rather than off a piece of kit. The map is the bridge out of the trunk: one
+ * run says the line works once, the map says how much land is like this. Then
+ * the dark act, which is the payoff and the most considered part of the page.
+ *
+ * THREE COLOUR SYSTEMS, AND THEY DO NOT OVERLAP. Same three as V1.
+ *
+ *   1  THE ZONE says whose work a card is. Green biology, slate engineering,
+ *      amber deployment. It colours the well behind the icon and the connector
+ *      that ties the card to the trunk.
+ *   2  THE RAMP says direction. The five node badges walk light to dark down
+ *      the trunk. It is the only cue that says which way to read it.
+ *   3  THE ICONS are coloured by what the object actually is, and are drawn
+ *      from our own CAD renders and the system schematic.
+ *
+ * RULES THAT SHOULD SURVIVE THE NEXT EDIT
+ *
+ * · NOTHING OPENS. No modal, no drawer, no click-through. Every word is in the
+ *   markup before the script runs. Pointing changes emphasis, nothing else.
+ * · A LIMIT SITS IN THE SAME SENTENCE AS THE CLAIM IT LIMITS, at the same size.
+ *   No small print anywhere on this page.
+ * · A SLOT IS A DESIGNED ELEMENT, not an omission. Where a number is not on
+ *   record the page says so and says what would fill it.
+ * · READABLE WITH NO JAVASCRIPT AND NO MOTION. The hidden entrance state is
+ *   added by script, never by the stylesheet.
+ * · THE TRUNK IS VERTICAL, so nothing is ever wider than the column and there
+ *   is no drag gesture to explain.
+ * ========================================================================== */
+
+:root {
+  /* ── the icon palette ──────────────────────────────────────────────────
+     Carried over from V1 unchanged so one sprite serves both pages. Every
+     value is a wiki token or an interpolation between two of them; the mid
+     tones exist because tokens.css carries only a 700 and a 100 per signal
+     colour and flat colour art needs a middle. */
+  --i-k:  var(--black);
+  --i-p:  var(--white);
+  --i-n:  var(--gray-400);
+  --i-g9: var(--leaf-900);
+  --i-g7: var(--leaf-700);
+  --i-g5: var(--leaf-500);
+  --i-g2: var(--leaf-200);
+  --i-lt: #35e08a;                 /* the 520 nm the reactor runs on */
+  --i-a7: var(--amber-700);
+  --i-a5: #d9a13c;                 /* interpolated: amber 700 to 100 */
+  --i-a2: #f2ddb0;
+  --i-a1: var(--amber-100);
+  --i-r7: var(--rust-700);
+  --i-r3: #edc0ae;                 /* interpolated: rust 700 to 100 */
+  --i-r1: var(--rust-100);
+  --i-s7: var(--slate-700);
+  --i-s2: #c3d4e2;                 /* interpolated: slate 700 to 100 */
+  --i-s1: var(--slate-100);
+
+  /* mirrored from home.css, which already defines these for the dark act.
+     Once merged, these three lines can go. */
+  --ink:       #070b09;
+  --ink-2:     #0d1512;
+  --sig-green: #35e08a;
+
+  /* the three beds in the drawing at the end, receding into the dark */
+  --dest-far:  color-mix(in oklab, var(--leaf-900) 62%, var(--ink));
+  --dest-mid:  color-mix(in oklab, var(--leaf-900) 82%, var(--ink));
+  --dest-near: var(--leaf-900);
+
+  /* the ramp. Five stops, light to dark, down the trunk. */
+  --rung-1: #6aab86;
+  --rung-2: var(--leaf-500);
+  --rung-3: #3d8560;
+  --rung-4: var(--leaf-700);
+  --rung-5: var(--leaf-900);
+
+  --trunk:   452px;   /* the middle column: node cards sit on the rail */
+  --wingmin: 210px;
+  --chainmax: 1000px; /* the figure is a drawing, not a page width */
+  --v2-ease: cubic-bezier(.16, 1, .3, 1);
+  --v2-dur:  190ms;
+}
+
+/* ── the frame ─────────────────────────────────────────────────────────── */
+
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.bpv2 { padding-bottom: var(--sp-7); }
+.bpv2 h2.band__title { margin-bottom: var(--sp-4); max-width: 28ch; }
+
+.bpv2__kicker {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--leaf-700);
+}
+.bpv2__lede {
+  margin: 0 0 var(--sp-7); max-width: 58ch;
+  font-size: var(--text-lede); line-height: 1.55; color: var(--gray-700);
+}
+.bpv2__lede b { color: var(--black); font-weight: 600; }
+
+/* ── whose work is whose ───────────────────────────────────────────────
+   V1 said this with labelled zone bands behind the lanes. A vertical trunk
+   has no lanes to label, so the three zones are named once, here, and the
+   name is also a handle: pointing at one lights every card that belongs to
+   it. It is a key that does something, which is the only kind worth having. */
+
+.key {
+  display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sp-4); row-gap: var(--sp-2);
+  max-width: var(--chainmax); margin: 0 auto var(--sp-6);
+  padding-bottom: var(--sp-3); border-bottom: 1px solid var(--gray-200);
+}
+.key__lab {
+  margin-right: auto;
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--gray-500);
+}
+.key__item {
+  display: inline-flex; align-items: center; column-gap: var(--sp-2);
+  font-size: var(--text-sm); color: var(--gray-600); cursor: default;
+  transition: color var(--v2-dur) var(--v2-ease);
+}
+.key__sw {
+  width: 12px; height: 12px; border-radius: 3px;
+  background: var(--zone); border: 1px solid var(--zone-ink);
+}
+.key__item[data-zone="bio"] { --zone: var(--leaf-100);  --zone-ink: var(--leaf-700); }
+.key__item[data-zone="eng"] { --zone: var(--slate-100); --zone-ink: var(--slate-700); }
+.key__item[data-zone="dep"] { --zone: var(--amber-100); --zone-ink: var(--amber-700); }
+.key__item[data-lit] { color: var(--black); }
+.key__item:focus-visible { outline: 2px solid var(--leaf-700); outline-offset: 3px; transition: none; }
+.spine[data-focus] .key__item:not([data-lit]) { opacity: .42; }
+.key__item { transition: opacity var(--v2-dur) var(--v2-ease), color var(--v2-dur) var(--v2-ease); }
+
+/* ── the trunk ─────────────────────────────────────────────────────────── */
+
+.chain { position: relative; max-width: var(--chainmax); margin: 0 auto; padding: 0; list-style: none; }
+
+.node,
+.link {
+  display: grid;
+  grid-template-columns: minmax(var(--wingmin), 1fr) minmax(0, var(--trunk)) minmax(var(--wingmin), 1fr);
+  column-gap: var(--sp-5);
+  align-items: center;
+}
+
+/* the segment between two nodes. It belongs to the gap, not to either node,
+   which is why it carries its own data-flow rather than a data-lit. */
+.link { height: 46px; }
+.link__rail {
+  grid-column: 2; justify-self: center; position: relative;
+  width: 2px; height: 100%; background: var(--leaf-200);
+  transition: background-color var(--v2-dur) var(--v2-ease);
+}
+.link__rail::after {
+  content: ""; position: absolute; left: 50%; bottom: -1px; margin-left: -5px;
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-top: 7px solid var(--leaf-200);
+  transition: border-top-color var(--v2-dur) var(--v2-ease);
+}
+.link[data-flow] .link__rail { background: var(--leaf-500); }
+.link[data-flow] .link__rail::after { border-top-color: var(--leaf-500); }
+
+/* ── a node ────────────────────────────────────────────────────────────── */
+
+.node__core {
+  grid-column: 2; position: relative;
+  display: grid; grid-template-columns: auto 1fr; column-gap: var(--sp-4);
+  align-items: start;
+  padding: var(--sp-4) var(--sp-5) var(--sp-4) var(--sp-4);
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-left: 3px solid var(--rung, var(--leaf-500));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  cursor: default;
+  transition: border-color var(--v2-dur) var(--v2-ease),
+              box-shadow   var(--v2-dur) var(--v2-ease),
+              background-color var(--v2-dur) var(--v2-ease);
+}
+.node:nth-child(1)  .node__core { --rung: var(--rung-1); }
+.node:nth-child(3)  .node__core { --rung: var(--rung-2); }
+.node:nth-child(5)  .node__core { --rung: var(--rung-3); }
+.node:nth-child(7)  .node__core { --rung: var(--rung-4); }
+.node:nth-child(9)  .node__core { --rung: var(--rung-5); }
+
+.node__badge { display: grid; justify-items: center; row-gap: var(--sp-2); }
+.node__n {
+  order: -1;
+  font-family: var(--font-mono); font-size: 1.0625rem; font-weight: 600;
+  letter-spacing: .02em; color: var(--rung, var(--leaf-700));
+}
+.node__name {
+  display: block; margin: 0 0 var(--sp-1);
+  font-family: var(--font-display); font-size: var(--text-h3); font-weight: 650;
+  line-height: 1.2; letter-spacing: -.015em; color: var(--leaf-900);
+}
+.node__note { display: block; font-size: var(--text-sm); line-height: 1.55; color: var(--gray-600); }
+
+.node[data-lit] .node__core {
+  border-color: var(--leaf-500); border-left-color: var(--rung, var(--leaf-700));
+  box-shadow: var(--shadow-md);
+}
+
+/* ── the wings ─────────────────────────────────────────────────────────── */
+
+.wing { display: flex; flex-direction: column; row-gap: var(--sp-2); }
+.wing--l { grid-column: 1; align-items: flex-end; }
+.wing--r { grid-column: 3; align-items: flex-start; }
+
+.chip {
+  position: relative;
+  display: inline-flex; align-items: center; column-gap: var(--sp-2);
+  max-width: 100%;
+  padding: 5px 12px 5px 5px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 999px;
+  font-size: var(--text-sm); line-height: 1.3; color: var(--gray-700);
+  cursor: default;
+  transition: background-color var(--v2-dur) var(--v2-ease),
+              border-color     var(--v2-dur) var(--v2-ease),
+              color            var(--v2-dur) var(--v2-ease),
+              box-shadow       var(--v2-dur) var(--v2-ease);
+}
+.chip__name { white-space: nowrap; }
+
+/* the connector: a hairline into the trunk, in the card's own zone colour,
+   with a dot where it lands. Hidden when the layout stacks. */
+.chip::after {
+  content: ""; position: absolute; top: 50%; width: var(--sp-5); height: 1px;
+  background: var(--zone-line, var(--gray-300));
+  transition: background-color var(--v2-dur) var(--v2-ease);
+}
+.wing--l .chip::after { left: 100%; }
+.wing--r .chip::after { right: 100%; }
+
+.chip[data-feeds="bio"] { --zone: var(--leaf-100);  --zone-ink: var(--leaf-700);  --zone-line: var(--leaf-200); }
+.chip[data-feeds="eng"] { --zone: var(--slate-100); --zone-ink: var(--slate-700); --zone-line: #c3d4e2; }
+.chip[data-feeds="dep"] { --zone: var(--amber-100); --zone-ink: var(--amber-700); --zone-line: #ecd7a4; }
+
+.chip[data-lit] {
+  background: var(--white); border-color: var(--zone-ink, var(--leaf-700));
+  color: var(--black); box-shadow: var(--shadow-sm);
+}
+.chip[data-lit]::after { background: var(--zone-ink, var(--leaf-700)); }
+
+/* the quiet half: a card marks the pieces it talks to elsewhere */
+.chip[data-rel] {
+  background: var(--amber-100); border-color: var(--amber-700); color: var(--amber-700);
+}
+
+/* ── the icon wells ────────────────────────────────────────────────────── */
+
+.well {
+  display: inline-grid; place-items: center; flex: none;
+  background: var(--zone, var(--leaf-100));
+  border-radius: 999px;
+}
+.chip .well { width: 28px; height: 28px; }
+.node__badge .well { width: 54px; height: 54px; border-radius: var(--radius); background: var(--leaf-50); }
+.ico { display: block; }
+.chip .ico { width: 19px; height: 19px; }
+.node__badge .ico { width: 34px; height: 34px; }
+
+/* ── the bridge: the map, where one run becomes a quantity ─────────────── */
+
+.bridge {
+  grid-column: 2;
+  display: grid; grid-template-columns: auto 1fr; column-gap: var(--sp-4);
+  align-items: start;
+  padding: var(--sp-4) var(--sp-5) var(--sp-4) var(--sp-4);
+  background: var(--leaf-50);
+  border: 1px solid var(--leaf-200);
+  border-radius: var(--radius);
+  cursor: default;
+  transition: border-color var(--v2-dur) var(--v2-ease),
+              box-shadow   var(--v2-dur) var(--v2-ease);
+}
+.bridgerow { display: grid; grid-template-columns: minmax(var(--wingmin), 1fr) minmax(0, var(--trunk)) minmax(var(--wingmin), 1fr); column-gap: var(--sp-5); }
+.bridge .well { background: var(--white); border: 1px solid var(--leaf-200); }
+.bridge__tag {
+  display: block; margin-bottom: var(--sp-1);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--leaf-700);
+}
+.bridge__name {
+  display: block; margin-bottom: var(--sp-1);
+  font-family: var(--font-display); font-size: var(--text-h3); font-weight: 650;
+  line-height: 1.2; letter-spacing: -.015em; color: var(--leaf-900);
+}
+.bridge__note { display: block; font-size: var(--text-sm); line-height: 1.55; color: var(--gray-600); }
+.bridge[data-lit] { border-color: var(--leaf-500); box-shadow: var(--shadow-md); }
+
+/* ── focus ─────────────────────────────────────────────────────────────── */
+
+.node__core:focus-visible,
+.chip:focus-visible,
+.bridge:focus-visible,
+.moment:focus-visible {
+  outline: 2px solid var(--leaf-700);
+  outline-offset: 3px;
+  transition: none;                /* focus rings are never transitioned */
+}
+.act .node__core:focus-visible,
+.act .moment:focus-visible { outline-color: var(--sig-green); }
+
+/* =============================================================================
+   THE ACT. One call, one plot, one week, on ink.
+   ========================================================================== */
+
+.act { background: var(--ink); color: var(--leaf-100); }
+.act .band__inner { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+.act__kicker {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--sig-green);
+}
+.act h2 {
+  margin: 0 0 var(--sp-4); max-width: 20ch;
+  font-family: var(--font-display); font-size: var(--text-h2); font-weight: 700;
+  line-height: 1.14; letter-spacing: -.018em; color: var(--white);
+}
+.act__lede {
+  margin: 0 0 var(--sp-7); max-width: 62ch;
+  font-size: var(--text-base); line-height: 1.62; color: var(--leaf-200);
+}
+
+/* the week, as a time rail */
+.week { position: relative; margin: 0 0 var(--sp-7); padding: 0; list-style: none; max-width: 82ch; }
+.week::before {
+  content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px;
+  width: 1px; background: rgb(53 224 138 / .3);
+}
+.moment {
+  position: relative;
+  display: grid; grid-template-columns: auto 1fr; column-gap: var(--sp-5);
+  padding: var(--sp-3) var(--sp-3) var(--sp-3) 0;
+  cursor: default;
+  transition: background-color var(--v2-dur) var(--v2-ease);
+}
+.moment + .moment { border-top: 1px solid rgb(255 255 255 / .07); }
+.moment__mark { display: grid; grid-template-columns: 15px auto; column-gap: var(--sp-4); align-items: start; }
+.moment__dot {
+  width: 15px; height: 15px; margin-top: 5px; border-radius: 999px;
+  background: var(--ink); border: 2px solid rgb(53 224 138 / .45);
+  transition: border-color var(--v2-dur) var(--v2-ease), background-color var(--v2-dur) var(--v2-ease);
+}
+.moment__t {
+  width: 13ch; padding-top: 3px;
+  font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: .02em;
+  color: var(--leaf-500);
+  transition: color var(--v2-dur) var(--v2-ease);
+}
+.moment__name {
+  display: flex; align-items: center; column-gap: var(--sp-2);
+  margin: 0 0 var(--sp-1);
+  font-family: var(--font-display); font-size: var(--text-h3); font-weight: 650;
+  line-height: 1.25; letter-spacing: -.015em; color: var(--white);
+}
+.moment__name .well { width: 26px; height: 26px; background: rgb(255 255 255 / .07); }
+.moment__name .ico { width: 18px; height: 18px; }
+.moment p { margin: 0; max-width: 64ch; font-size: var(--text-sm); line-height: 1.62; color: var(--leaf-200); }
+.moment[data-lit] { background: var(--ink-2); }
+.moment[data-lit] .moment__dot { background: var(--sig-green); border-color: var(--sig-green); }
+.moment[data-lit] .moment__t { color: var(--sig-green); }
+
+/* a slot. Not an omission: a designed hole with the question in it. */
+.slot {
+  display: block; max-width: 64ch; margin-top: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px dashed var(--gray-500); border-left-width: 3px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm); line-height: 1.55; color: var(--gray-600);
+}
+.slot b {
+  display: block; font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--amber-700);
+}
+.act .slot { border-color: rgb(255 255 255 / .24); color: rgb(255 255 255 / .72); }
+.act .slot b { color: #d9a13c; }
+
+/* the one comparison we have not made */
+.hinge {
+  max-width: 74ch; margin: 0 0 var(--sp-7);
+  padding: var(--sp-5); background: var(--ink-2);
+  border: 1px solid rgb(53 224 138 / .28); border-left: 3px solid var(--sig-green);
+  border-radius: var(--radius);
+}
+.hinge h3 {
+  margin: 0 0 var(--sp-3); max-width: 30ch;
+  font-family: var(--font-display); font-size: var(--text-h3); font-weight: 650;
+  line-height: 1.28; letter-spacing: -.015em; color: var(--white);
+}
+.hinge p { margin: 0; font-size: var(--text-sm); line-height: 1.62; color: var(--leaf-200); }
+
+/* widening back out: the same week, across the map */
+.wide { max-width: 74ch; margin: 0 0 var(--sp-7); }
+.wide h3 {
+  margin: 0 0 var(--sp-3);
+  font-family: var(--font-display); font-size: var(--text-h3); font-weight: 650;
+  line-height: 1.25; letter-spacing: -.015em; color: var(--white);
+}
+.wide p { margin: 0 0 var(--sp-3); font-size: var(--text-sm); line-height: 1.62; color: var(--leaf-200); }
+.wide p:last-child { margin-bottom: 0; }
+
+/* the claim */
+.claim {
+  display: grid; grid-template-columns: 232px minmax(0, 1fr); column-gap: var(--sp-6);
+  align-items: start;
+  max-width: 84ch; padding-top: var(--sp-6);
+  border-top: 1px solid rgb(255 255 255 / .12);
+}
+.dest { width: 232px; height: auto; }
+@media (max-width: 760px) {
+  .claim { grid-template-columns: 1fr; row-gap: var(--sp-5); }
+  .dest { width: 100%; max-width: 232px; }
+}
+.claim__line {
+  margin: 0 0 var(--sp-3);
+  font-family: var(--font-display); font-size: var(--text-h2); font-weight: 700;
+  line-height: 1.14; letter-spacing: -.02em; color: var(--white);
+}
+.claim__sub { margin: 0 0 var(--sp-5); max-width: 56ch; font-size: var(--text-base); line-height: 1.62; color: var(--leaf-200); }
+.claim__open { margin: 0; font-size: var(--text-sm); line-height: 1.62; color: rgb(255 255 255 / .72); }
+.claim__open b {
+  display: block; margin-bottom: var(--sp-1);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--sig-green);
+}
+
+/* =============================================================================
+   DIMMING. One highlight primitive: while something is pointed at, everything
+   not in its run steps back. Opacity only, nothing moves and nothing scales.
+   ========================================================================== */
+
+.spine[data-focus] .node:not([data-lit]) .node__core,
+.spine[data-focus] .chip:not([data-lit]):not([data-rel]),
+.spine[data-focus] .bridge:not([data-lit]) { opacity: .42; }
+.node__core, .chip, .bridge, .moment { transition: opacity var(--v2-dur) var(--v2-ease); }
+
+/* =============================================================================
+   ENTRANCE. One shot, added by script so the page is complete without it.
+   ========================================================================== */
+
+.will-rise .node__core,
+.will-rise .chip,
+.will-rise .bridge { opacity: 0; transform: translateY(10px); }
+.will-rise.in .node__core,
+.will-rise.in .chip,
+.will-rise.in .bridge {
+  opacity: 1; transform: none;
+  transition: opacity 460ms var(--v2-ease), transform 460ms var(--v2-ease);
+}
+.will-rise.in .node:nth-child(3)  .node__core,
+.will-rise.in .node:nth-child(3)  .chip { transition-delay: 70ms; }
+.will-rise.in .node:nth-child(5)  .node__core,
+.will-rise.in .node:nth-child(5)  .chip { transition-delay: 140ms; }
+.will-rise.in .node:nth-child(7)  .node__core,
+.will-rise.in .node:nth-child(7)  .chip { transition-delay: 210ms; }
+.will-rise.in .node:nth-child(9)  .node__core,
+.will-rise.in .node:nth-child(9)  .chip { transition-delay: 280ms; }
+.will-rise.in .bridge { transition-delay: 350ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+  .will-rise .node__core, .will-rise .chip, .will-rise .bridge { opacity: 1; transform: none; }
+}
+
+/* =============================================================================
+   NARROW. Below 900px the trunk moves to the left edge and the wings stack
+   underneath their node. Same markup, no second copy of the content, and no
+   drag gesture anywhere: the drawing was never wider than the column.
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .node, .link, .bridgerow { grid-template-columns: 1fr; }
+  .node {
+    row-gap: var(--sp-3);
+    padding-left: var(--sp-5);
+    border-left: 2px solid var(--leaf-200);
+  }
+  .node__core, .wing--l, .wing--r, .bridge { grid-column: 1; }
+  /* the node first, then the work that feeds it. On the wide layout the work
+     comes in from the sides, which has no up or down; stacked, it does. */
+  .node__core { order: -1; margin-left: calc(var(--sp-5) * -1 - 2px); }
+  .link { height: 26px; padding-left: var(--sp-5); border-left: 2px solid var(--leaf-200); }
+  .link__rail { display: none; }
+  .wing { flex-direction: row; flex-wrap: wrap; align-items: flex-start; column-gap: var(--sp-2); }
+  .wing--l, .wing--r { justify-content: flex-start; }
+  .chip::after { display: none; }
+  .moment { grid-template-columns: 1fr; row-gap: var(--sp-2); }
+  .moment__mark { grid-template-columns: 15px auto; }
+  .week::before { left: 7px; }
+}
+
+@media (max-width: 560px) {
+  .node__core { grid-template-columns: 1fr; row-gap: var(--sp-3); }
+  .node__badge { grid-auto-flow: column; justify-items: start; justify-content: start; column-gap: var(--sp-3); align-items: center; }
+}
+
+@media print {
+  .act { background: var(--white); color: var(--black); }
+  .act h2, .act .moment__name, .claim__line { color: var(--black); }
+  .moment p, .act__lede, .hinge p, .wide p, .claim__sub { color: var(--gray-700); }
+}

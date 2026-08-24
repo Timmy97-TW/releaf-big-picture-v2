@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The big picture &middot; V2 &middot; ReLeaf &middot; GEMS Taiwan, iGEM 2026</title>
+  <meta name="description" content="Five things the system does, the work that feeds each one, and one week on one plot at the end." />
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/big-picture-v2.css" />
+  <style>
+    /* Standalone shell only. The wiki supplies all of this through page.css and
+       home.css, so everything in this block is deleted at merge. */
+    html, body { overflow-x: clip; }
+    body { margin: 0; font-family: var(--font-body); font-size: var(--text-base);
+           line-height: 1.68; color: var(--black); background: var(--white);
+           -webkit-font-smoothing: antialiased; }
+    *, *::before, *::after { box-sizing: border-box; }
+    a { color: var(--leaf-700); }
+    .band { padding: var(--sp-8) 0; }
+    .band__inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--sp-5); }
+    @media (min-width: 640px) { .band__inner { padding: 0 var(--sp-6); } }
+    .band--dark { background: var(--ink); color: var(--leaf-100); }
+    h2.band__title { margin: 0 0 var(--sp-5); font-family: var(--font-display);
+                     font-size: var(--text-h2); font-weight: 700; line-height: 1.14;
+                     letter-spacing: -.018em; color: var(--leaf-900); max-width: 26ch; }
+    .shell { border-bottom: 1px solid var(--gray-200); background: var(--gray-50);
+             padding: 8px var(--sp-5); font-size: var(--text-xs); color: var(--gray-500); }
+    .shell b { color: var(--black); }
+  </style>
+</head>
+<body>
+
+<!-- Standalone development shell. Delete this element when merging. -->
+<div class="shell"><b>ReLeaf &middot; the big picture, V2</b> &nbsp;standalone build, drawn on the wiki&rsquo;s own tokens</div>
+
+<!-- =============================================================================
+     THE BIG PICTURE, V2.
+
+     Reads assets/css/big-picture-v2.css. Three rules govern every change:
+
+       1. FIVE VERBS, RUNNING DOWN. Each node is something the system does, not
+          a piece of kit, so a piece of work hangs off whichever node it serves.
+          The work enters the trunk from both sides. The map is the bridge out
+          of the trunk, because one run says the line works once and the map
+          says how much land is like this. If a future edit turns a node back
+          into an object, the figure has stopped making its argument.
+       2. NOTHING OPENS, and nothing is hidden. Pointing at a piece lights the
+          run it belongs to and marks, in amber, the pieces it talks to
+          elsewhere. That quieter web is what data-with is for.
+       3. EVERY LIMIT SITS IN THE SAME SENTENCE AS THE CLAIM IT LIMITS, at the
+          same size. Where a number is not on record the page carries a slot
+          that says so and says what would fill it. Do not fill a slot with a
+          guess, and do not delete one to tidy the page up.
+     ========================================================================== -->
+
+<section class="band bpv2" id="bigpicture" aria-labelledby="bpv2-title">
+  <div class="band__inner">
+    <svg class="sprite" aria-hidden="true" focusable="false"><defs>
+    
+      <!-- ═══ the line · six steps ═══════════════════════════════════════════ -->
+    
+      <!-- 1  a stressed field. Terracotta pot, one leaf still green and one
+             going over, under the sun that is doing it.                        -->
+      <symbol id="i-field" viewBox="0 0 32 32">
+        <circle cx="24.8" cy="7.2" r="3.5" fill="var(--i-a5)"/>
+        <g stroke="var(--i-a7)" stroke-width="1.9" stroke-linecap="round">
+          <path d="M24.8 1.2v1.6M24.8 11.6v1.6M30.8 7.2h-1.6M20.4 7.2h-1.6M29 3l-1.1 1.1M21.7 10.3l-1.1 1.1M29 11.4l-1.1-1.1M21.7 4.1l-1.1-1.1"/>
+        </g>
+        <path d="M13.4 20.4V9.6" stroke="var(--i-g7)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M13.4 14.4c-3.7 0-5.6-2-5.6-5.2 3.4 0 5.6 1.9 5.6 5.2z" fill="var(--i-g5)"/>
+        <path d="M13.4 17c3-.7 5.4.7 6.5 3.7-3 .8-5.5-.4-6.5-3.7z" fill="var(--i-a7)"/>
+        <path d="M6.6 21.4h13.6l-1.6 8.2a1.6 1.6 0 0 1-1.6 1.3H9.8a1.6 1.6 0 0 1-1.6-1.3z" fill="var(--i-r3)"/>
+        <rect x="4.8" y="18.4" width="17.2" height="3.6" rx="1.4" fill="var(--i-r7)"/>
+      </symbol>
+    
+      <!-- 2  the call. The AIoT board, its chip lit, talking to the forecast.  -->
+      <symbol id="i-board" viewBox="0 0 32 32">
+        <g stroke="var(--i-s7)" stroke-width="2" stroke-linecap="round">
+          <path d="M4.4 12.6H1.8M4.4 16.4H1.8M4.4 20.2H1.8"/>
+        </g>
+        <rect x="4" y="8.6" width="16.4" height="15.2" rx="2.4" fill="var(--i-s2)"/>
+        <rect x="8.2" y="12.8" width="8" height="6.8" rx="1.4" fill="var(--i-s7)"/>
+        <circle cx="12.2" cy="16.2" r="1.5" fill="var(--i-lt)"/>
+        <g fill="none" stroke="var(--i-g5)" stroke-width="2" stroke-linecap="round">
+          <path d="M23.8 12.6a4.8 4.8 0 0 1 0 7.2"/>
+          <path d="M27.2 9.4a9 9 0 0 1 0 13.6"/>
+        </g>
+      </symbol>
+    
+      <!-- 3  green light. The LED can and its cone, at 520 nm.                 -->
+      <symbol id="i-led" viewBox="0 0 32 32">
+        <path d="M12.6 16.2 28.4 6.4v19.6z" fill="var(--i-lt)" opacity=".34"/>
+        <g stroke="var(--i-lt)" stroke-width="2.2" stroke-linecap="round">
+          <path d="M17.6 16.2h3.6M22 11.8h3.4M22 20.6h3.4"/>
+        </g>
+        <rect x="3" y="11.2" width="8.4" height="10" rx="2" fill="var(--i-k)"/>
+        <ellipse cx="12.2" cy="16.2" rx="2.2" ry="4.6" fill="var(--i-lt)"/>
+      </symbol>
+    
+      <!-- 4  protein made. The culture carboy: ribbed cap, pink medium, rods
+             and the stir bar on the floor of it.                               -->
+      <symbol id="i-culture" viewBox="0 0 32 32">
+        <path d="M13 7.4v2.2c0 1.7-4.6 2.7-4.6 6.2v11a2.2 2.2 0 0 0 2.2 2.2h10.8a2.2 2.2 0 0 0 2.2-2.2v-11c0-3.5-4.6-4.5-4.6-6.2V7.4z" fill="var(--i-p)" stroke="var(--i-g7)" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M8.4 18.6h15.2v8.2a2.2 2.2 0 0 1-2.2 2.2H10.6a2.2 2.2 0 0 1-2.2-2.2z" fill="var(--i-r3)"/>
+        <g stroke="var(--i-g7)" stroke-width="2.6" stroke-linecap="round">
+          <path d="M11.6 22.6 13.8 21.6M15.8 25.2 18.2 24.4M18.8 21.4 21 22.6"/>
+        </g>
+        <rect x="13.4" y="26.4" width="5.2" height="1.8" rx=".9" fill="var(--i-k)"/>
+        <rect x="11.6" y="2.6" width="8.8" height="4.8" rx="1.2" fill="var(--i-g9)"/>
+        <g stroke="var(--i-p)" stroke-width="1" stroke-linecap="round" opacity=".65">
+          <path d="M14.2 3.6v2.8M16 3.6v2.8M17.8 3.6v2.8"/>
+        </g>
+      </symbol>
+    
+      <!-- 5  the handover. The hollow fibre cartridge, both side ports on.     -->
+      <symbol id="i-cartridge" viewBox="0 0 32 32">
+        <g stroke="var(--i-s7)" stroke-width="2.6" stroke-linecap="round">
+          <path d="M11.4 10.6H7.4M20.6 21.4h4"/>
+        </g>
+        <rect x="11.2" y="6" width="9.6" height="20" fill="var(--i-s2)"/>
+        <g stroke="var(--i-g5)" stroke-width="1.5" stroke-linecap="round">
+          <path d="M13.6 6.6v18.8M16 6.6v18.8M18.4 6.6v18.8"/>
+        </g>
+        <rect x="9.6" y="2.4" width="12.8" height="4" rx="1.2" fill="var(--i-k)"/>
+        <rect x="9.6" y="25.6" width="12.8" height="4" rx="1.2" fill="var(--i-k)"/>
+        <circle cx="6.6" cy="10.6" r="1.8" fill="var(--i-lt)"/>
+      </symbol>
+    
+      <!-- 6  into the crop. The hydroponic tray, net pots on the rim and roots
+             in the water underneath.                                           -->
+      <symbol id="i-tray" viewBox="0 0 32 32">
+        <path d="M2.6 16.6h26.8v9.6a2.4 2.4 0 0 1-2.4 2.4H5a2.4 2.4 0 0 1-2.4-2.4z" fill="var(--i-s2)"/>
+        <g stroke="var(--i-g5)" stroke-width="1.6" stroke-linecap="round">
+          <path d="M8.6 22.4v4M8.6 23.4l-1.8 1.8M8.6 24.6l1.8 1.6M23.4 22.4v4M23.4 23.4l1.8 1.8M23.4 24.6l-1.8 1.6"/>
+        </g>
+        <rect x="2.6" y="15" width="26.8" height="3" rx="1.2" fill="var(--i-s7)"/>
+        <g fill="var(--i-g5)">
+          <path d="M8.6 15c-2.6 0-4-1.4-4-3.8 2.4 0 4 1.3 4 3.8z"/>
+          <path d="M16 15c-2.6 0-4-1.4-4-3.8 2.4 0 4 1.3 4 3.8z"/>
+          <path d="M23.4 15c-2.6 0-4-1.4-4-3.8 2.4 0 4 1.3 4 3.8z"/>
+        </g>
+        <g fill="var(--i-g7)">
+          <path d="M8.6 15c2.6 0 4-1.4 4-3.8-2.4 0-4 1.3-4 3.8z"/>
+          <path d="M16 15c2.6 0 4-1.4 4-3.8-2.4 0-4 1.3-4 3.8z"/>
+          <path d="M23.4 15c2.6 0 4-1.4 4-3.8-2.4 0-4 1.3-4 3.8z"/>
+        </g>
+      </symbol>
+    
+      <!-- ═══ what we made ═══════════════════════════════════════════════════ -->
+    
+      <!-- the model: a swept family of predictions, not one measured curve     -->
+      <symbol id="i-model" viewBox="0 0 32 32">
+        <path d="M8.4 25.6C15.6 25.6 15 15.6 25.4 15V25.6z" fill="var(--i-g2)"/>
+        <g fill="none" stroke-linecap="round">
+          <path d="M8.4 22C11.8 22 11.4 7.8 25.4 7.2" stroke="var(--i-lt)" stroke-width="2"/>
+          <path d="M8.4 23.8C13.8 23.8 13.2 11.6 25.4 11" stroke="var(--i-g5)" stroke-width="2"/>
+          <path d="M8.4 25.6C15.6 25.6 15 15.6 25.4 15" stroke="var(--i-g7)" stroke-width="2"/>
+          <path d="M6 4.6v22.8h22.8" stroke="var(--i-n)" stroke-width="1.8"/>
+        </g>
+      </symbol>
+    
+      <!-- the circuit: the promoter, and the coding block it drives            -->
+      <symbol id="i-construct" viewBox="0 0 32 32">
+        <rect x="2.4" y="21.4" width="27.2" height="2.4" rx="1.2" fill="var(--i-n)"/>
+        <path d="M7 21.4v-7.6h5.4" fill="none" stroke="var(--i-lt)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10.4 10.8 14.6 13.8l-4.2 3z" fill="var(--i-lt)"/>
+        <path d="M15.4 17.2h7.4l4 4-4 4h-7.4z" fill="var(--i-g7)"/>
+        <rect x="3.6" y="17.6" width="3.2" height="3.2" rx="1" fill="var(--i-a7)"/>
+      </symbol>
+    
+      <!-- the light array: DIOPAL, sloped housing under its well block         -->
+      <symbol id="i-diopal" viewBox="0 0 32 32">
+        <path d="M2.4 28.4 6.6 21h18.8l4.2 7.4z" fill="var(--i-k)"/>
+        <rect x="4" y="16.8" width="24" height="4.6" rx="1.4" fill="var(--i-s7)"/>
+        <rect x="6.2" y="6.6" width="19.6" height="10.2" rx="1.6" fill="var(--i-p)" stroke="var(--i-s7)" stroke-width="1.6"/>
+        <g fill="var(--i-lt)">
+          <circle cx="9.8" cy="9.8" r="1.35"/><circle cx="14" cy="9.8" r="1.35"/><circle cx="18" cy="9.8" r="1.35"/><circle cx="22.2" cy="9.8" r="1.35"/>
+          <circle cx="9.8" cy="13.8" r="1.35"/><circle cx="14" cy="13.8" r="1.35"/><circle cx="18" cy="13.8" r="1.35"/><circle cx="22.2" cy="13.8" r="1.35"/>
+        </g>
+      </symbol>
+    
+      <!-- the molecule: the docking pose, ligand at the mouth of the cleft     -->
+      <symbol id="i-peptide" viewBox="0 0 32 32">
+        <path d="M14.4 7.6a9 9 0 1 1 0 16.8v-4.6a4.4 4.4 0 1 0 0-7.6z" fill="var(--i-s2)"/>
+        <path d="M14.4 7.6a9 9 0 1 1 0 16.8" fill="none" stroke="var(--i-s7)" stroke-width="1.8" stroke-linecap="round"/>
+        <g stroke="var(--i-g7)" stroke-width="1.8" stroke-linecap="round">
+          <path d="M7.6 12.6 11 15.4M7.6 19.4 11 16.6"/>
+        </g>
+        <circle cx="12.4" cy="16" r="2.8" fill="var(--i-lt)"/>
+        <circle cx="6.2" cy="11.6" r="2.2" fill="var(--i-g7)"/>
+        <circle cx="6.2" cy="20.4" r="2.2" fill="var(--i-g7)"/>
+      </symbol>
+    
+      <!-- the reactor: base plate, cartridge column, carboy, pump head, and the
+           tubing loop with its LED strip over the top                          -->
+      <symbol id="i-reactor" viewBox="0 0 32 32">
+        <path d="M6.4 12.6V7.2h17.2a2.6 2.6 0 0 1 2.6 2.6v6.4" fill="none" stroke="var(--i-g5)" stroke-width="1.8" stroke-linecap="round"/>
+        <g fill="var(--i-lt)">
+          <circle cx="10.4" cy="7.2" r="1.1"/><circle cx="15" cy="7.2" r="1.1"/><circle cx="19.6" cy="7.2" r="1.1"/>
+        </g>
+        <rect x="4.2" y="12" width="5" height="11.4" rx="1.2" fill="var(--i-s7)"/>
+        <path d="M11.6 23.4v-5.2c0-1.4 1.3-1.8 1.3-2.8v-1.2h3.6v1.2c0 1 1.3 1.4 1.3 2.8v5.2z" fill="var(--i-r3)" stroke="var(--i-r7)" stroke-width="1.4" stroke-linejoin="round"/>
+        <circle cx="23.4" cy="19" r="4.2" fill="var(--i-a5)" stroke="var(--i-a7)" stroke-width="1.6"/>
+        <circle cx="23.4" cy="19" r="1.3" fill="var(--i-a7)"/>
+        <rect x="1.6" y="23.4" width="28.8" height="4.4" rx="1.8" fill="var(--i-k)"/>
+      </symbol>
+    
+      <!-- ═══ how we know ════════════════════════════════════════════════════ -->
+    
+      <!-- stress baselines: a plate with a seedling on it                      -->
+      <symbol id="i-dish" viewBox="0 0 32 32">
+        <path d="M4.2 20.6h23.6v2.6c0 2.6-5.3 4.6-11.8 4.6S4.2 25.8 4.2 23.2z" fill="var(--i-s7)"/>
+        <ellipse cx="16" cy="20.6" rx="11.8" ry="4.6" fill="var(--i-s2)"/>
+        <path d="M16 20.4v-6.6" stroke="var(--i-g7)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 17c-3.1 0-4.7-1.7-4.7-4.6 2.9 0 4.7 1.6 4.7 4.6z" fill="var(--i-g5)"/>
+        <path d="M16 18.8c2.8 0 4.3-1.5 4.3-4.2-2.6 0-4.3 1.5-4.3 4.2z" fill="var(--i-g7)"/>
+      </symbol>
+    
+      <!-- dose response: the curve this run would produce, with its points     -->
+      <symbol id="i-curve" viewBox="0 0 32 32">
+        <path d="M8.4 25.4C15 25.4 14.2 10.4 26 9.6v15.8z" fill="var(--i-g2)"/>
+        <path d="M8.4 25.4C15 25.4 14.2 10.4 26 9.6" fill="none" stroke="var(--i-g7)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M6 4.6v22.8h22.8" fill="none" stroke="var(--i-n)" stroke-width="1.8" stroke-linecap="round"/>
+        <g fill="var(--i-lt)" stroke="var(--i-g9)" stroke-width="1.2">
+          <circle cx="11.8" cy="24.4" r="2"/><circle cx="15" cy="19" r="2"/><circle cx="20.6" cy="11.6" r="2"/>
+        </g>
+      </symbol>
+    
+      <!-- the photometer: the tower on its open foot, light path lit           -->
+      <symbol id="i-photometer" viewBox="0 0 32 32">
+        <rect x="11.8" y="2.8" width="8.4" height="21.6" rx="1.6" fill="var(--i-k)"/>
+        <rect x="13.8" y="7.6" width="4.4" height="5.6" rx="1" fill="var(--i-lt)"/>
+        <rect x="6.6" y="16.4" width="8" height="8" rx="1.6" fill="var(--i-s7)"/>
+        <rect x="8.6" y="19" width="3.6" height="2.8" rx=".8" fill="var(--i-s2)"/>
+        <rect x="4.6" y="24.4" width="22.8" height="4" rx="1.6" fill="var(--i-s7)"/>
+        <g stroke="var(--i-p)" stroke-width="1.6" stroke-linecap="round" opacity=".55">
+          <path d="M9.4 26.4h4M18.6 26.4h4"/>
+        </g>
+      </symbol>
+    
+      <!-- expression: the blot, three lanes, the bands that would be on it     -->
+      <symbol id="i-blot" viewBox="0 0 32 32">
+        <rect x="3.4" y="4.8" width="25.2" height="22.4" rx="2.2" fill="var(--i-p)" stroke="var(--i-s7)" stroke-width="1.8"/>
+        <g stroke="var(--i-s2)" stroke-width="1.4">
+          <path d="M11.8 5.6v20.8M20.2 5.6v20.8"/>
+        </g>
+        <g fill="var(--i-k)">
+          <rect x="5.4" y="10.2" width="5.4" height="3" rx="1.5"/>
+          <rect x="13.6" y="14.4" width="5.4" height="3" rx="1.5"/>
+        </g>
+        <rect x="21.4" y="10.2" width="5.4" height="3" rx="1.5" fill="var(--i-g7)"/>
+        <g fill="var(--i-s2)">
+          <rect x="5.4" y="19.6" width="5.4" height="2.4" rx="1.2"/>
+          <rect x="13.6" y="21.6" width="5.4" height="2.4" rx="1.2"/>
+          <rect x="21.4" y="19.6" width="5.4" height="2.4" rx="1.2"/>
+        </g>
+      </symbol>
+    
+      <!-- the harvest: the cartridge again, and the pressure it runs at        -->
+      <symbol id="i-gauge" viewBox="0 0 32 32">
+        <rect x="3.4" y="5.4" width="9.2" height="21.2" rx="1.6" fill="var(--i-s2)"/>
+        <g stroke="var(--i-g5)" stroke-width="1.5" stroke-linecap="round">
+          <path d="M6 7.4v17.2M8 7.4v17.2M10 7.4v17.2"/>
+        </g>
+        <circle cx="22" cy="18" r="7.4" fill="var(--i-p)" stroke="var(--i-s7)" stroke-width="1.8"/>
+        <path d="M22 18 26 13.4" stroke="var(--i-a7)" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="22" cy="18" r="1.6" fill="var(--i-a7)"/>
+        <path d="M22 9.4V6.6" stroke="var(--i-s7)" stroke-width="2.2" stroke-linecap="round"/>
+      </symbol>
+    
+      <!-- rescue assays: the one that got it, and the one that did not         -->
+      <symbol id="i-rescue" viewBox="0 0 32 32">
+        <rect x="2.6" y="26.4" width="26.8" height="3" rx="1.4" fill="var(--i-n)"/>
+        <path d="M9.6 26.4v-6.2" stroke="var(--i-a7)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M9.6 22.4c-3.1 1-5-.1-5.6-3.2 3-.8 5 .3 5.6 3.2z" fill="var(--i-a5)"/>
+        <path d="M22 26.4V13.6" stroke="var(--i-g7)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M22 18.4c-3.2 0-4.9-1.8-4.9-4.9 3 0 4.9 1.7 4.9 4.9z" fill="var(--i-g5)"/>
+        <path d="M22 21c3 0 4.6-1.6 4.6-4.4-2.8 0-4.6 1.6-4.6 4.4z" fill="var(--i-g7)"/>
+      </symbol>
+    
+      <!-- the tandem run: the carboy piped straight into the tray              -->
+      <symbol id="i-tandem" viewBox="0 0 32 32">
+        <path d="M11 18.4h3.6a2.2 2.2 0 0 1 2.2 2.2v1.8" fill="none" stroke="var(--i-lt)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.8 21 17 24.6l3.2-3.6z" fill="var(--i-lt)"/>
+        <rect x="2.6" y="13.4" width="8.4" height="13.2" rx="1.8" fill="var(--i-r3)" stroke="var(--i-r7)" stroke-width="1.6"/>
+        <rect x="4.8" y="10.6" width="4" height="3.2" rx="1" fill="var(--i-k)"/>
+        <path d="M18.6 21.4h11.2v5.2a2 2 0 0 1-2 2h-7.2a2 2 0 0 1-2-2z" fill="var(--i-s2)"/>
+        <rect x="18.6" y="20" width="11.2" height="2.6" rx="1" fill="var(--i-s7)"/>
+        <g fill="var(--i-g7)">
+          <path d="M22 20c-2.2 0-3.4-1.2-3.4-3.2 2 0 3.4 1.1 3.4 3.2z"/>
+          <path d="M26.4 20c-2.2 0-3.4-1.2-3.4-3.2 2 0 3.4 1.1 3.4 3.2z"/>
+        </g>
+      </symbol>
+    
+      <!-- the map: the layers themselves, stacked, with one site marked        -->
+      <symbol id="i-map" viewBox="0 0 32 32">
+        <path d="M16 19.8 3.4 25.4 16 31l12.6-5.6z" fill="var(--i-s2)"/>
+        <path d="M16 12.6 3.4 18.2 16 23.8l12.6-5.6z" fill="var(--i-a5)"/>
+        <path d="M16 5.4 3.4 11l12.6 5.6L28.6 11z" fill="var(--i-g5)"/>
+        <path d="M16 5.4 3.4 11l12.6 5.6L28.6 11z" fill="none" stroke="var(--i-g9)" stroke-width="1.4" stroke-linejoin="round"/>
+        <circle cx="16" cy="11" r="2.4" fill="var(--i-r7)"/>
+      </symbol>
+    
+      <!-- the farmers: the change log, not the attendance record               -->
+      <symbol id="i-log" viewBox="0 0 32 32">
+        <rect x="5.6" y="4.6" width="20.8" height="24.4" rx="2.6" fill="var(--i-a2)"/>
+        <rect x="11.4" y="2" width="9.2" height="5.2" rx="1.8" fill="var(--i-k)"/>
+        <path d="m9.8 14.6 2.4 2.4 4.6-4.8" fill="none" stroke="var(--i-g7)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <g stroke="var(--i-a7)" stroke-width="2" stroke-linecap="round">
+          <path d="M18.6 15h3.6M9.8 20.8h12.4M9.8 24.6h8"/>
+        </g>
+      </symbol>
+    
+      <!-- design and docking: the in-silico half, on the screen it happens on   -->
+      <symbol id="i-insilico" viewBox="0 0 32 32">
+        <rect x="2.4" y="4.6" width="27.2" height="19" rx="2.6" fill="var(--i-s7)"/>
+        <rect x="4.8" y="7" width="22.4" height="14.2" rx="1.4" fill="var(--i-k)"/>
+        <path d="M13.2 26.6h5.6l.8 2.4h-7.2z" fill="var(--i-s7)"/>
+        <rect x="9.2" y="28.6" width="13.6" height="2.6" rx="1.3" fill="var(--i-s7)"/>
+        <path d="M19.6 10a4.6 4.6 0 1 1 0 8.4" fill="none" stroke="var(--i-lt)" stroke-width="1.8" stroke-linecap="round"/>
+        <g stroke="var(--i-lt)" stroke-width="1.4" stroke-linecap="round">
+          <path d="M11.4 12.2 13.6 13.6M11.4 16.2 13.6 14.8"/>
+        </g>
+        <g fill="var(--i-lt)">
+          <circle cx="15.2" cy="14.2" r="2.1"/>
+          <circle cx="10.2" cy="11.4" r="1.5"/><circle cx="10.2" cy="17" r="1.5"/>
+        </g>
+      </symbol>
+    
+      <!-- containment: the membrane read as the safety layer it also is         -->
+      <symbol id="i-shield" viewBox="0 0 32 32">
+        <path d="M16 2.4 27.4 6.6v9.2c0 6.8-4.7 11.8-11.4 13.8C9.3 27.6 4.6 22.6 4.6 15.8V6.6z" fill="var(--i-s2)"/>
+        <path d="M16 2.4 27.4 6.6v9.2c0 6.8-4.7 11.8-11.4 13.8C9.3 27.6 4.6 22.6 4.6 15.8V6.6z" fill="none" stroke="var(--i-s7)" stroke-width="1.8" stroke-linejoin="round"/>
+        <g stroke="var(--i-g7)" stroke-width="1.7" stroke-linecap="round">
+          <path d="M12.2 10.4v10.4M16 9.6v12M19.8 10.4v10.4"/>
+        </g>
+      </symbol>
+    
+      <!-- the map: Taiwan, with the layers that matter laid over it. An earlier
+           pass drew this as an abstract layer stack because a coastline at twenty
+           pixels reads as a leaf. At the size the transition node gives it, the
+           island itself is the better glyph.                                     -->
+      <symbol id="i-taiwan" viewBox="0 0 32 32">
+        <path d="M19.4 2.8c2.5 2.3 4 6 4.5 10.1.6 5-.1 9.8-2.1 13.1-1.3 2.3-3.1 3.3-4.8 2.7-2-.7-3.4-3.5-4.2-7.5-.9-4.8-.6-10.2.9-14.3 1.2-3.2 3.7-5.9 5.7-4.1z" fill="var(--i-g5)"/>
+        <path d="M17.4 7.6c2.3-.6 4 .8 4.6 3.6-2.3.7-4-.6-4.6-3.6z" fill="var(--i-a5)"/>
+        <path d="M15.2 17c2.7-.8 4.8.8 5.6 4-2.8.9-4.9-.5-5.6-4z" fill="var(--i-r7)"/>
+        <path d="M19.4 2.8c2.5 2.3 4 6 4.5 10.1.6 5-.1 9.8-2.1 13.1-1.3 2.3-3.1 3.3-4.8 2.7-2-.7-3.4-3.5-4.2-7.5-.9-4.8-.6-10.2.9-14.3 1.2-3.2 3.7-5.9 5.7-4.1z" fill="none" stroke="var(--i-g9)" stroke-width="1.4" stroke-linejoin="round"/>
+        <g stroke="var(--i-s7)" stroke-width="1.2" stroke-linecap="round" opacity=".5">
+          <path d="M4.6 11.6h5.2M4.6 20.4h6.4M26.6 11.6h2.8M27.4 20.4h2"/>
+        </g>
+      </symbol>
+    
+      <!-- outreach: what leaves the room, and who it reaches                     -->
+      <symbol id="i-outreach" viewBox="0 0 32 32">
+        <path d="M4 7.6h18a2.4 2.4 0 0 1 2.4 2.4v8.6a2.4 2.4 0 0 1-2.4 2.4h-8.8L8 25.4v-4.4H4a2.4 2.4 0 0 1-2.4-2.4V10A2.4 2.4 0 0 1 4 7.6z" fill="var(--i-a2)"/>
+        <g stroke="var(--i-a7)" stroke-width="2" stroke-linecap="round">
+          <path d="M6 12.4h14M6 16.4h9"/>
+        </g>
+        <circle cx="25.4" cy="8.6" r="4.6" fill="var(--i-g5)"/>
+        <path d="m23.4 8.6 1.4 1.4 2.6-2.8" fill="none" stroke="var(--i-p)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+    
+      <!-- the business plan: what a cooperative would actually pay              -->
+      <symbol id="i-plan" viewBox="0 0 32 32">
+        <rect x="4.4" y="3.6" width="23.2" height="24.8" rx="2.6" fill="var(--i-a2)"/>
+        <rect x="7.6" y="18.6" width="4" height="6.4" rx="1.2" fill="var(--i-a7)"/>
+        <rect x="14" y="14.4" width="4" height="10.6" rx="1.2" fill="var(--i-a7)"/>
+        <rect x="20.4" y="9.6" width="4" height="15.4" rx="1.2" fill="var(--i-g7)"/>
+        <path d="M7.6 12.4 12 9.2l4.4 2.4 6.6-4.8" fill="none" stroke="var(--i-r7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+    
+      <!-- regulation: the envelope the business has to fit inside              -->
+      <symbol id="i-law" viewBox="0 0 32 32">
+        <rect x="14.4" y="4.6" width="3.2" height="22.6" rx="1.4" fill="var(--i-s7)"/>
+        <rect x="6.6" y="26" width="18.8" height="3.4" rx="1.6" fill="var(--i-s7)"/>
+        <path d="M5.4 8.6h21.2" stroke="var(--i-s7)" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M8.6 9.6 4 19.4h9.2z" fill="var(--i-a5)"/>
+        <path d="M23.4 9.6 18.8 19.4H28z" fill="var(--i-a5)"/>
+        <circle cx="16" cy="4.6" r="2.4" fill="var(--i-g5)"/>
+      </symbol>
+    
+
+      <!-- ═══ new in V2 ══════════════════════════════════════════════════════
+           Two glyphs V1 had no use for, drawn in the same voice and from the
+           same hardware: the cartridge with its black end caps, its slate body
+           and its green fibres.                                               -->
+
+      <!-- 05  do it again. The module in the middle, the cassette block seated
+             in it in amber, and the loop that says the machine comes back      -->
+      <symbol id="i-again" viewBox="0 0 32 32">
+        <g fill="none" stroke="var(--i-g5)" stroke-width="2.2" stroke-linecap="round">
+          <path d="M16 4A12 12 0 0 1 28 16"/>
+          <path d="M16 28A12 12 0 0 1 4 16"/>
+        </g>
+        <path d="M28 20.4 25.2 15h5.6z" fill="var(--i-g7)"/>
+        <path d="M4 11.6 6.8 17H1.2z" fill="var(--i-g7)"/>
+        <rect x="11.4" y="10.4" width="9.2" height="11.2" fill="var(--i-s2)"/>
+        <g stroke="var(--i-g5)" stroke-width="1.3" stroke-linecap="round">
+          <path d="M13.6 11.2v9.6M16 11.2v9.6M18.4 11.2v9.6"/>
+        </g>
+        <rect x="10.2" y="7.4" width="11.6" height="3.2" rx="1.1" fill="var(--i-k)"/>
+        <rect x="10.2" y="21.4" width="11.6" height="3.2" rx="1.1" fill="var(--i-k)"/>
+        <rect x="13.2" y="13.4" width="5.6" height="5.2" rx="1.2" fill="var(--i-a7)"/>
+      </symbol>
+
+      <!-- scale-out. The same module three times on one manifold, because on
+             the model that is what scaling is: more of the same, not a bigger
+             one. Same green permeate leaving each                              -->
+      <symbol id="i-scaleout" viewBox="0 0 32 32">
+        <circle cx="16" cy="2.4" r="1.8" fill="var(--i-a7)"/>
+        <rect x="2.4" y="4.4" width="27.2" height="3.6" rx="1.4" fill="var(--i-k)"/>
+        <rect x="2.4" y="23.6" width="27.2" height="3.6" rx="1.4" fill="var(--i-k)"/>
+        <g fill="var(--i-s2)">
+          <rect x="4.8" y="8" width="6" height="15.6"/>
+          <rect x="13" y="8" width="6" height="15.6"/>
+          <rect x="21.2" y="8" width="6" height="15.6"/>
+        </g>
+        <g stroke="var(--i-g5)" stroke-width="1.3" stroke-linecap="round">
+          <path d="M6.6 9.4v12.8M9 9.4v12.8M14.8 9.4v12.8M17.2 9.4v12.8M23 9.4v12.8M25.4 9.4v12.8"/>
+        </g>
+        <g stroke="var(--i-lt)" stroke-width="2.2" stroke-linecap="round">
+          <path d="M7.8 27.6v2.6M16 27.6v2.6M24.2 27.6v2.6"/>
+        </g>
+      </symbol>
+
+    </defs></svg>
+
+    <p class="bpv2__kicker">The big picture</p>
+    <h2 class="band__title" id="bpv2-title">Five things the system does, and the work that feeds each one.</h2>
+    <p class="bpv2__lede">Everything on this project serves one of five things the machine has to do.
+    The work that feeds each of them comes in from both sides. At the end, one week on one plot,
+    with every number carrying where it came from and <b>every hole marked as a hole</b>.</p>
+
+    <div class="spine" id="spine" role="group" aria-label="Five things the ReLeaf system does, and the work that feeds each one">
+
+      <!-- The zones, named once. Pointing at one lights every card in it. -->
+      <div class="key">
+        <span class="key__lab">Whose work</span>
+        <span class="key__item" data-zone="bio" tabindex="0"><span class="key__sw"></span>Biology</span>
+        <span class="key__item" data-zone="eng" tabindex="0"><span class="key__sw"></span>Engineering</span>
+        <span class="key__item" data-zone="dep" tabindex="0"><span class="key__sw"></span>Deployment</span>
+      </div>
+
+      <div class="chain">
+
+        <!-- ═══ 01 ═════════════════════════════════════════════════════════ -->
+        <div class="node" data-node="1">
+          <div class="wing wing--l">
+            <div class="chip" id="c-baselines" tabindex="0" data-feeds="bio" data-at="1" data-with="c-model c-tandem">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-dish"/></svg></span><span class="chip__name">Stress baselines</span>
+            </div>
+          </div>
+          <div class="node__core" tabindex="0">
+            <span class="node__badge">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-board"/></svg></span>
+              <span class="node__n">01</span>
+            </span>
+            <span>
+              <span class="node__name">See it coming</span>
+              <span class="node__note">A sensor in the soil and a forecast off the network call the stress
+              before the plant shows it. Design intent. The prediction has never been run against a season.</span>
+            </span>
+          </div>
+          <div class="wing wing--r">
+            <div class="chip" id="c-farmers" tabindex="0" data-feeds="dep" data-at="1" data-with="c-room c-plan">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-log"/></svg></span><span class="chip__name">The farmers</span>
+            </div>
+          </div>
+        </div>
+        <div class="link" data-seg="1"><span class="link__rail"></span></div>
+
+        <!-- ═══ 02 ═════════════════════════════════════════════════════════ -->
+        <div class="node" data-node="2">
+          <div class="wing wing--l">
+            <div class="chip" id="c-docking" tabindex="0" data-feeds="bio" data-at="2" data-with="c-cassette c-model">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-insilico"/></svg></span><span class="chip__name">Design and docking</span>
+            </div>
+            <div class="chip" id="c-cassette" tabindex="0" data-feeds="bio" data-at="2" data-with="c-docking c-array c-blot">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-construct"/></svg></span><span class="chip__name">The cassette</span>
+            </div>
+          </div>
+          <div class="node__core" tabindex="0">
+            <span class="node__badge">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-peptide"/></svg></span>
+              <span class="node__n">02</span>
+            </span>
+            <span>
+              <span class="node__name">Pick what to make</span>
+              <span class="node__note">One of three protectants sits in the cassette slot, and green light is
+              meant to set how much. Brightness as dose is design intent; no induction curve exists in our hands.</span>
+            </span>
+          </div>
+          <div class="wing wing--r">
+            <div class="chip" id="c-model" tabindex="0" data-feeds="eng" data-at="2" data-with="c-baselines c-array c-tandem bridge">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-model"/></svg></span><span class="chip__name">The model</span>
+            </div>
+            <div class="chip" id="c-array" tabindex="0" data-feeds="eng" data-at="2" data-with="c-cassette c-model">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-diopal"/></svg></span><span class="chip__name">The light array</span>
+            </div>
+          </div>
+        </div>
+        <div class="link" data-seg="2"><span class="link__rail"></span></div>
+
+        <!-- ═══ 03 ═════════════════════════════════════════════════════════ -->
+        <div class="node" data-node="3">
+          <div class="wing wing--l">
+            <div class="chip" id="c-blot" tabindex="0" data-feeds="bio" data-at="3" data-with="c-cassette c-photometer">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-blot"/></svg></span><span class="chip__name">Expression</span>
+            </div>
+          </div>
+          <div class="node__core" tabindex="0">
+            <span class="node__badge">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-reactor"/></svg></span>
+              <span class="node__n">03</span>
+            </span>
+            <span>
+              <span class="node__name">Make it</span>
+              <span class="node__note"><i>B. subtilis</i> grows without stopping in the extracapillary chamber,
+              in a machine we built rather than one somebody else owns. Three weeks of unbroken OD600 logging,
+              which describes the log and not the culture.</span>
+            </span>
+          </div>
+          <div class="wing wing--r">
+            <div class="chip" id="c-photometer" tabindex="0" data-feeds="eng" data-at="3" data-with="c-blot c-harvest">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-photometer"/></svg></span><span class="chip__name">The photometer</span>
+            </div>
+          </div>
+        </div>
+        <div class="link" data-seg="3"><span class="link__rail"></span></div>
+
+        <!-- ═══ 04 ═════════════════════════════════════════════════════════ -->
+        <div class="node" data-node="4">
+          <div class="wing wing--l">
+            <div class="chip" id="c-harvest" tabindex="0" data-feeds="eng" data-at="4" data-with="c-shield c-photometer c-scaleout">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-gauge"/></svg></span><span class="chip__name">The harvest</span>
+            </div>
+            <div class="chip" id="c-tandem" tabindex="0" data-feeds="bio" data-at="4" data-with="c-model c-baselines">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-tandem"/></svg></span><span class="chip__name">The tandem run</span>
+            </div>
+          </div>
+          <div class="node__core" tabindex="0">
+            <span class="node__badge">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-cartridge"/></svg></span>
+              <span class="node__n">04</span>
+            </span>
+            <span>
+              <span class="node__name">Hand it over</span>
+              <span class="node__note">A hollow fibre membrane is intended to keep every cell and pass only
+              protein. Intended, not shown, and the cutoff that decides it is the one design decision still unmade.</span>
+            </span>
+          </div>
+          <div class="wing wing--r">
+            <div class="chip" id="c-shield" tabindex="0" data-feeds="eng" data-at="4" data-with="c-harvest c-law">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="chip__name">Containment</span>
+            </div>
+          </div>
+        </div>
+        <div class="link" data-seg="4"><span class="link__rail"></span></div>
+
+        <!-- ═══ 05 ═════════════════════════════════════════════════════════ -->
+        <div class="node" data-node="5">
+          <div class="wing wing--l">
+            <div class="chip" id="c-scaleout" tabindex="0" data-feeds="eng" data-at="5" data-with="c-harvest c-plan">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-scaleout"/></svg></span><span class="chip__name">Scale-out</span>
+            </div>
+            <div class="chip" id="c-room" tabindex="0" data-feeds="dep" data-at="5" data-with="c-farmers bridge">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-outreach"/></svg></span><span class="chip__name">What leaves the room</span>
+            </div>
+          </div>
+          <div class="node__core" tabindex="0">
+            <span class="node__badge">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-again"/></svg></span>
+              <span class="node__n">05</span>
+            </span>
+            <span>
+              <span class="node__name">Do it again</span>
+              <span class="node__note">The cassette is a slot, not a rebuild, so the machine answers how much
+              on Thursday and something else next season. An argument about the architecture, not something we
+              have done twice.</span>
+            </span>
+          </div>
+          <div class="wing wing--r">
+            <div class="chip" id="c-law" tabindex="0" data-feeds="dep" data-at="5" data-with="c-shield c-plan">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-law"/></svg></span><span class="chip__name">Regulation</span>
+            </div>
+            <div class="chip" id="c-plan" tabindex="0" data-feeds="dep" data-at="5" data-with="bridge c-law c-farmers">
+              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-plan"/></svg></span><span class="chip__name">The business plan</span>
+            </div>
+          </div>
+        </div>
+        <div class="link" data-seg="5"><span class="link__rail"></span></div>
+
+        <!-- ═══ out of the trunk: one run becomes a quantity ════════════════ -->
+        <div class="bridgerow">
+          <div class="bridge" id="bridge" tabindex="0" data-with="c-plan c-room c-model">
+            <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-taiwan"/></svg></span>
+            <span>
+              <span class="bridge__tag">How much land</span>
+              <span class="bridge__name">The map</span>
+              <span class="bridge__note">Salinity and heat across Taiwan, in QGIS. One tandem run says the line
+              works once. The map says which townships carry the stress and in which month, which is the step
+              that turns a result into a claim about a country.</span>
+              <span class="slot"><b>not on record</b>The township reading. It fills when the QGIS layers are
+              written up as a table, which is ours to do and nobody else&rsquo;s.</span>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================================
+     THE ACT. The payoff, on ink. One call, one plot, one week, then the same
+     week across the map. Every number here is either ours, borrowed with the
+     borrowing named, or a slot. Do not fill a slot with a guess.
+     ========================================================================== -->
+
+<section class="band band--dark act" aria-labelledby="act-title">
+  <div class="band__inner">
+    <p class="act__kicker">One call, one plot, one week</p>
+    <h2 id="act-title">What it would actually do, on a Tuesday.</h2>
+    <p class="act__lede">A coastal plot under salt. Salt-affected land runs to 1.38 billion hectares, about
+    10.7% of the global total (FAO 2024), and the map narrows that to ground one machine can reach. Below is
+    the week that follows. The site itself is a slot: the QGIS layers exist, the township reading is not
+    written up, so this page does not name one.</p>
+
+    <ol class="week">
+      <li class="moment" data-node="1" tabindex="0">
+        <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">T minus ?</span></span>
+        <div>
+          <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-board"/></svg></span>The forecast</h3>
+          <p>The controller reads a soil sensor and an online forecast together and calls the stress early.
+          How much warning that buys is the number the whole week turns on.</p>
+          <span class="slot"><b>not on record</b>Forecast lead time. It fills the first season the controller
+          is run against real weather.</span>
+        </div>
+      </li>
+      <li class="moment" data-node="2" tabindex="0">
+        <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">T = 0</span></span>
+        <div>
+          <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-led"/></svg></span>The call</h3>
+          <p>Green light goes on over the chamber at 520 nm, and the intent is that brightness sets the dose
+          rather than switching it on and off. What the controller does with a prediction, threshold or
+          schedule or dose policy, has not been written down.</p>
+          <span class="slot"><b>not on record</b>The dose policy.</span>
+        </div>
+      </li>
+      <li class="moment" data-node="3" tabindex="0">
+        <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">~105 min</span></span>
+        <div>
+          <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-culture"/></svg></span>Half maximum</h3>
+          <p>Published half-maximum for a switch of this class is roughly 105 minutes. Borrowed, not ours: a
+          different organism at a different wavelength, and it is not on record whether that figure describes
+          transcript, protein inside the cell, or anything in the permeate.</p>
+        </div>
+      </li>
+      <li class="moment" data-node="4" tabindex="0">
+        <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">hours</span></span>
+        <div>
+          <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-cartridge"/></svg></span>Into the permeate</h3>
+          <p>The gate we set ourselves is 1 mU/mL of ACC deaminase in neat, cell-free permeate. It is not an
+          arbitrary number. It is at once the ACC-cleaving capacity of a 10&#8312; CFU/mL colonisation by
+          <i>Pseudomonas putida</i> UW4, the reference strain in that field, and the activity that gives a
+          39 hour clearance half-life in the reservoir. With a 5 L reservoir and 60 mL/h of permeate the
+          reactor has to hand over 2.4 mU/mL.</p>
+          <span class="slot"><b>not on record</b>The permeate rate. It is the one input that closes the
+          dilution table, and hardware owes it.</span>
+        </div>
+      </li>
+      <li class="moment" data-node="4" tabindex="0">
+        <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">hours to days</span></span>
+        <div>
+          <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-tray"/></svg></span>In the root zone</h3>
+          <p>Clearance runs first order and does not depend on how much ACC is present, because K<sub>M</sub>
+          is 3.4 mM (Hontzeas 2004), three orders of magnitude above anything a root zone holds. So we never
+          had to guess a concentration nobody has measured. One risk sits directly under that: the same paper
+          reports almost no activity below pH 6.5, and hydroponic solution is normally held at 5.5 to 6.5.</p>
+        </div>
+      </li>
+      <li class="moment" data-node="5" tabindex="0">
+        <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">the plant</span></span>
+        <div>
+          <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-rescue"/></svg></span>Nothing here yet</h3>
+          <p>No plant has received anything from this system. When one has, the claim is not that it worked
+          once. It is that the same machine does it again on Thursday, and something else next season.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="hinge">
+      <h3>One comparison decides the whole week, and we have not made it.</h3>
+      <p>The forecast has to warn us earlier than the system takes to answer. Induction, translation,
+      secretion, permeate, reservoir, root zone. End to end that is necessarily longer than 105 minutes, and
+      we have measured neither it nor the lead time it has to beat. If the warning is shorter than the answer,
+      the protein arrives after the stress, and the argument for predicting anything falls over.</p>
+      <span class="slot"><b>not on record</b>End-to-end latency, and forecast lead time. Two measurements, and
+      they are the two this page most wants.</span>
+    </div>
+
+    <div class="wide">
+      <h3>The same week, across the map.</h3>
+      <p>One machine stands at the head of one irrigation line. The economic unit is the line and the owner is
+      the cooperative, so a farmer in a 產銷班 that owns a reactor is a biomanufacturer in the only sense that
+      matters, which is that no outside licence-holder decides what gets made.</p>
+      <p>Serving more line means adding modules rather than building something larger. On the model, cross-flow,
+      permeate and working volume scale together, so wall shear, Reynolds number, flux and fouling margin all
+      hold across the change. Power is the one thing that does not scale, and that tension is left in on
+      purpose. Model output, all of it, and none of it measured.</p>
+      <span class="slot"><b>not on record</b>How many lines are like this one, and what one machine costs to
+      build. The first is a map reading. The second is a bill of materials with no total yet, which is why no
+      page here carries a price.</span>
+    </div>
+
+    <div class="claim">
+          <svg class="dest" viewBox="0 0 168 112" role="img"
+               aria-label="The bioreactor standing at the head of an irrigation line, feeding three rows of crop.">
+            <rect x="30" y="40" width="112" height="10" rx="5" fill="var(--dest-far)"/>
+            <rect x="14" y="59" width="140" height="12" rx="6" fill="var(--dest-mid)"/>
+            <rect x="0" y="82" width="168" height="15" rx="7.5" fill="var(--dest-near)"/>
+            <g fill="none" stroke="var(--sig-green)" stroke-linecap="round">
+              <g stroke-width="1.4" opacity=".55">
+            <path d="M42 40 v-5 M42 37 l-2.4 -2.2 M42 37 l2.4 -2.2"/>
+            <path d="M62 40 v-5 M62 37 l-2.4 -2.2 M62 37 l2.4 -2.2"/>
+            <path d="M82 40 v-5 M82 37 l-2.4 -2.2 M82 37 l2.4 -2.2"/>
+            <path d="M102 40 v-5 M102 37 l-2.4 -2.2 M102 37 l2.4 -2.2"/>
+            <path d="M122 40 v-5 M122 37 l-2.4 -2.2 M122 37 l2.4 -2.2"/>
+            <path d="M137 40 v-5 M137 37 l-2.4 -2.2 M137 37 l2.4 -2.2"/>
+              </g>
+              <g stroke-width="1.7" opacity=".74">
+            <path d="M26 59 v-7 M26 54 l-3.0 -2.7 M26 54 l3.0 -2.7"/>
+            <path d="M50 59 v-7 M50 54 l-3.0 -2.7 M50 54 l3.0 -2.7"/>
+            <path d="M74 59 v-7 M74 54 l-3.0 -2.7 M74 54 l3.0 -2.7"/>
+            <path d="M98 59 v-7 M98 54 l-3.0 -2.7 M98 54 l3.0 -2.7"/>
+            <path d="M122 59 v-7 M122 54 l-3.0 -2.7 M122 54 l3.0 -2.7"/>
+            <path d="M146 59 v-7 M146 54 l-3.0 -2.7 M146 54 l3.0 -2.7"/>
+              </g>
+              <g stroke-width="2" opacity=".92">
+            <path d="M62 82 v-9 M62 75 l-3.8 -3.4 M62 75 l3.8 -3.4"/>
+            <path d="M92 82 v-9 M92 75 l-3.8 -3.4 M92 75 l3.8 -3.4"/>
+            <path d="M122 82 v-9 M122 75 l-3.8 -3.4 M122 75 l3.8 -3.4"/>
+            <path d="M150 82 v-9 M150 75 l-3.8 -3.4 M150 75 l3.8 -3.4"/>
+              </g>
+            </g>
+            <path d="M14 89H158" stroke="var(--i-s2)" stroke-width="1.5" stroke-opacity=".26" fill="none"/>
+            <path d="M46 72C62 72 64 64 80 64" fill="none" stroke="var(--i-s2)" stroke-width="2" stroke-opacity=".42" stroke-linecap="round"/>
+            <rect x="12" y="58" width="32" height="32" rx="4" fill="var(--ink-2)" stroke="var(--leaf-700)" stroke-width="1.4"/>
+            <rect x="18" y="64" width="20" height="12" rx="2" fill="var(--sig-green)" opacity=".82"/>
+            <rect x="18" y="81" width="11" height="3" rx="1.5" fill="var(--i-s2)" opacity=".38"/>
+            <circle cx="36.5" cy="82.5" r="2.2" fill="var(--sig-green)"/>
+          </svg>
+      <div>
+      <p class="claim__line">Every farmer a biomanufacturer.</p>
+      <p class="claim__sub">Not a farmer who owns a machine. A farmer whose cooperative owns the irrigation
+      line, and for whom no outside licence-holder decides what gets made.</p>
+      <p class="claim__open"><b>Still open</b>A build cost we can put a number on. A classification a Taiwanese
+      regulator accepts. A cooperative willing to run the thing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/big-picture-v2.js"></script>
+</body>
+</html>
