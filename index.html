@@ -427,266 +427,170 @@
     </defs></svg>
 
     <p class="bpv2__kicker">The big picture</p>
-    <h2 class="band__title" id="bpv2-title">Five things the system does, and the work that feeds each one.</h2>
-    <p class="bpv2__lede">Everything on this project serves one of five things the machine has to do.
-    The work that feeds each of them comes in from both sides. At the end, one week on one plot,
-    with every number carrying where it came from and <b>every hole marked as a hole</b>.</p>
+    <h2 class="band__title" id="bpv2-title">The whole project, in five steps.</h2>
 
-    <div class="spine" id="spine" role="group" aria-label="Five things the ReLeaf system does, and the work that feeds each one">
-
-      <!-- The zones, named once. Pointing at one lights every card in it. -->
-      <div class="key">
-        <span class="key__lab">Whose work</span>
-        <span class="key__item" data-zone="bio" tabindex="0"><span class="key__sw"></span>Biology</span>
-        <span class="key__item" data-zone="eng" tabindex="0"><span class="key__sw"></span>Engineering</span>
-        <span class="key__item" data-zone="dep" tabindex="0"><span class="key__sw"></span>Deployment</span>
-        <p class="key__note">Every picture in the margin is ours, from the day the work happened.
-        The one that moves is 30 ns of molecular dynamics we ran, and it moves when you point at it.</p>
-      </div>
-
+    <div class="spine" id="spine" role="group" aria-label="The ReLeaf project as five steps, with the work that feeds each one">
       <div class="chain">
-
-        <!-- ═══ 01 ═════════════════════════════════════════════════════════ -->
         <div class="node" data-node="1">
-          <div class="wing wing--l">
-            <div class="feed" data-zone="bio">
-              <figure class="shot"><img src="assets/img/baselines.jpg" width="340" height="255"
+          <div class="strip strip--l">
+            <div class="task" id="t-baselines" tabindex="0" data-at="1" data-with="t-model t-tandem">
+              <figure class="task__shot"><img src="assets/img/baselines.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="Two Arabidopsis agar boxes held up to the light in our lab, 5 July 2026." /></figure>
-              <div class="chip" id="c-baselines" tabindex="0" data-feeds="bio" data-at="1" data-with="c-model c-tandem">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-dish"/></svg></span><span class="chip__name">Stress baselines</span>
-              </div>
+              <span class="task__name">Baselines</span>
+            </div>
+            <div class="task" id="t-farmers" tabindex="0" data-at="1" data-with="t-plan t-edu">
+              <figure class="task__shot"><img src="assets/img/farmers.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="陳惠雯 on her knees in her plot, showing two of us the soil, 21 July 2026." /></figure>
+              <span class="task__name">Farmers</span>
             </div>
           </div>
           <div class="node__core" tabindex="0">
-            <span class="node__badge">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-board"/></svg></span>
-              <span class="node__n">01</span>
-            </span>
+            <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-field"/></svg></span>
             <span>
-              <span class="node__name">See it coming</span>
-              <span class="node__note">A sensor in the soil and a forecast off the network call the stress
-              before the plant shows it. Design intent. The prediction has never been run against a season.</span>
+              <span class="node__name">The stress</span>
+              <span class="node__note">Heat and salt. The smallest farms sit where they are worst.</span>
             </span>
           </div>
-          <div class="wing wing--r">
-            <div class="feed" data-zone="dep">
-              <figure class="shot"><img src="assets/img/farmers.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="陳惠雯 on her knees in her plot, showing two of us the soil, 21 July 2026." /></figure>
-              <div class="chip" id="c-farmers" tabindex="0" data-feeds="dep" data-at="1" data-with="c-room c-plan">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-log"/></svg></span><span class="chip__name">The farmers</span>
-              </div>
+          <div class="strip strip--r">
+            <div class="task" id="t-map" tabindex="0" data-at="1" data-with="t-plan t-model">
+              <figure class="task__shot"><img src="assets/img/map.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="Our QGIS layer: small-scale farm parcels in red over the climate volatility index, west coast." /></figure>
+              <span class="task__name">The map</span>
             </div>
           </div>
         </div>
         <div class="link" data-seg="1"><span class="link__rail"></span></div>
-
-        <!-- ═══ 02 ═════════════════════════════════════════════════════════ -->
         <div class="node" data-node="2">
-          <div class="wing wing--l">
-            <div class="feed" data-zone="bio">
-              <figure class="shot shot--md">
+          <div class="strip strip--l">
+            <div class="task task--md" id="t-docking" tabindex="0" data-at="2" data-with="t-cassette t-model">
+              <figure class="task__shot">
                 <svg class="mdanim" viewBox="0 0 200 150" role="img"
-                 aria-label="Thirty nanoseconds of molecular dynamics we ran: the BoPep4 backbone moving in the PEPR1 groove, Asn23 in green and Arg487 in amber. Still until it is pointed at."
-                 data-frames="M25 112L29 105L36 101L43 103L49 96L57 97L65 92L72 96L80 95L86 91L94 95L101 93L109 89L116 94L124 91L128 84L137 85L143 79L143 72L151 69L156 63L162 57L169 52;M21 97L28 102L35 102L44 104L49 97L58 97L65 94L73 96L81 95L88 91L96 96L102 93L110 89L118 94L126 91L130 84L139 84L144 77L144 69L151 67L158 63L163 55L170 51;M20 100L28 103L36 102L44 106L49 100L58 98L64 93L72 96L81 95L87 91L95 96L101 93L109 89L116 94L125 92L131 86L138 84L143 77L143 70L150 68L155 62L162 56L169 51;M20 94L27 99L35 98L43 101L49 95L58 95L65 93L73 96L81 96L87 91L95 95L102 93L109 89L117 95L124 93L129 86L137 85L143 78L144 72L151 69L157 63L162 55L169 52;M19 98L27 102L34 101L43 102L48 97L58 98L65 94L72 98L80 95L86 90L94 94L101 92L109 89L116 95L124 93L130 86L138 85L143 78L143 71L152 69L156 64L161 56L168 52;M19 104L27 103L34 101L43 103L50 98L59 98L64 93L72 95L80 94L87 90L95 93L101 91L109 89L116 94L124 92L131 87L138 86L143 79L144 71L153 69L159 64L163 56L170 52;M18 97L26 100L33 98L41 101L47 95L56 96L64 91L71 95L80 95L86 90L95 94L101 93L109 90L117 94L124 92L130 87L137 86L143 79L143 72L151 69L154 61L162 56L169 52;M19 96L27 100L34 99L42 101L48 95L57 95L64 90L71 95L80 94L86 89L94 93L101 93L109 90L117 95L124 94L131 88L138 88L144 81L144 74L152 70L155 63L162 56L169 53;M17 103L25 105L33 104L41 106L47 101L56 99L62 93L70 96L78 95L85 91L93 95L100 93L108 89L116 94L124 93L129 86L137 86L143 79L144 71L151 68L157 63L163 56L171 53;M21 104L29 103L35 100L43 103L49 97L58 97L65 92L72 95L81 93L87 89L94 94L101 93L110 90L117 95L125 93L130 86L138 86L143 79L143 72L151 69L156 62L163 56L170 53;M21 99L28 100L35 96L43 101L50 94L59 93L65 89L72 93L80 94L86 90L93 95L100 94L108 91L116 96L124 94L128 86L137 86L143 80L144 72L152 70L156 63L162 57L169 53;M25 108L29 102L36 97L44 99L49 92L57 94L65 92L72 96L81 94L87 91L95 95L102 94L110 91L117 96L124 94L130 87L138 87L144 80L143 73L150 69L155 64L162 57L168 52;M20 102L28 103L34 102L43 102L48 96L57 96L64 93L72 96L80 95L87 92L95 97L101 95L109 90L116 96L124 93L129 87L137 86L143 80L144 73L151 69L156 64L161 57L168 52;M21 99L30 102L35 101L44 102L49 96L58 97L65 92L73 95L80 93L87 90L94 94L101 93L110 90L117 96L125 93L130 87L138 86L142 80L143 72L151 70L157 65L161 57L167 52;M23 112L30 107L35 103L43 104L49 98L58 97L65 93L72 96L81 95L87 91L95 95L102 93L110 90L117 96L125 93L131 88L138 86L143 79L143 71L151 69L156 64L162 57L168 52;M24 111L30 106L36 101L44 105L49 99L58 100L65 94L72 98L80 97L87 93L94 97L101 95L109 91L118 95L125 92L131 86L138 86L143 78L144 72L152 69L156 60L163 55L169 50;M28 116L31 109L37 104L46 104L50 96L59 96L67 91L74 95L83 93L89 90L97 94L103 94L111 90L119 95L127 93L132 87L139 86L146 80L145 72L151 69L157 63L163 57L170 52;M26 113L31 107L36 101L44 103L49 96L58 97L66 92L74 96L82 95L88 92L97 95L103 94L111 90L118 95L126 93L130 86L139 88L143 81L145 73L152 70L156 62L163 57L170 52;M21 111L29 109L35 105L43 104L49 98L58 98L65 93L72 96L81 95L87 91L95 95L103 94L110 90L118 95L126 93L130 86L138 87L144 80L144 73L152 70L157 64L163 57L170 52;M25 111L30 106L36 101L44 102L50 96L59 96L66 91L74 94L81 94L87 90L95 95L102 93L109 90L117 95L125 92L130 86L137 87L143 80L143 73L150 69L156 64L162 57L168 53;M23 108L28 105L35 104L44 103L51 98L60 98L67 92L75 94L83 93L89 88L95 94L103 93L110 90L118 95L126 93L130 86L138 87L144 80L144 73L151 69L156 63L162 57L168 53;M20 104L28 104L36 105L45 105L50 98L59 99L65 93L73 96L80 93L87 88L95 92L102 91L110 89L117 94L125 91L130 84L138 85L144 78L144 71L152 68L156 61L163 55L170 51;M23 94L32 94L37 99L45 102L50 96L59 97L64 92L72 95L80 94L86 89L94 94L101 94L109 90L116 95L124 92L128 85L137 86L142 79L142 71L151 69L155 61L162 56L169 52;M22 101L31 99L36 104L44 107L49 100L57 100L64 94L72 97L80 93L86 90L94 94L101 92L108 90L117 94L124 90L130 84L137 83L143 76L143 69L151 67L157 61L163 54L170 50;M21 101L30 100L34 105L43 107L48 99L57 99L64 94L73 96L81 95L88 92L95 96L102 94L109 90L117 95L125 93L131 86L138 86L144 79L144 73L151 69L157 64L163 57L169 53;M20 99L28 101L36 104L44 105L50 99L59 99L66 93L74 95L82 94L87 91L95 95L102 92L110 89L117 94L125 92L130 86L138 86L143 79L144 72L152 71L155 63L162 57L168 53;M21 97L29 101L36 103L45 103L49 96L59 96L66 92L74 96L82 95L89 91L97 95L103 95L110 90L118 94L126 93L130 85L139 87L145 80L145 73L153 69L158 64L164 57L170 53;M20 98L27 103L34 101L42 105L49 99L58 98L65 94L73 98L81 96L87 95L95 97L102 94L109 90L117 95L124 93L129 86L137 86L141 79L143 72L152 70L156 63L163 57L170 53;M21 94L27 99L35 98L44 101L50 94L58 93L66 92L73 96L81 95L88 92L96 96L102 94L110 90L118 95L126 93L130 86L138 86L144 79L144 72L151 68L157 63L164 56L170 52;M22 92L27 99L34 99L43 102L49 97L58 97L65 92L72 96L81 94L87 90L94 94L101 92L109 89L117 94L125 92L131 85L138 85L144 78L144 71L152 69L156 61L163 55L170 52;M18 98L27 101L34 100L43 103L50 97L58 96L65 93L73 97L81 95L87 90L95 94L102 92L110 89L118 94L126 92L132 86L140 86L145 79L145 72L153 69L157 62L163 56L170 52;M22 110L29 105L36 102L44 104L49 97L58 96L65 92L72 96L81 95L86 90L94 94L101 93L109 90L117 95L125 92L131 86L139 87L144 80L144 72L152 70L159 64L162 56L170 53;M22 104L30 101L37 98L44 101L51 95L59 96L66 92L74 97L82 95L87 90L95 94L102 92L110 89L118 94L125 92L132 87L139 86L145 79L146 72L154 70L159 65L164 57L172 53;M25 111L30 104L36 101L44 103L50 96L59 96L66 92L74 96L82 93L89 90L97 95L102 93L110 89L117 94L125 92L130 85L138 86L143 78L145 72L153 68L159 64L163 56L171 52;M23 111L29 105L35 102L43 106L50 100L59 99L66 95L74 98L82 96L88 92L95 97L102 95L110 92L117 97L125 94L130 87L138 87L143 80L145 73L153 70L159 66L163 58L170 53;M24 110L28 104L34 98L42 102L50 96L59 96L66 93L74 97L82 96L89 92L97 97L103 94L110 90L118 94L125 93L131 86L139 86L144 79L144 71L152 69L158 63L163 56L170 52;M23 111L28 105L35 100L43 103L49 96L58 96L66 92L73 96L81 95L88 92L96 95L102 93L110 90L117 96L125 94L131 88L139 87L145 80L145 74L152 69L157 64L163 56L171 53;M25 114L29 107L36 103L44 106L50 99L58 97L64 92L72 96L80 95L87 91L95 95L101 93L109 89L116 94L124 92L130 85L137 85L143 78L143 71L152 69L158 63L163 56L171 52;M23 114L28 107L35 104L42 106L49 99L58 99L65 95L73 97L80 96L87 92L94 96L101 94L109 91L117 96L124 94L129 87L137 86L142 79L144 72L153 69L158 65L163 57L170 53;M20 108L27 103L34 100L42 104L49 98L58 99L64 94L72 96L80 95L86 92L94 96L101 94L108 90L116 94L124 92L129 85L137 86L143 80L143 72L151 68L157 64L162 56L170 51;M21 111L27 105L34 102L42 105L47 99L56 98L63 93L71 96L79 95L85 91L93 95L100 94L107 89L115 94L123 92L128 85L136 85L142 78L145 71L153 68L155 59L161 52L169 52;M26 112L29 105L35 100L43 102L49 95L58 96L64 91L72 95L80 94L87 90L95 93L102 92L110 89L117 95L125 92L131 86L138 85L145 79L145 72L153 68L157 62L162 55L171 52;M22 115L27 108L34 105L42 107L48 100L57 100L65 96L73 97L80 96L87 92L95 96L102 94L109 88L117 93L124 91L130 85L137 84L144 78L144 70L152 69L157 63L163 56L171 52;M28 113L32 106L36 100L45 102L50 96L59 98L65 98L74 98L81 96L88 91L96 95L102 94L109 90L117 95L124 92L131 86L138 85L145 80L145 73L152 68L158 64L162 55L170 52;M27 114L31 106L37 103L46 103L50 95L57 95L63 94L72 97L80 96L86 92L94 96L101 94L109 90L117 94L124 91L130 85L138 84L145 78L145 71L151 66L157 62L163 54L170 51;M24 114L29 106L35 104L44 105L48 97L56 97L64 97L72 95L80 93L88 90L96 94L102 92L110 89L118 94L125 91L130 85L138 85L144 78L145 70L153 69L159 64L164 56L170 52"
-                 data-tipx="169;170;169;169;168;170;169;169;171;170;169;168;168;167;168;169;170;170;170;168;168;170;169;170;169;168;170;170;170;170;170;170;172;171;170;170;171;171;170;170;169;171;171;170;170;170"
-                 data-tipy="52;51;51;52;52;52;52;53;53;53;53;52;52;52;52;50;52;52;52;53;53;51;52;50;53;53;53;53;52;52;52;53;53;52;53;52;53;52;53;51;52;52;52;52;51;52">
-              <path class="md-band" fill="none" stroke-width="9.0" d="M22.2 105.3L28.6 103.4L35.1 101.4L43.4 103.5L49.2 97.0L58.0 97.1L64.9 92.9L72.6 96.1L80.7 94.7L87.1 90.8L94.9 94.9L101.6 93.3L109.4 89.7L117.0 94.7L124.7 92.4L130.1 86.0L137.9 85.9L143.5 79.0L144.0 71.8L151.8 68.9L156.8 63.0L162.6 56.1L169.5 52.1"/>
-              <g class="md-pocket"><circle cx="26" cy="91" r="2.2"/> <circle cx="20" cy="98" r="2.2"/> <circle cx="17" cy="104" r="2.2"/> <circle cx="9" cy="105" r="2.2"/> <circle cx="29" cy="104" r="2.2"/> <circle cx="35" cy="98" r="2.2"/> <circle cx="44" cy="87" r="2.2"/> <circle cx="56" cy="79" r="2.2"/> <circle cx="38" cy="111" r="2.2"/> <circle cx="45" cy="105" r="2.2"/> <circle cx="48" cy="100" r="2.2"/> <circle cx="53" cy="93" r="2.2"/> <circle cx="49" cy="118" r="2.2"/> <circle cx="54" cy="110" r="2.2"/> <circle cx="58" cy="107" r="2.2"/> <circle cx="63" cy="99" r="2.2"/> <circle cx="74" cy="92" r="2.2"/> <circle cx="60" cy="121" r="2.2"/> <circle cx="64" cy="113" r="2.2"/> <circle cx="68" cy="112" r="2.2"/> <circle cx="72" cy="104" r="2.2"/> <circle cx="74" cy="116" r="2.2"/> <circle cx="83" cy="108" r="2.2"/> <circle cx="85" cy="116" r="2.2"/> <circle cx="93" cy="111" r="2.2"/> <circle cx="104" cy="107" r="2.2"/> <circle cx="94" cy="115" r="2.2"/> <circle cx="99" cy="118" r="2.2"/> <circle cx="103" cy="112" r="2.2"/> <circle cx="115" cy="108" r="2.2"/> <circle cx="101" cy="116" r="2.2"/> <circle cx="104" cy="112" r="2.2"/> <circle cx="109" cy="117" r="2.2"/> <circle cx="113" cy="112" r="2.2"/> <circle cx="118" cy="116" r="2.2"/> <circle cx="124" cy="109" r="2.2"/> <circle cx="127" cy="105" r="2.2"/> <circle cx="113" cy="108" r="2.2"/> <circle cx="119" cy="113" r="2.2"/> <circle cx="123" cy="109" r="2.2"/> <circle cx="128" cy="114" r="2.2"/> <circle cx="134" cy="107" r="2.2"/> <circle cx="138" cy="108" r="2.2"/> <circle cx="122" cy="103" r="2.2"/> <circle cx="129" cy="108" r="2.2"/> <circle cx="132" cy="105" r="2.2"/> <circle cx="137" cy="109" r="2.2"/> <circle cx="141" cy="102" r="2.2"/> <circle cx="148" cy="105" r="2.2"/> <circle cx="130" cy="96" r="2.2"/> <circle cx="137" cy="101" r="2.2"/> <circle cx="140" cy="99" r="2.2"/> <circle cx="146" cy="103" r="2.2"/> <circle cx="150" cy="97" r="2.2"/> <circle cx="155" cy="98" r="2.2"/> <circle cx="156" cy="108" r="2.2"/> <circle cx="136" cy="87" r="2.2"/> <circle cx="147" cy="91" r="2.2"/> <circle cx="154" cy="96" r="2.2"/> <circle cx="159" cy="90" r="2.2"/> <circle cx="163" cy="93" r="2.2"/> <circle cx="151" cy="82" r="2.2"/> <circle cx="153" cy="82" r="2.2"/> <circle cx="161" cy="87" r="2.2"/> <circle cx="166" cy="82" r="2.2"/> <circle cx="171" cy="86" r="2.2"/> <circle cx="148" cy="68" r="2.2"/> <circle cx="157" cy="71" r="2.2"/> <circle cx="160" cy="73" r="2.2"/> <circle cx="168" cy="77" r="2.2"/> <circle cx="173" cy="73" r="2.2"/> <circle cx="179" cy="78" r="2.2"/> <circle cx="152" cy="57" r="2.2"/> <circle cx="161" cy="60" r="2.2"/> <circle cx="166" cy="63" r="2.2"/> <circle cx="174" cy="65" r="2.2"/> <circle cx="179" cy="63" r="2.2"/> <circle cx="185" cy="69" r="2.2"/> <circle cx="155" cy="48" r="2.2"/> <circle cx="164" cy="48" r="2.2"/> <circle cx="170" cy="52" r="2.2"/> <circle cx="178" cy="54" r="2.2"/> <circle cx="183" cy="54" r="2.2"/> <circle cx="191" cy="58" r="2.2"/> <circle cx="151" cy="37" r="2.2"/> <circle cx="159" cy="40" r="2.2"/> <circle cx="167" cy="38" r="2.2"/> <circle cx="173" cy="43" r="2.2"/> <circle cx="181" cy="42" r="2.2"/> <circle cx="187" cy="43" r="2.2"/> <circle cx="162" cy="33" r="2.2"/> <circle cx="169" cy="30" r="2.2"/> <circle cx="177" cy="35" r="2.2"/> <circle cx="185" cy="34" r="2.2"/> <circle cx="165" cy="29" r="2.2"/> <circle cx="181" cy="30" r="2.2"/></g>
-              <circle class="md-anchor" cx="162" cy="33" r="3.4"/>
-              <path class="md-chain" fill="none" d="M25 112L29 105L36 101L43 103L49 96L57 97L65 92L72 96L80 95L86 91L94 95L101 93L109 89L116 94L124 91L128 84L137 85L143 79L143 72L151 69L156 63L162 57L169 52"/>
-              <circle class="md-tip" cx="169" cy="52" r="4.4"/>
-            </svg>
+                                 aria-label="Thirty nanoseconds of molecular dynamics we ran: the BoPep4 backbone moving in the PEPR1 groove, Asn23 in green and Arg487 in amber. Still until it is pointed at."
+                                 data-frames="M25 112L29 105L36 101L43 103L49 96L57 97L65 92L72 96L80 95L86 91L94 95L101 93L109 89L116 94L124 91L128 84L137 85L143 79L143 72L151 69L156 63L162 57L169 52;M21 97L28 102L35 102L44 104L49 97L58 97L65 94L73 96L81 95L88 91L96 96L102 93L110 89L118 94L126 91L130 84L139 84L144 77L144 69L151 67L158 63L163 55L170 51;M20 100L28 103L36 102L44 106L49 100L58 98L64 93L72 96L81 95L87 91L95 96L101 93L109 89L116 94L125 92L131 86L138 84L143 77L143 70L150 68L155 62L162 56L169 51;M20 94L27 99L35 98L43 101L49 95L58 95L65 93L73 96L81 96L87 91L95 95L102 93L109 89L117 95L124 93L129 86L137 85L143 78L144 72L151 69L157 63L162 55L169 52;M19 98L27 102L34 101L43 102L48 97L58 98L65 94L72 98L80 95L86 90L94 94L101 92L109 89L116 95L124 93L130 86L138 85L143 78L143 71L152 69L156 64L161 56L168 52;M19 104L27 103L34 101L43 103L50 98L59 98L64 93L72 95L80 94L87 90L95 93L101 91L109 89L116 94L124 92L131 87L138 86L143 79L144 71L153 69L159 64L163 56L170 52;M18 97L26 100L33 98L41 101L47 95L56 96L64 91L71 95L80 95L86 90L95 94L101 93L109 90L117 94L124 92L130 87L137 86L143 79L143 72L151 69L154 61L162 56L169 52;M19 96L27 100L34 99L42 101L48 95L57 95L64 90L71 95L80 94L86 89L94 93L101 93L109 90L117 95L124 94L131 88L138 88L144 81L144 74L152 70L155 63L162 56L169 53;M17 103L25 105L33 104L41 106L47 101L56 99L62 93L70 96L78 95L85 91L93 95L100 93L108 89L116 94L124 93L129 86L137 86L143 79L144 71L151 68L157 63L163 56L171 53;M21 104L29 103L35 100L43 103L49 97L58 97L65 92L72 95L81 93L87 89L94 94L101 93L110 90L117 95L125 93L130 86L138 86L143 79L143 72L151 69L156 62L163 56L170 53;M21 99L28 100L35 96L43 101L50 94L59 93L65 89L72 93L80 94L86 90L93 95L100 94L108 91L116 96L124 94L128 86L137 86L143 80L144 72L152 70L156 63L162 57L169 53;M25 108L29 102L36 97L44 99L49 92L57 94L65 92L72 96L81 94L87 91L95 95L102 94L110 91L117 96L124 94L130 87L138 87L144 80L143 73L150 69L155 64L162 57L168 52;M20 102L28 103L34 102L43 102L48 96L57 96L64 93L72 96L80 95L87 92L95 97L101 95L109 90L116 96L124 93L129 87L137 86L143 80L144 73L151 69L156 64L161 57L168 52;M21 99L30 102L35 101L44 102L49 96L58 97L65 92L73 95L80 93L87 90L94 94L101 93L110 90L117 96L125 93L130 87L138 86L142 80L143 72L151 70L157 65L161 57L167 52;M23 112L30 107L35 103L43 104L49 98L58 97L65 93L72 96L81 95L87 91L95 95L102 93L110 90L117 96L125 93L131 88L138 86L143 79L143 71L151 69L156 64L162 57L168 52;M24 111L30 106L36 101L44 105L49 99L58 100L65 94L72 98L80 97L87 93L94 97L101 95L109 91L118 95L125 92L131 86L138 86L143 78L144 72L152 69L156 60L163 55L169 50;M28 116L31 109L37 104L46 104L50 96L59 96L67 91L74 95L83 93L89 90L97 94L103 94L111 90L119 95L127 93L132 87L139 86L146 80L145 72L151 69L157 63L163 57L170 52;M26 113L31 107L36 101L44 103L49 96L58 97L66 92L74 96L82 95L88 92L97 95L103 94L111 90L118 95L126 93L130 86L139 88L143 81L145 73L152 70L156 62L163 57L170 52;M21 111L29 109L35 105L43 104L49 98L58 98L65 93L72 96L81 95L87 91L95 95L103 94L110 90L118 95L126 93L130 86L138 87L144 80L144 73L152 70L157 64L163 57L170 52;M25 111L30 106L36 101L44 102L50 96L59 96L66 91L74 94L81 94L87 90L95 95L102 93L109 90L117 95L125 92L130 86L137 87L143 80L143 73L150 69L156 64L162 57L168 53;M23 108L28 105L35 104L44 103L51 98L60 98L67 92L75 94L83 93L89 88L95 94L103 93L110 90L118 95L126 93L130 86L138 87L144 80L144 73L151 69L156 63L162 57L168 53;M20 104L28 104L36 105L45 105L50 98L59 99L65 93L73 96L80 93L87 88L95 92L102 91L110 89L117 94L125 91L130 84L138 85L144 78L144 71L152 68L156 61L163 55L170 51;M23 94L32 94L37 99L45 102L50 96L59 97L64 92L72 95L80 94L86 89L94 94L101 94L109 90L116 95L124 92L128 85L137 86L142 79L142 71L151 69L155 61L162 56L169 52;M22 101L31 99L36 104L44 107L49 100L57 100L64 94L72 97L80 93L86 90L94 94L101 92L108 90L117 94L124 90L130 84L137 83L143 76L143 69L151 67L157 61L163 54L170 50;M21 101L30 100L34 105L43 107L48 99L57 99L64 94L73 96L81 95L88 92L95 96L102 94L109 90L117 95L125 93L131 86L138 86L144 79L144 73L151 69L157 64L163 57L169 53;M20 99L28 101L36 104L44 105L50 99L59 99L66 93L74 95L82 94L87 91L95 95L102 92L110 89L117 94L125 92L130 86L138 86L143 79L144 72L152 71L155 63L162 57L168 53;M21 97L29 101L36 103L45 103L49 96L59 96L66 92L74 96L82 95L89 91L97 95L103 95L110 90L118 94L126 93L130 85L139 87L145 80L145 73L153 69L158 64L164 57L170 53;M20 98L27 103L34 101L42 105L49 99L58 98L65 94L73 98L81 96L87 95L95 97L102 94L109 90L117 95L124 93L129 86L137 86L141 79L143 72L152 70L156 63L163 57L170 53;M21 94L27 99L35 98L44 101L50 94L58 93L66 92L73 96L81 95L88 92L96 96L102 94L110 90L118 95L126 93L130 86L138 86L144 79L144 72L151 68L157 63L164 56L170 52;M22 92L27 99L34 99L43 102L49 97L58 97L65 92L72 96L81 94L87 90L94 94L101 92L109 89L117 94L125 92L131 85L138 85L144 78L144 71L152 69L156 61L163 55L170 52;M18 98L27 101L34 100L43 103L50 97L58 96L65 93L73 97L81 95L87 90L95 94L102 92L110 89L118 94L126 92L132 86L140 86L145 79L145 72L153 69L157 62L163 56L170 52;M22 110L29 105L36 102L44 104L49 97L58 96L65 92L72 96L81 95L86 90L94 94L101 93L109 90L117 95L125 92L131 86L139 87L144 80L144 72L152 70L159 64L162 56L170 53;M22 104L30 101L37 98L44 101L51 95L59 96L66 92L74 97L82 95L87 90L95 94L102 92L110 89L118 94L125 92L132 87L139 86L145 79L146 72L154 70L159 65L164 57L172 53;M25 111L30 104L36 101L44 103L50 96L59 96L66 92L74 96L82 93L89 90L97 95L102 93L110 89L117 94L125 92L130 85L138 86L143 78L145 72L153 68L159 64L163 56L171 52;M23 111L29 105L35 102L43 106L50 100L59 99L66 95L74 98L82 96L88 92L95 97L102 95L110 92L117 97L125 94L130 87L138 87L143 80L145 73L153 70L159 66L163 58L170 53;M24 110L28 104L34 98L42 102L50 96L59 96L66 93L74 97L82 96L89 92L97 97L103 94L110 90L118 94L125 93L131 86L139 86L144 79L144 71L152 69L158 63L163 56L170 52;M23 111L28 105L35 100L43 103L49 96L58 96L66 92L73 96L81 95L88 92L96 95L102 93L110 90L117 96L125 94L131 88L139 87L145 80L145 74L152 69L157 64L163 56L171 53;M25 114L29 107L36 103L44 106L50 99L58 97L64 92L72 96L80 95L87 91L95 95L101 93L109 89L116 94L124 92L130 85L137 85L143 78L143 71L152 69L158 63L163 56L171 52;M23 114L28 107L35 104L42 106L49 99L58 99L65 95L73 97L80 96L87 92L94 96L101 94L109 91L117 96L124 94L129 87L137 86L142 79L144 72L153 69L158 65L163 57L170 53;M20 108L27 103L34 100L42 104L49 98L58 99L64 94L72 96L80 95L86 92L94 96L101 94L108 90L116 94L124 92L129 85L137 86L143 80L143 72L151 68L157 64L162 56L170 51;M21 111L27 105L34 102L42 105L47 99L56 98L63 93L71 96L79 95L85 91L93 95L100 94L107 89L115 94L123 92L128 85L136 85L142 78L145 71L153 68L155 59L161 52L169 52;M26 112L29 105L35 100L43 102L49 95L58 96L64 91L72 95L80 94L87 90L95 93L102 92L110 89L117 95L125 92L131 86L138 85L145 79L145 72L153 68L157 62L162 55L171 52;M22 115L27 108L34 105L42 107L48 100L57 100L65 96L73 97L80 96L87 92L95 96L102 94L109 88L117 93L124 91L130 85L137 84L144 78L144 70L152 69L157 63L163 56L171 52;M28 113L32 106L36 100L45 102L50 96L59 98L65 98L74 98L81 96L88 91L96 95L102 94L109 90L117 95L124 92L131 86L138 85L145 80L145 73L152 68L158 64L162 55L170 52;M27 114L31 106L37 103L46 103L50 95L57 95L63 94L72 97L80 96L86 92L94 96L101 94L109 90L117 94L124 91L130 85L138 84L145 78L145 71L151 66L157 62L163 54L170 51;M24 114L29 106L35 104L44 105L48 97L56 97L64 97L72 95L80 93L88 90L96 94L102 92L110 89L118 94L125 91L130 85L138 85L144 78L145 70L153 69L159 64L164 56L170 52"
+                                 data-tipx="169;170;169;169;168;170;169;169;171;170;169;168;168;167;168;169;170;170;170;168;168;170;169;170;169;168;170;170;170;170;170;170;172;171;170;170;171;171;170;170;169;171;171;170;170;170"
+                                 data-tipy="52;51;51;52;52;52;52;53;53;53;53;52;52;52;52;50;52;52;52;53;53;51;52;50;53;53;53;53;52;52;52;53;53;52;53;52;53;52;53;51;52;52;52;52;51;52">
+                              <path class="md-band" fill="none" stroke-width="9.0" d="M22.2 105.3L28.6 103.4L35.1 101.4L43.4 103.5L49.2 97.0L58.0 97.1L64.9 92.9L72.6 96.1L80.7 94.7L87.1 90.8L94.9 94.9L101.6 93.3L109.4 89.7L117.0 94.7L124.7 92.4L130.1 86.0L137.9 85.9L143.5 79.0L144.0 71.8L151.8 68.9L156.8 63.0L162.6 56.1L169.5 52.1"/>
+                              <g class="md-pocket"><circle cx="26" cy="91" r="2.2"/> <circle cx="20" cy="98" r="2.2"/> <circle cx="17" cy="104" r="2.2"/> <circle cx="9" cy="105" r="2.2"/> <circle cx="29" cy="104" r="2.2"/> <circle cx="35" cy="98" r="2.2"/> <circle cx="44" cy="87" r="2.2"/> <circle cx="56" cy="79" r="2.2"/> <circle cx="38" cy="111" r="2.2"/> <circle cx="45" cy="105" r="2.2"/> <circle cx="48" cy="100" r="2.2"/> <circle cx="53" cy="93" r="2.2"/> <circle cx="49" cy="118" r="2.2"/> <circle cx="54" cy="110" r="2.2"/> <circle cx="58" cy="107" r="2.2"/> <circle cx="63" cy="99" r="2.2"/> <circle cx="74" cy="92" r="2.2"/> <circle cx="60" cy="121" r="2.2"/> <circle cx="64" cy="113" r="2.2"/> <circle cx="68" cy="112" r="2.2"/> <circle cx="72" cy="104" r="2.2"/> <circle cx="74" cy="116" r="2.2"/> <circle cx="83" cy="108" r="2.2"/> <circle cx="85" cy="116" r="2.2"/> <circle cx="93" cy="111" r="2.2"/> <circle cx="104" cy="107" r="2.2"/> <circle cx="94" cy="115" r="2.2"/> <circle cx="99" cy="118" r="2.2"/> <circle cx="103" cy="112" r="2.2"/> <circle cx="115" cy="108" r="2.2"/> <circle cx="101" cy="116" r="2.2"/> <circle cx="104" cy="112" r="2.2"/> <circle cx="109" cy="117" r="2.2"/> <circle cx="113" cy="112" r="2.2"/> <circle cx="118" cy="116" r="2.2"/> <circle cx="124" cy="109" r="2.2"/> <circle cx="127" cy="105" r="2.2"/> <circle cx="113" cy="108" r="2.2"/> <circle cx="119" cy="113" r="2.2"/> <circle cx="123" cy="109" r="2.2"/> <circle cx="128" cy="114" r="2.2"/> <circle cx="134" cy="107" r="2.2"/> <circle cx="138" cy="108" r="2.2"/> <circle cx="122" cy="103" r="2.2"/> <circle cx="129" cy="108" r="2.2"/> <circle cx="132" cy="105" r="2.2"/> <circle cx="137" cy="109" r="2.2"/> <circle cx="141" cy="102" r="2.2"/> <circle cx="148" cy="105" r="2.2"/> <circle cx="130" cy="96" r="2.2"/> <circle cx="137" cy="101" r="2.2"/> <circle cx="140" cy="99" r="2.2"/> <circle cx="146" cy="103" r="2.2"/> <circle cx="150" cy="97" r="2.2"/> <circle cx="155" cy="98" r="2.2"/> <circle cx="156" cy="108" r="2.2"/> <circle cx="136" cy="87" r="2.2"/> <circle cx="147" cy="91" r="2.2"/> <circle cx="154" cy="96" r="2.2"/> <circle cx="159" cy="90" r="2.2"/> <circle cx="163" cy="93" r="2.2"/> <circle cx="151" cy="82" r="2.2"/> <circle cx="153" cy="82" r="2.2"/> <circle cx="161" cy="87" r="2.2"/> <circle cx="166" cy="82" r="2.2"/> <circle cx="171" cy="86" r="2.2"/> <circle cx="148" cy="68" r="2.2"/> <circle cx="157" cy="71" r="2.2"/> <circle cx="160" cy="73" r="2.2"/> <circle cx="168" cy="77" r="2.2"/> <circle cx="173" cy="73" r="2.2"/> <circle cx="179" cy="78" r="2.2"/> <circle cx="152" cy="57" r="2.2"/> <circle cx="161" cy="60" r="2.2"/> <circle cx="166" cy="63" r="2.2"/> <circle cx="174" cy="65" r="2.2"/> <circle cx="179" cy="63" r="2.2"/> <circle cx="185" cy="69" r="2.2"/> <circle cx="155" cy="48" r="2.2"/> <circle cx="164" cy="48" r="2.2"/> <circle cx="170" cy="52" r="2.2"/> <circle cx="178" cy="54" r="2.2"/> <circle cx="183" cy="54" r="2.2"/> <circle cx="191" cy="58" r="2.2"/> <circle cx="151" cy="37" r="2.2"/> <circle cx="159" cy="40" r="2.2"/> <circle cx="167" cy="38" r="2.2"/> <circle cx="173" cy="43" r="2.2"/> <circle cx="181" cy="42" r="2.2"/> <circle cx="187" cy="43" r="2.2"/> <circle cx="162" cy="33" r="2.2"/> <circle cx="169" cy="30" r="2.2"/> <circle cx="177" cy="35" r="2.2"/> <circle cx="185" cy="34" r="2.2"/> <circle cx="165" cy="29" r="2.2"/> <circle cx="181" cy="30" r="2.2"/></g>
+                              <circle class="md-anchor" cx="162" cy="33" r="4.6"/>
+                              <path class="md-chain" fill="none" d="M25 112L29 105L36 101L43 103L49 96L57 97L65 92L72 96L80 95L86 91L94 95L101 93L109 89L116 94L124 91L128 84L137 85L143 79L143 72L151 69L156 63L162 57L169 52"/>
+                              <circle class="md-tip" cx="169" cy="52" r="5.6"/>
+                            </svg>
               </figure>
-              <div class="chip" id="c-docking" tabindex="0" data-feeds="bio" data-at="2" data-with="c-cassette c-model">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-insilico"/></svg></span><span class="chip__name">Design and docking</span>
-              </div>
-            </div>
-            <div class="feed" data-zone="bio">
-              <figure class="shot"><img src="assets/img/cassette.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="The light circuit explained on the board in our lab, 17 May 2026." /></figure>
-              <div class="chip" id="c-cassette" tabindex="0" data-feeds="bio" data-at="2" data-with="c-docking c-array c-blot">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-construct"/></svg></span><span class="chip__name">The cassette</span>
-              </div>
+              <span class="task__name">Docking</span>
             </div>
           </div>
           <div class="node__core" tabindex="0">
-            <span class="node__badge">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-peptide"/></svg></span>
-              <span class="node__n">02</span>
-            </span>
+            <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-peptide"/></svg></span>
             <span>
-              <span class="node__name">Pick what to make</span>
-              <span class="node__note">One of three protectants sits in the cassette slot, and green light is
-              meant to set how much. Brightness as dose is design intent; no induction curve exists in our hands.</span>
+              <span class="node__name">The protein</span>
+              <span class="node__note">One of three, chosen against that stress. Not yet made.</span>
             </span>
           </div>
-          <div class="wing wing--r">
-            <div class="feed" data-zone="eng">
-              <figure class="shot"><img src="assets/img/model.jpg" width="340" height="255"
+          <div class="strip strip--r">
+            <div class="task" id="t-model" tabindex="0" data-at="2" data-with="t-baselines t-array t-tandem">
+              <figure class="task__shot"><img src="assets/img/model.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="A page of the model worked out by hand, 2 July 2026." /></figure>
-              <div class="chip" id="c-model" tabindex="0" data-feeds="eng" data-at="2" data-with="c-baselines c-array c-tandem bridge">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-model"/></svg></span><span class="chip__name">The model</span>
-              </div>
-            </div>
-            <div class="feed" data-zone="eng">
-              <figure class="shot"><img src="assets/img/array.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="The light array, first assembled with its printed housing, 17 July 2026." /></figure>
-              <div class="chip" id="c-array" tabindex="0" data-feeds="eng" data-at="2" data-with="c-cassette c-model">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-diopal"/></svg></span><span class="chip__name">The light array</span>
-              </div>
+              <span class="task__name">The model</span>
             </div>
           </div>
         </div>
         <div class="link" data-seg="2"><span class="link__rail"></span></div>
-
-        <!-- ═══ 03 ═════════════════════════════════════════════════════════ -->
         <div class="node" data-node="3">
-          <div class="wing wing--l">
-            <div class="feed" data-zone="bio">
-              <figure class="shot"><img src="assets/img/blot.jpg" width="340" height="255"
+          <div class="strip strip--l">
+            <div class="task" id="t-cassette" tabindex="0" data-at="3" data-with="t-docking t-array t-blot">
+              <figure class="task__shot"><img src="assets/img/cassette.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="The light circuit explained on the board in our lab, 17 May 2026." /></figure>
+              <span class="task__name">Cassette</span>
+            </div>
+            <div class="task" id="t-blot" tabindex="0" data-at="3" data-with="t-cassette t-photometer">
+              <figure class="task__shot"><img src="assets/img/blot.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="A gel on the transilluminator, 10 June 2026." /></figure>
-              <div class="chip" id="c-blot" tabindex="0" data-feeds="bio" data-at="3" data-with="c-cassette c-photometer">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-blot"/></svg></span><span class="chip__name">Expression</span>
-              </div>
+              <span class="task__name">Expression</span>
             </div>
           </div>
           <div class="node__core" tabindex="0">
-            <span class="node__badge">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-reactor"/></svg></span>
-              <span class="node__n">03</span>
-            </span>
+            <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-culture"/></svg></span>
             <span>
-              <span class="node__name">Make it</span>
-              <span class="node__note"><i>B. subtilis</i> grows without stopping in the extracapillary chamber,
-              in a machine we built rather than one somebody else owns. Three weeks of unbroken OD600 logging,
-              which describes the log and not the culture.</span>
+              <span class="node__name">The cells</span>
+              <span class="node__note"><i>B. subtilis</i>, engineered to make it and let it out. No output measured.</span>
             </span>
           </div>
-          <div class="wing wing--r">
-            <div class="feed" data-zone="eng">
-              <figure class="shot"><img src="assets/img/photometer.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="Our photometer under test, its lamp visible inside the box, 4 July 2026." /></figure>
-              <div class="chip" id="c-photometer" tabindex="0" data-feeds="eng" data-at="3" data-with="c-blot c-harvest">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-photometer"/></svg></span><span class="chip__name">The photometer</span>
-              </div>
+          <div class="strip strip--r">
+            <div class="task" id="t-shield" tabindex="0" data-at="3" data-with="t-harvest t-law">
+              <figure class="task__shot"><img src="assets/img/shield.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="The hollow fibre membrane worked out on paper, 25 April 2026." /></figure>
+              <span class="task__name">Containment</span>
             </div>
           </div>
         </div>
         <div class="link" data-seg="3"><span class="link__rail"></span></div>
-
-        <!-- ═══ 04 ═════════════════════════════════════════════════════════ -->
         <div class="node" data-node="4">
-          <div class="wing wing--l">
-            <div class="feed" data-zone="eng">
-              <figure class="shot"><img src="assets/img/harvest.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="The first time the pressure sensor put live data on a screen, 12 July 2026." /></figure>
-              <div class="chip" id="c-harvest" tabindex="0" data-feeds="eng" data-at="4" data-with="c-shield c-photometer c-scaleout">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-gauge"/></svg></span><span class="chip__name">The harvest</span>
-              </div>
+          <div class="strip strip--l">
+            <div class="task" id="t-photometer" tabindex="0" data-at="4" data-with="t-blot t-harvest">
+              <figure class="task__shot"><img src="assets/img/photometer.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="Our photometer under test, its lamp visible inside the box, 4 July 2026." /></figure>
+              <span class="task__name">Photometer</span>
             </div>
-            <div class="feed" data-zone="bio">
-              <figure class="shot"><img src="assets/img/tandem.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="The reactor running in the incubator, yellow culture in the bottle, 20 July 2026." /></figure>
-              <div class="chip" id="c-tandem" tabindex="0" data-feeds="bio" data-at="4" data-with="c-model c-baselines">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-tandem"/></svg></span><span class="chip__name">The tandem run</span>
-              </div>
+            <div class="task" id="t-array" tabindex="0" data-at="4" data-with="t-cassette t-model">
+              <figure class="task__shot"><img src="assets/img/array.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="The light array, first assembled with its printed housing, 17 July 2026." /></figure>
+              <span class="task__name">Light array</span>
             </div>
           </div>
           <div class="node__core" tabindex="0">
-            <span class="node__badge">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-cartridge"/></svg></span>
-              <span class="node__n">04</span>
-            </span>
+            <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-reactor"/></svg></span>
             <span>
-              <span class="node__name">Hand it over</span>
-              <span class="node__note">A hollow fibre membrane is intended to keep every cell and pass only
-              protein. Intended, not shown, and the cutoff that decides it is the one design decision still unmade.</span>
+              <span class="node__name">The reactor</span>
+              <span class="node__note">Ours, built from nothing. It has never stood at a farm.</span>
             </span>
           </div>
-          <div class="wing wing--r">
-            <div class="feed" data-zone="eng">
-              <figure class="shot"><img src="assets/img/shield.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="The hollow fibre membrane worked out on paper, 25 April 2026." /></figure>
-              <div class="chip" id="c-shield" tabindex="0" data-feeds="eng" data-at="4" data-with="c-harvest c-law">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="chip__name">Containment</span>
-              </div>
+          <div class="strip strip--r">
+            <div class="task" id="t-harvest" tabindex="0" data-at="4" data-with="t-shield t-photometer t-scaleout">
+              <figure class="task__shot"><img src="assets/img/harvest.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="The first time the pressure sensor put live data on a screen, 12 July 2026." /></figure>
+              <span class="task__name">Harvest</span>
+            </div>
+            <div class="task" id="t-scaleout" tabindex="0" data-at="4" data-with="t-harvest t-plan">
+              <figure class="task__shot"><img src="assets/img/scaleout.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="Our group learning from a hollow fibre setup at BioAsia Taiwan, 18 July 2026." /></figure>
+              <span class="task__name">Scale-out</span>
             </div>
           </div>
         </div>
         <div class="link" data-seg="4"><span class="link__rail"></span></div>
-
-        <!-- ═══ 05 ═════════════════════════════════════════════════════════ -->
         <div class="node" data-node="5">
-          <div class="wing wing--l">
-            <div class="feed" data-zone="eng">
-              <figure class="shot"><img src="assets/img/scaleout.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="Our group learning from a hollow fibre setup at BioAsia Taiwan, 18 July 2026." /></figure>
-              <div class="chip" id="c-scaleout" tabindex="0" data-feeds="eng" data-at="5" data-with="c-harvest c-plan">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-scaleout"/></svg></span><span class="chip__name">Scale-out</span>
-              </div>
+          <div class="strip strip--l">
+            <div class="task" id="t-tandem" tabindex="0" data-at="5" data-with="t-model t-baselines">
+              <figure class="task__shot"><img src="assets/img/tandem.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="The reactor running in the incubator, yellow culture in the bottle, 20 July 2026." /></figure>
+              <span class="task__name">Tandem run</span>
             </div>
-            <div class="feed" data-zone="dep">
-              <figure class="shot"><img src="assets/img/room.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="A primary school pupil writing ATCG on the board at one of our sessions, 14 July 2026." /></figure>
-              <div class="chip" id="c-room" tabindex="0" data-feeds="dep" data-at="5" data-with="c-farmers bridge">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-outreach"/></svg></span><span class="chip__name">What leaves the room</span>
-              </div>
+            <div class="task" id="t-plan" tabindex="0" data-at="5" data-with="t-map t-law t-farmers">
+              <figure class="task__shot"><img src="assets/img/plan.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="A row of CH Biotech's plant protectant products on the table, 9 July 2026." /></figure>
+              <span class="task__name">Business plan</span>
             </div>
           </div>
           <div class="node__core" tabindex="0">
-            <span class="node__badge">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-again"/></svg></span>
-              <span class="node__n">05</span>
-            </span>
+            <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-tray"/></svg></span>
             <span>
-              <span class="node__name">Do it again</span>
-              <span class="node__note">The cassette is a slot, not a rebuild, so the machine answers how much
-              on Thursday and something else next season. An argument about the architecture, not something we
-              have done twice.</span>
+              <span class="node__name">The field</span>
+              <span class="node__note">The dose arrives where the crop is. No plant has had one.</span>
             </span>
           </div>
-          <div class="wing wing--r">
-            <div class="feed" data-zone="dep">
-              <figure class="shot"><img src="assets/img/law.jpg" width="340" height="255"
+          <div class="strip strip--r">
+            <div class="task" id="t-law" tabindex="0" data-at="5" data-with="t-shield t-plan">
+              <figure class="task__shot"><img src="assets/img/law.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="A regulation specialist at CH Biotech taking us through the structure, 9 July 2026." /></figure>
-              <div class="chip" id="c-law" tabindex="0" data-feeds="dep" data-at="5" data-with="c-shield c-plan">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-law"/></svg></span><span class="chip__name">Regulation</span>
-              </div>
+              <span class="task__name">Regulation</span>
             </div>
-            <div class="feed" data-zone="dep">
-              <figure class="shot"><img src="assets/img/plan.jpg" width="340" height="255"
-                   loading="lazy" decoding="async" alt="A row of CH Biotech's plant protectant products on the table, 9 July 2026." /></figure>
-              <div class="chip" id="c-plan" tabindex="0" data-feeds="dep" data-at="5" data-with="bridge c-law c-farmers">
-              <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-plan"/></svg></span><span class="chip__name">The business plan</span>
-              </div>
+            <div class="task" id="t-edu" tabindex="0" data-at="5" data-with="t-farmers t-map">
+              <figure class="task__shot"><img src="assets/img/room.jpg" width="340" height="255"
+                   loading="lazy" decoding="async" alt="A primary school pupil writing ATCG on the board at one of our sessions, 14 July 2026." /></figure>
+              <span class="task__name">Education</span>
             </div>
           </div>
         </div>
-        <div class="link" data-seg="5"><span class="link__rail"></span></div>
-
-        <!-- ═══ out of the trunk: one run becomes a quantity ════════════════ -->
-        <div class="bridgerow">
-          <div class="wing wing--l" aria-hidden="true"></div>
-          <div class="bridge" id="bridge" tabindex="0" data-with="c-plan c-room c-model">
-            <span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-taiwan"/></svg></span>
-            <span>
-              <span class="bridge__tag">How much land</span>
-              <span class="bridge__name">The map</span>
-              <span class="bridge__note">Salinity and heat across Taiwan, in QGIS. One tandem run says the line
-              works once. The map says which townships carry the stress and in which month, which is the step
-              that turns a result into a claim about a country.</span>
-              <span class="slot"><b>not on record</b>The township reading. It fills when the QGIS layers are
-              written up as a table, which is ours to do and nobody else&rsquo;s.</span>
-            </span>
-          </div>
-          <div class="wing wing--r">
-            <div class="feed" data-zone="dep">
-            <figure class="shot"><img src="assets/img/map.jpg" width="340" height="255"
-                 loading="lazy" decoding="async" alt="The geospatial session, laptops down the table, 2 July 2026." /></figure>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -702,10 +606,9 @@
   <div class="band__inner">
     <p class="act__kicker">One call, one plot, one week</p>
     <h2 id="act-title">What it would actually do, on a Tuesday.</h2>
-    <p class="act__lede">A coastal plot under salt. Salt-affected land runs to 1.38 billion hectares, about
-    10.7% of the global total (FAO 2024), and the map narrows that to ground one machine can reach. Below is
-    the week that follows. The site itself is a slot: the QGIS layers exist, the township reading is not
-    written up, so this page does not name one.</p>
+    <p class="act__lede">One plot in the band our own map puts at the top of the volatility index, which
+    runs down the west coast through 雲林 and 嘉義 and is dense with parcels under two hectares. Below is
+    the week that follows a single call, with every number carrying where it came from.</p>
 
     <ol class="week">
       <li class="moment" data-node="1" tabindex="0">
@@ -718,7 +621,7 @@
           is run against real weather.</span>
         </div>
       </li>
-      <li class="moment" data-node="2" tabindex="0">
+      <li class="moment" data-node="4" tabindex="0">
         <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">T = 0</span></span>
         <div>
           <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-led"/></svg></span>The call</h3>
@@ -750,7 +653,7 @@
           dilution table, and hardware owes it.</span>
         </div>
       </li>
-      <li class="moment" data-node="4" tabindex="0">
+      <li class="moment" data-node="5" tabindex="0">
         <span class="moment__mark"><span class="moment__dot"></span><span class="moment__t">hours to days</span></span>
         <div>
           <h3 class="moment__name"><span class="well"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-tray"/></svg></span>In the root zone</h3>
@@ -780,18 +683,50 @@
       they are the two this page most wants.</span>
     </div>
 
-    <div class="wide">
-      <h3>The same week, across the map.</h3>
-      <p>One machine stands at the head of one irrigation line. The economic unit is the line and the owner is
-      the cooperative, so a farmer in a 產銷班 that owns a reactor is a biomanufacturer in the only sense that
-      matters, which is that no outside licence-holder decides what gets made.</p>
-      <p>Serving more line means adding modules rather than building something larger. On the model, cross-flow,
-      permeate and working volume scale together, so wall shear, Reynolds number, flux and fouling margin all
-      hold across the change. Power is the one thing that does not scale, and that tension is left in on
-      purpose. Model output, all of it, and none of it measured.</p>
-      <span class="slot"><b>not on record</b>How many lines are like this one, and what one machine costs to
-      build. The first is a map reading. The second is a bill of materials with no total yet, which is why no
-      page here carries a price.</span>
+    <div class="reach" id="reach">
+      <p class="reach__kicker">If it spread</p>
+      <h3 class="reach__title">Where a machine like this would land.</h3>
+
+      <div class="reach__grid">
+        <figure class="reach__map">
+          <img src="assets/img/gis-farmland-volatility.jpg" width="900" height="1408"
+               loading="lazy" decoding="async"
+               alt="Our QGIS map of Taiwan. Farm parcels under two hectares are drawn in red and parcels over two hectares in blue, over a five step choropleth of the climate volatility index. The red parcels are densest along the west coast, under the top band of the index." />
+          <figcaption>Ours, in QGIS. Red is a farm parcel under two hectares, blue is over. Underneath is the
+          climate volatility index, computed from mean diurnal temperature range, seasonal temperature range
+          and the coefficient of variation of precipitation. The small parcels and the top band of the index
+          are the same ground.</figcaption>
+        </figure>
+
+        <div class="reach__panel">
+          <p class="reach__lead">The argument the map makes is not that Taiwan is hot. It is that the farms
+          least able to buy their way out of a bad season are sitting on the worst of it.</p>
+
+          <div class="dial">
+            <label class="dial__lab" for="share">Share of those small farms with a reactor</label>
+            <div class="dial__row">
+              <input class="dial__input" id="share" type="range" min="0" max="100" step="5" value="30"
+                     aria-describedby="dial-read" />
+              <output class="dial__val" id="dial-val" for="share">30%</output>
+            </div>
+            <div class="dial__grid" id="dial-grid" aria-hidden="true"></div>
+            <p class="dial__read" id="dial-read"><b>What that buys, honestly</b>Thirty percent of the
+            small-farm land in that band, and nothing more than that yet. The share is true by construction.
+            The two things that would turn it into a quantity are below, and both are ours to close.</p>
+          </div>
+
+          <ul class="owed">
+            <li><b>How many machines</b>Our own parcel layer can be counted. It has not been counted, so the
+            number of reactors behind any share on that dial is not on record.</li>
+            <li><b>How much protein</b>No titre has been measured, and there is no bill of materials total, so
+            neither the output of one machine nor its cost can be put on this page.</li>
+          </ul>
+
+          <p class="reach__close">For scale, and sourced rather than ours: <b>84%</b> of the world&rsquo;s
+          <b>570 million</b> farms are under two hectares (FAO), which is the same cut the red on that map is
+          drawn at.</p>
+        </div>
+      </div>
     </div>
 
     <div class="claim">

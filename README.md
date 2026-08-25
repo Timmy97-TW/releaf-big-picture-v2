@@ -15,90 +15,83 @@ self-hosted Inter. Nothing in this repo forks the palette.
 
 ## What it argues
 
-**V1 drew eight concrete steps on two horizontal lines.** A stressed field, a molecule, cells, a
-plant, and underneath them the call, the light, the reactor, the membrane. Objects, mostly.
+**V1 drew eight concrete steps on two horizontal lines.** V2 tells the same material as a story a
+judge can follow with one finger, down a single trunk, with the work converging on it horizontally:
 
-**V2 draws five verbs on one vertical trunk**, because the argument is not really about the kit. It
-is about what the machine does, and about who is allowed to do it.
+| | |
+|---|---|
+| **The stress** | Heat and salt. The smallest farms sit where they are worst. |
+| **The protein** | One of three, chosen against that stress. Not yet made. |
+| **The cells** | *B. subtilis*, engineered to make it and let it out. No output measured. |
+| **The reactor** | Ours, built from nothing. It has never stood at a farm. |
+| **The field** | The dose arrives where the crop is. No plant has had one. |
 
-| | | |
-|---|---|---|
-| 01 | **See it coming** | a stress called before the plant shows it |
-| 02 | **Pick what to make** | which molecule, and how much of it |
-| 03 | **Make it** | a culture that runs where the crop is |
-| 04 | **Hand it over** | protein out, cells in |
-| 05 | **Do it again** | for something else, somewhere else |
+Two rules produced those five, and they are worth keeping:
 
-Three of these are deliberate departures from the obvious chain.
+1. **Every step is a thing you can point at**, not a stage of a process. An earlier pass used verbs
+   (*see it coming, pick what to make, make it, hand it over, do it again*) and it was clever in a
+   way that cost clarity: a judge had to build the object back out of the verb before they could
+   place a piece of work against it. Nouns let sixteen pieces of work find their step in one look.
+2. **Each step carries its claim and its limit in one breath**, at the same size, and then stops.
+   Two short sentences, never three. If a step needs a paragraph, the step is wrong.
 
-- **Not *locate*.** Locating is what the map does, once, offline. It is not something the machine
-  does. What the machine does every day is call a stress early, and that is the claim the whole
-  prediction argument rests on, including its unclosed half. The map earns a better job below the
-  trunk instead.
-- **Not *deliver*.** Deliver overstates what we can defend. Delivery stops at a reservoir.
-  *Hand it over* is the membrane act itself, and it lets the limit sit inside the node rather than
-  beside it.
-- **Not *scale*.** Half of that node is not scale, it is retasking, and retasking is the answer to
-  the one competitor this whole device has: a dried spore sachet. *Do it again* carries both halves.
-  A sachet answers only *whether*, once, forever. This answers *how much*, again, and for something
-  else.
+**There are no step numbers.** The ramp on the left edge of each card walks light to dark down the
+five, and the chevrons between them point one way; that is enough. A numbered list says "process
+diagram" when this is meant to say "here is the thing".
 
-Fifteen pieces of work enter the trunk from both sides, icon and name only. The node carries the
-sentence; a card that carries its own subtitle competes with the node it is meant to feed, which is
-what V1 learned the hard way with fifteen subtitled cards in a horizontal band.
-
-Below the trunk sits **the map**, keeping V1's best structural move: one tandem run says the line
-works once, and the map says how much land is under the stress, where, and in which month. Past it,
-on ink, sits **the week**, which is the payoff.
+Under the five sit **one week on one plot**, which is the mechanism at a single farm, and then
+**the map**, which is where the argument stops being about a machine and starts being about ground.
+Zoom in, then all the way out.
 
 ## Reading it
 
 - **Nothing opens.** No panel, no modal, no drawer, no page change. Every label is on screen before
   you touch anything.
-- **Point at a node** and the work that feeds it lights up, along with the moments in the week at
+- **Point at a step** and the work that feeds it lights up, along with the moments in the week at
   the end that come out of it.
-- **Point at a piece of work** and it lights the node it feeds, every node after that one, the
-  segments between them, and the map. That is the answer to the only question worth asking of a
-  figure like this: how does my work reach a farm.
+- **Point at a piece of work** and it lights the step it feeds, every step after that one, and the
+  segments between them. Its photograph comes up to full colour and a line draws into the step it
+  serves. That is the answer to the only question worth asking of a figure like this: how does my
+  work reach a farm.
 - **Point at anything and its cross-links are marked in amber.** That is the quiet half. The model
-  marks stress baselines, the light array and the tandem run. The business plan marks the map,
+  marks the baselines, the light array and the tandem run. The business plan marks the map,
   regulation and the farmers. The run down the trunk stays the loud thing, and the web of
   who-talks-to-whom sits underneath it rather than being drawn as permanent lines that would turn
-  the trunk into a hairball. Cross-links live in `data-with` on each card.
-- **Point at a zone in the key** and every card that belongs to it lights. The key is the one thing
-  V1 did not need, because V1 had labelled zone bands behind its lanes and a vertical trunk has no
-  lanes to label. It is a key that does something, which is the only kind worth having.
-- **Point at a moment in the week** and the verb it came out of lights, up the page.
-- **Point at anything and the photographs follow it.** A card's picture comes up to full colour with
-  it, a marked cross-link's comes part way, and the rest of the contact sheet steps back.
+  the trunk into a hairball. Cross-links live in `data-with` on each tile.
+- **Point at a moment in the week** and the step it came out of lights, up the page.
 
-Keyboard reaches all of it: thirty focusable elements, and focus runs the same code path as hover.
+Keyboard reaches all of it: twenty-seven focusable elements plus the dial, and focus runs the same
+code path as hover.
 
-## The margins
+## A piece of work is its own photograph
 
-Every card carries a photograph of the work, outboard of it in the margin, from
+There is no card beside the picture. **The tile is the picture**, with the name under it, and that
+is the whole thing: no pill, no icon, no subtitle. Sixteen of them, fifteen photographs from
 `iGEM2026_Images` (filenames are `YYYYMMDD_Subteam_Type_Description`, and the date is the day the
-photograph was taken). Fifteen of them, plus the trajectory below.
+photograph was taken) plus the one tile that moves.
 
-Four decisions keep this from turning into clutter, and they are the point of the arrangement:
+An earlier pass put a photograph in the margin *next to* a labelled pill, and it read as two things
+about one subject. Collapsing them was the change that made the figure quiet. Four decisions hold it
+there:
 
-1. **Two fixed columns per wing.** Every picture in a margin shares one edge and every card sits
-   flush against the trunk. An earlier pass let each pair size itself, and the ragged inner edge was
-   the thing that read as mess.
-2. **They sit quiet until they are wanted.** Held back in saturation and opacity, they read as a
-   contact sheet running down the sides rather than as fifteen pictures competing with the figure.
-   The card being pointed at brings its own up to full.
-3. **No captions.** A caption under each one is exactly the mess this is trying to avoid, and the
-   card beside it already names the work. The detail, including the date, lives in `alt`, where a
-   screen reader gets it and the drawing does not have to carry it.
-4. **The dark act has no photographs at all.** The light half is the record and the pictures are
-   evidence for it. The week at the end is a projection: none of it has happened, so there is
-   nothing to photograph, and putting real pictures beside a hypothetical week would be the one
-   dishonest thing on the page.
+1. **They run horizontally, not down.** A step and everything that feeds it occupy one line of the
+   page, which is what lets all five fit on a laptop screen with nothing scrolled.
+2. **One line per label, always**, terse and with the definite articles dropped. Under a photograph
+   "Photometer" reads faster than "The photometer", and a fixed one-line label means every row of
+   the chain is exactly as tall as every other. Ragged rows were what read as mess.
+3. **They sit held back until wanted.** Desaturated and slightly down in opacity, so they read as a
+   contact sheet feeding the trunk rather than sixteen pictures competing with it.
+4. **No captions.** The name under the tile is the caption. The detail, including the date, lives in
+   `alt`, where a screen reader gets it and the drawing does not have to carry it.
+
+**The dark half has no photographs at all.** The five steps are the record and the pictures are
+evidence for them. The week is a projection: none of it has happened, so there is nothing to
+photograph, and putting real pictures beside a hypothetical week would be the one dishonest thing on
+the page. The only image down there is the map, which is a measurement.
 
 ## The trajectory
 
-The margin of **Design and docking** is not a photograph. It is 46 frames of our own MD run,
+The tile marked **Docking** is not a photograph. It is 46 frames of our own MD run,
 `R1_BoPep4_WT_PEPR1`: 30 ns of production, BoPep4 in the PEPR1 groove, drawn straight out of
 `21_MD_Simulation/results/R1_BoPep4_WT_PEPR1_out/stripped.dcd`.
 
@@ -142,13 +135,35 @@ Then it widens back out to the country, on the scale-out model from the
 wall shear, Reynolds number, flux and fouling margin, and power is the one thing that does not
 scale. Model output, none of it measured.
 
+## The reach, and the dial
+
+The page ends on **our own QGIS map**: farm parcels under two hectares in red, parcels over two in
+blue, over a five step choropleth of the climate volatility index, which is computed from mean
+diurnal temperature range, seasonal temperature range and the coefficient of variation of
+precipitation. The finding is in the overlay rather than in either layer: **the small parcels and
+the top band of the index are the same ground.** The farms least able to buy their way out of a bad
+season are sitting on the worst of it.
+
+Beside it is a dial, and the dial is the honest part. It moves a **share** of those small farms, and
+a hundred squares fill to match. A share is true by construction: no count is implied and none is
+needed, because the grid is the percentage, drawn. What the dial refuses to do is turn that share
+into a number of machines or a quantity of protein, and it says why, in two boxes underneath:
+
+- **How many machines.** Our own parcel layer can be counted. It has not been counted.
+- **How much protein.** No titre has been measured, and there is no bill of materials total.
+
+That is the shape every impact claim on this project should take: show the ground, move the share,
+and name the two measurements standing between a share and a number. Do not close the gap with a
+guess. The one number that is allowed to be large is sourced rather than ours: 84% of the world's
+570 million farms are under two hectares (FAO), which is the same cut the red on the map is drawn at.
+
 ## Slots, and why they are drawn rather than left out
 
 Seven numbers this page needs are not on record. **A slot is a designed element, not an omission.**
 Each one says what is missing and what would fill it, in the same type as everything else:
 
-the township reading · forecast lead time · the dose policy · the permeate rate Q_p · end-to-end
-latency · how many irrigation lines are like this one · what one machine costs to build.
+forecast lead time · the dose policy · the permeate rate Q_p · end-to-end latency · how many small
+farms sit in that band · what one machine costs to build · what one machine puts out.
 
 Do not fill a slot with a guess, and do not delete one to tidy the page up. Never invent a number, a
 quote, a date or a result: it is the project's main credibility asset, and this page is where a
@@ -157,20 +172,20 @@ judge will check it.
 The site itself is a slot on purpose. The QGIS layers exist; the township reading is not written up,
 so the page does not name a place.
 
-## Three colour systems, and they do not overlap
+## Two colour systems, and they do not overlap
 
-**The zone** says whose work a card is. Green is biology, slate is engineering, amber is deployment.
-It colours the well behind the icon, the connector that ties a card to the trunk, and the swatch in
-the key, so a card's home is legible before a word on it is read.
+**The ramp** says direction. The five accent bars walk light to dark down the trunk. With the step
+numbers gone it is the only cue in the figure that says which way to read it.
 
-**The ramp** says direction. The five node badges walk light to dark down the trunk, and so does the
-accent bar on each card. It is the only cue in the figure that says which way to read it.
+**Amber** marks a cross-link, and never means anything else.
 
 **The icons** are coloured by what the object actually is. So is the trajectory: its chain, its
 envelope and its two marked residues all come through the same icon palette, so the one moving thing
 on the page is in the same voice as the glyphs.
 
-Amber has one more job, and only one: **marking a cross-link**. It never means anything else.
+V1 had a third system, a zone colour saying which subteam owned a card, read off a key at the top of
+the figure. **The key was cut and the colour went with it** rather than sitting on the page
+unexplained. An unlabelled code is worse than no code, and the figure got quieter for losing it.
 
 ## The icons
 
@@ -179,7 +194,10 @@ the point of them: a generic flask says "science", and the culture carboy with i
 pink medium, its rod cells and its stir bar says *this bottle*.
 
 The 26-symbol sprite is **V1's, reused unchanged**, so one drawing serves both pages and a hardware
-change is one edit. Two glyphs are new here, drawn in the same voice from the same CAD:
+change is one edit. Five of its glyphs sit on the step cards (the potted plant, the docking pose,
+the culture carboy, the reactor, the hydroponic tray) and the rest are held for the wiki. Two glyphs
+were drawn new for an earlier pass of this page, in the same voice from the same CAD, and are kept
+in the sprite:
 
 | Glyph | Drawn from |
 |---|---|
@@ -201,8 +219,11 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 - **No horizontal scroll, and no drag gesture to explain.** The trunk is vertical, so the drawing is
   never wider than the column. V1 needed a scroll frame and a line of text telling you to drag it;
   this one does not, which is the quiet practical win of turning the figure ninety degrees.
-- **Under 900px** the trunk moves to the left edge and each node's work stacks underneath it, node
+- **Under 900px** the trunk moves to the left edge and each step's work wraps underneath it, step
   first. Same markup, no second copy of the content to keep in sync.
+- **The five steps fit one laptop screen.** That is a constraint, not an accident: a judge should
+  see the whole chain without scrolling and then choose where to look. If an edit pushes the fifth
+  step below the fold, cut writing rather than shrinking type.
 - **Two motion primitives only**: one entrance on first sight, one highlight on point. The
   trajectory belongs to the second of those, because it runs only while its card is pointed at. It
   is deliberately not a third, always-on animation. Nothing scales, nothing bounces, and focus rings
@@ -213,11 +234,11 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 
 ## Merging into the homepage
 
-1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js` and the fifteen files in
+1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js` and the sixteen files in
    `assets/img/` into the wiki's `assets/`. The image paths in the markup are relative
    (`assets/img/*.jpg`), so they need no edit if the wiki keeps the same layout.
 2. Paste **both** `<section>` elements into `index.html`: the white `section.bpv2` and the ink
-   `section.band--dark.act` that follows it. Include the `<svg class="sprite">` block at the top of
+   `section.band--dark.act` that follows it, which carries the week, the map and the claim. Include the `<svg class="sprite">` block at the top of
    the first one. The sprite has to travel with the section: a `<use href="external.svg#id">` does
    not resolve reliably, so the symbols are inlined.
 3. Add the stylesheet link and the script tag.
@@ -241,17 +262,16 @@ over is an edit to two variables. If that swap happens, this section follows it 
 
 Everything readable is in `index.html`. The script holds no content of its own.
 
-- **A node** is a `.node` with `data-node="1"` to `"5"`, containing a `.wing--l`, a `.node__core`
-  and a `.wing--r`.
-- **A card** is a `.chip` with an `id`, `data-feeds="bio|eng|dep"`, `data-at="<node number>"`, an
-  optional `data-with="<space separated ids>"`, and an `<svg class="ico">` pointing at a symbol in
-  the sprite. Adding a piece of work is one element and no JavaScript.
-- **A card and its photograph** are a `.feed` with `data-zone` matching the card's `data-feeds`,
-  holding a `<figure class="shot">` and then the `.chip`, in that order. The right wing puts the
-  figure back on the outside itself, so the markup order never changes. Swapping a photograph is one
-  `src` and one `alt`; the `alt` should name what is in the frame and the date, and nothing more.
+- **A step** is a `.node` with `data-node="1"` to `"5"`, containing a `.strip--l`, a `.node__core`
+  and a `.strip--r`. Two short sentences in `.node__note`, claim then limit. Never three.
+- **A piece of work** is a `.task` with an `id`, `data-at="<step number>"`, an optional
+  `data-with="<space separated ids>"`, a `<figure class="task__shot">` holding one image, and a
+  `.task__name`. Adding one is a single element and no JavaScript. Keep the name to one line;
+  it is clipped rather than wrapped on purpose, so a long one will tell you.
+- Swapping a photograph is one `src` and one `alt`. The `alt` names what is in the frame and the
+  date, and nothing more.
 - **A segment** is a `.link` with `data-seg`, matching the node it leaves.
-- **A moment** in the week is a `.moment` with `data-node`, naming the verb it came out of.
+- **A moment** in the week is a `.moment` with `data-node`, naming the step it came out of.
 - **A slot** is a `.slot` with a `<b>` label and one sentence saying what would fill it.
 
 Related pages: the [judging session board](https://timmy97-tw.github.io/judging-session-prep/), the

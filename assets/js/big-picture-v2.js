@@ -1,10 +1,11 @@
 /* =============================================================================
    ReLeaf: the big picture, V2
    -----------------------------------------------------------------------------
-   Two jobs, and no third.
+   Three jobs, and no fourth.
 
      1  reveal      the one-shot entrance, matching .rise elsewhere on the page
      2  emphasis    pointing at something lights the run it belongs to
+     3  the dial    the share at the end, and the hundred squares under it
 
    NOTHING OPENS. There is no panel to build, no state to remember and no route
    to change. Every word on this page is in the markup before this file runs, so
@@ -13,45 +14,84 @@
 
    THE LIGHTING RULES, IN FULL
 
-     a node       lights itself and the work that feeds it
-     a card       lights itself, the node it feeds, every node after that one,
-                  the segments between them, and the map at the end. That is
-                  the answer to the only question worth asking of a figure like
-                  this: how does my work reach a farm. It also MARKS, in amber,
-                  the pieces it talks to elsewhere, so the web of who-talks-to
-                  -whom shows without permanent lines turning the trunk into a
-                  hairball. Cross-links live in data-with.
-     the map      lights itself and marks what feeds it
-     a zone       in the key, lights every card that belongs to it
-     a moment     in the week at the end, lights the node it came out of, so a
-                  reader who scrolls back finds the verb that produced it
+     a step       lights itself and the work that feeds it, and the moments in
+                  the week at the end that come out of it
+     a tile       lights itself, the step it feeds, every step after that one
+                  and the segments between them. That is the answer to the only
+                  question worth asking of a figure like this: how does my work
+                  reach a farm. It also MARKS, in amber, the pieces it talks to
+                  elsewhere, so the web of who-talks-to-whom shows without
+                  permanent lines turning the trunk into a hairball. Cross-links
+                  live in data-with.
+     a moment     lights the step it came out of, so a reader who scrolls back
+                  finds the part of the machine that produced it
 
    Segments carry data-flow rather than data-lit, because a segment belongs to
-   the gap after a node rather than to the node itself.
+   the gap after a step rather than to the step itself.
    ========================================================================== */
 
 (function () {
   "use strict";
 
   var spine = document.getElementById("spine");
+
+  /* ------------------------------------------------------------- 3  dial --- */
+  /* Built first, because it is independent of the figure and must work even if
+     the figure is not on the page. The hundred squares are drawn here rather
+     than sitting in the markup as a hundred empty elements. */
+
+  (function () {
+    var input = document.getElementById("share");
+    var grid  = document.getElementById("dial-grid");
+    var val   = document.getElementById("dial-val");
+    var read  = document.getElementById("dial-read");
+    if (!input || !grid) return;
+
+    var cells = [], i;
+    for (i = 0; i < 100; i++) cells.push(document.createElement("i"));
+    cells.forEach(function (c) { grid.appendChild(c); });
+
+    var WORDS = ["No", "Five percent of", "A tenth of", "Fifteen percent of",
+                 "A fifth of", "A quarter of", "Thirty percent of", "Thirty five percent of",
+                 "A third of", "Forty five percent of", "Half", "Fifty five percent of",
+                 "Three fifths of", "Sixty five percent of", "Seventy percent of",
+                 "Three quarters of", "Eighty percent of", "Eighty five percent of",
+                 "Ninety percent of", "Ninety five percent of", "All"];
+
+    function paint() {
+      var n = Number(input.value);
+      for (var k = 0; k < 100; k++) {
+        if (k < n) cells[k].setAttribute("data-on", "");
+        else cells[k].removeAttribute("data-on");
+      }
+      if (val) val.textContent = n + "%";
+      if (read) {
+        read.innerHTML = "<b>What that buys, honestly</b>" + WORDS[n / 5] +
+          " the small-farm land in that band, and nothing more than that yet. " +
+          "The share is true by construction. The two things that would turn it into a " +
+          "quantity are below, and both are ours to close.";
+      }
+    }
+    input.addEventListener("input", paint);
+    paint();
+  })();
+
   if (!spine) return;
 
-  var bridge  = document.getElementById("bridge");
   var nodes   = [].slice.call(spine.querySelectorAll(".node"));
   var links   = [].slice.call(spine.querySelectorAll(".link"));
-  var chips   = [].slice.call(spine.querySelectorAll(".chip"));
+  var tasks   = [].slice.call(spine.querySelectorAll(".task"));
   var moments = [].slice.call(document.querySelectorAll(".moment"));
-  var keys    = [].slice.call(spine.querySelectorAll(".key__item"));
 
-  /* The trajectory in the margin of "Design and docking". Forty-six frames of
+  /* The trajectory in the tile for "Design and docking". Forty-six frames of
      our own 30 ns run live in data attributes on the SVG, so with scripting off
      the drawing is a still frame and nothing on this page moves on its own. The
-     frames are stepped here rather than by SMIL, which turned out to wedge its
-     timeline if you pause it before it has ever run. It plays only while the
-     card it belongs to is pointed at or focused, which folds it into the
-     highlight primitive rather than adding a third one that never stops. */
-  var mdSvg   = document.querySelector(".shot--md .mdanim");
-  var mdOwner = document.getElementById("c-docking");
+     frames are stepped here rather than by SMIL, which wedges its timeline if
+     you pause it before it has ever run. It plays only while the tile it
+     belongs to is pointed at or focused, which folds it into the highlight
+     primitive rather than adding a third one that never stops. */
+  var mdSvg   = document.querySelector(".task--md .mdanim");
+  var mdOwner = document.getElementById("t-docking");
   var mdOn    = false;
 
   /* ---------------------------------------------------------- 1  reveal --- */
@@ -119,17 +159,15 @@
     spine.removeAttribute("data-focus");
     nodes.forEach(function (n) { n.removeAttribute("data-lit"); });
     links.forEach(function (l) { l.removeAttribute("data-flow"); });
-    chips.forEach(function (c) { c.removeAttribute("data-lit"); c.removeAttribute("data-rel"); });
-    keys.forEach(function (k) { k.removeAttribute("data-lit"); });
+    tasks.forEach(function (t) { t.removeAttribute("data-lit"); t.removeAttribute("data-rel"); });
     moments.forEach(function (m) { m.removeAttribute("data-lit"); });
-    if (bridge) { bridge.removeAttribute("data-lit"); bridge.removeAttribute("data-rel"); }
   }
 
   function at(el) { return Number(el.getAttribute("data-at") || el.getAttribute("data-node") || 0); }
 
-  /* the quiet half. A card names the pieces of work it talks to, usually in
-     another zone, and pointing at it marks them. Marked, not lit, so the run
-     down the trunk stays the loud thing. */
+  /* the quiet half. A tile names the pieces of work it talks to, usually in
+     another part of the team, and pointing at it marks them. Marked, not lit,
+     so the run down the trunk stays the loud thing. */
   function relate(el) {
     (el.getAttribute("data-with") || "").split(/\s+/).forEach(function (id) {
       if (!id) return;
@@ -138,26 +176,17 @@
     });
   }
 
-  /* light the trunk from one node downward, segments included */
+  /* light the trunk from one step downward, segments included */
   function runOut(from) {
-    nodes.forEach(function (n) {
-      if (at(n) >= from) n.setAttribute("data-lit", "");
-    });
+    nodes.forEach(function (n) { if (at(n) >= from) n.setAttribute("data-lit", ""); });
     links.forEach(function (l) {
       if (Number(l.getAttribute("data-seg")) >= from) l.setAttribute("data-flow", "");
     });
-    if (bridge) bridge.setAttribute("data-lit", "");
   }
 
   function show(el) {
     clear();
     spine.setAttribute("data-focus", "1");
-
-    if (el === bridge) {                                  /* the map */
-      bridge.setAttribute("data-lit", "");
-      relate(el);
-      return;
-    }
 
     if (el.classList.contains("moment")) {                /* a moment in the week */
       el.setAttribute("data-lit", "");
@@ -166,28 +195,19 @@
       return;
     }
 
-    if (el.classList.contains("node")) {                  /* a node */
+    if (el.classList.contains("node")) {                  /* a step */
       el.setAttribute("data-lit", "");
       var here = at(el);
-      chips.forEach(function (c) { if (at(c) === here) c.setAttribute("data-lit", ""); });
+      tasks.forEach(function (t) { if (at(t) === here) t.setAttribute("data-lit", ""); });
       moments.forEach(function (m) { if (at(m) === here) m.setAttribute("data-lit", ""); });
       return;
     }
 
-    if (el.classList.contains("key__item")) {             /* a whole zone */
+    if (el.classList.contains("task")) {                  /* a piece of work */
       el.setAttribute("data-lit", "");
-      var zone = el.getAttribute("data-zone");
-      chips.forEach(function (c) {
-        if (c.getAttribute("data-feeds") === zone) c.setAttribute("data-lit", "");
-      });
-      return;
-    }
-
-    if (el.classList.contains("chip")) {                  /* a piece of work */
-      el.setAttribute("data-lit", "");
-      if (el === mdOwner && !reduced) md(true);
+      if (el === mdOwner) md(true);
       runOut(at(el));
-      relate(el);                  /* after, so a lit node is never also marked */
+      relate(el);                  /* after, so a lit step is never also marked */
     }
   }
 
@@ -202,10 +222,8 @@
   }
 
   nodes.forEach(function (n) { wire(n.querySelector(".node__core"), n); });
-  chips.forEach(function (c) { wire(c, c); });
+  tasks.forEach(function (t) { wire(t, t); });
   moments.forEach(function (m) { wire(m, m); });
-  keys.forEach(function (k) { wire(k, k); });
-  if (bridge) wire(bridge, bridge);
 
   spine.addEventListener("pointerleave", clear);
 })();
