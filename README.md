@@ -181,7 +181,8 @@ Three things about that are worth keeping straight if you touch it:
   holes and is the wrong answer: a kernel small enough to keep the county boundaries honest does not
   fill them, and a kernel large enough to fill them redraws the regions.
 - **The legend is the control.** Pointing at a row scrims the map and holds that layer, with every
-  small farm left in at full strength. It answers to pointing exactly the way the five steps do, which is the whole
+  small farm left in at full strength. It carries a swatch and a label and nothing else: the gloss
+  column that explained each row was cut, because a legend that needs prose is not a legend. It answers to pointing exactly the way the five steps do, which is the whole
   reason it reads as one page and not as a figure bolted to the end of one.
 - **The island sits on the trunk's axis.** It is the same centre line as the five step cards, and the
   rail runs out of the last step, across the band edge, and into the map. The two halves are one
@@ -206,26 +207,34 @@ They are hard-coded in the script that drives it; if the layer is ever re-render
 and update them together.
 
 The readout names the threshold rather than a quantity: *every small farm on ground that swings 0.71
-or harder, and part of the band below it*. What the dial still will not do is turn a share into a
-number of machines or a weight of protein. The parcel layer has not been counted and no titre has
-been measured, and one line under the dial says so. That is the shape every impact claim on this
-project should take: show the ground, move the share, and say plainly what is missing. Do not close
-that gap with an estimate.
+or harder, and part of the band below it*. That is the whole caption. The paragraph that used to sit
+under it, spelling out that the parcels have not been counted and no titre has been measured, was cut
+for being a lecture; the constraint has not changed and it belongs in this file rather than on the
+page. **Do not put a number of machines or a weight of protein next to that dial.**
 
 ## The outro
 
-One frame, full bleed, with the closing sentence under it: **陳惠雯 cooking in her kitchen with two
-of us, 21 July 2026.** She is the farmer who moved our dosing off a wall clock and onto soil-moisture
-state, so ending on her kitchen rather than on our bench is the right way round. The team logo, drawn
-by one of us, sits bottom right as a colophon.
+**陳惠雯 in her plot, 21 July 2026**, bled off the left edge and feathered into the paper on the other
+three sides, with one sentence and a signature beside it. She is the farmer who moved our dosing off
+a wall clock and onto soil-moisture state, so ending on her rather than on our bench is the right way
+round.
+
+Three things hold it together and are easy to break:
+
+- **The ground stays light.** An ink outro was tried and the sign-off is the hand-drawn wordmark,
+  whose letters are filled black; on ink it disappears. Paper also means the band above needs no
+  seam, which is what makes the photograph read as part of the page rather than a block dropped on
+  the end.
+- **The photograph is masked, not cropped.** Two gradients, one fading the right edge and one the top
+  and bottom, composited with `mask-composite: intersect`. If a browser ignores the composite the
+  worst case is a softer fade, not a hard edge.
+- **The sign-off is a student drawing, not the logo.** The circular team logo was there first and got
+  swapped: the wordmark is warmer, it is the same hand as the two sticker tiles above, and it does
+  not read as corporate furniture at the end of a page about farmers.
 
 **Consent is not on record.** The project brief lists image consent and release for 陳惠雯 as
-outstanding. This page is public. Get her agreement before the wiki goes live, or swap the frame.
-Nothing else about the section depends on which photograph is in it.
-
-The gradient runs to near-opaque at the bottom so the type always clears its ground, whatever the
-photograph underneath turns out to be. The three open conditions sit in a row under a hairline: the
-page ends on what is still missing, not on a flourish.
+outstanding. This page is public. Get her agreement before the wiki goes live, or change the
+photograph.
 
 ## Slots, and why they are drawn rather than left out
 

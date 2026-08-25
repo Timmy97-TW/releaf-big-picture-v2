@@ -645,8 +645,6 @@
           <img class="atlas__l atlas__band" data-band="2" src="assets/img/map/sb2.webp" width="800" height="1267" loading="lazy" alt="" />
           <img class="atlas__l atlas__band" data-band="1" src="assets/img/map/sb1.webp" width="800" height="1267" loading="lazy" alt="" />
         </div>
-        <figcaption>Ours, in QGIS. The colours belong to this page. The class breaks are the ones we
-        drew. Every parcel is counted against the band of the ground around it.</figcaption>
       </figure>
 
       <div class="plate__read">
@@ -655,17 +653,14 @@
           <li class="key__grp">Farms</li>
           <li class="key__row" data-hold="small" tabindex="0">
             <span class="key__sw" style="--sw: var(--parcel-small)"></span><b>Under two hectares</b>
-            <span class="key__gloss">97% of the farmland here</span>
           </li>
           <li class="key__row" data-hold="large" tabindex="0">
             <span class="key__sw" style="--sw: var(--parcel-large)"></span><b>Over two hectares</b>
-            <span class="key__gloss">the other 3%, mostly inland</span>
           </li>
 
           <li class="key__grp">How hard the weather swings</li>
           <li class="key__row" data-hold="v1" tabindex="0">
             <span class="key__sw" style="--sw: var(--vol-1)"></span><b>0.38 to 0.49</b>
-            <span class="key__gloss">steadiest</span>
           </li>
           <li class="key__row" data-hold="v2" tabindex="0">
             <span class="key__sw" style="--sw: var(--vol-2)"></span><b>0.49 to 0.60</b>
@@ -678,7 +673,6 @@
           </li>
           <li class="key__row" data-hold="v5" tabindex="0">
             <span class="key__sw" style="--sw: var(--vol-5)"></span><b>0.82 to 0.93</b>
-            <span class="key__gloss">swings hardest</span>
           </li>
         </ul>
         <p class="key__hint">Point at a row to hold it on its own.</p>
@@ -693,9 +687,6 @@
           <div class="dial__rule" id="dial-rule" aria-hidden="true"></div>
           <p class="dial__read" id="dial-read">Reaching a quarter of the small-farm land means every
           farm on ground that swings 0.71 or harder, and part of the band below it.</p>
-          <p class="dial__note">Somebody rolling this out would start where the weather is worst, so
-          the map fills from the top band down. The share is area on this map, not a count of farms:
-          nobody has counted the parcels, and we have not measured what one machine makes.</p>
         </div>
       </div>
     </div>
@@ -704,28 +695,25 @@
 </section>
 
 <!-- =============================================================================
-     THE OUTRO. One frame, and the sentence it is under. The photograph is a
-     placeholder for the frame the team plans to shoot: farmers and the reactor
-     in the same picture. Swap the file, keep everything else.
+     THE OUTRO. One photograph of 陳惠雯, bled off the left edge and feathered
+     into the paper on every other side, so it joins the page rather than
+     sitting on it. The sign-off is the wordmark one of us drew.
+
+     HER IMAGE CONSENT IS NOT ON RECORD. The project brief lists it as
+     outstanding and this page is public. Get her agreement before the wiki goes
+     live, or change the photograph.
      ========================================================================== -->
 
 <section class="band outro" aria-labelledby="outro-title">
-  <img class="outro__shot" src="assets/img/outro.jpg" width="1600" height="1067"
+  <img class="outro__shot" src="assets/img/outro.jpg" width="1800" height="1200"
        loading="lazy" decoding="async"
-       alt="Two of us setting up the reactor on a bench under a strip of green light, with the project drawn on the whiteboard behind." />
-  <div class="outro__wash" aria-hidden="true"></div>
+       alt="陳惠雯 bent over the row in her plot, basket on her arm, cutting greens under the sun." />
   <div class="band__inner outro__inner">
-        <h2 class="outro__line" id="outro-title">Every farmer<br />a biomanufacturer.</h2>
-    <p class="outro__sub">Not a farmer who owns a machine. A farmer whose cooperative owns the
-    irrigation line, and for whom nobody outside decides what gets made.</p>
-    <p class="outro__lab">Still open</p>
-    <ol class="outro__open">
-      <li>A build cost we can put a number on.</li>
-      <li>A classification a Taiwanese regulator accepts.</li>
-      <li>A cooperative willing to run the thing.</li>
-    </ol>
-    <img class="outro__logo" src="assets/img/logo.webp" width="200" height="200" loading="lazy"
-         alt="The ReLeaf team logo, drawn by one of us." />
+    <div class="outro__say">
+      <h2 class="outro__line" id="outro-title">Every farmer<br />a biomanufacturer.</h2>
+      <img class="outro__mark" src="assets/img/wordmark.png" width="560" height="217" loading="lazy"
+           alt="ReLeaf, drawn by one of us." />
+    </div>
   </div>
 </section>
 
