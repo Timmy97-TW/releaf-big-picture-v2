@@ -82,6 +82,11 @@ there:
 
 1. **They run horizontally, not down.** A step and everything that feeds it occupy one line of the
    page, which is what lets all five fit on a laptop screen with nothing scrolled.
+1b. **Each step sets its own tile format, and the format is the step's signature.** A plot, a person
+   kneeling and an island are all upright, so **The stress** runs portrait. A trajectory and a page of
+   working are wide, so **The protein** does. Plates and gels are square, benches are landscape, a
+   field is a horizon. Uniform tiles read as a spreadsheet; these vary for a reason, the same way the
+   ramp does. Change a format in one line: `.node[data-node="3"] { --tile-w; --tile-h }`.
 2. **One line per label, always**, terse and with the definite articles dropped. Under a photograph
    "Photometer" reads faster than "The photometer", and a fixed one-line label means every row of
    the chain is exactly as tall as every other. Ragged rows were what read as mess.
@@ -118,6 +123,14 @@ beside the page: `tools_md_extract.py` reads the parm7 and the DCD with no MD li
 and writes the Cα coordinates, and `tools_md_svg.py` superposes, projects, picks the loop window and
 emits the SVG. Neither runs at page load; the reader only ever gets the finished drawing.
 
+## Two student drawings
+
+Two tiles are illustrations rather than photographs, and in both cases the drawing **is** the work:
+**Education** shows the outreach sticker one of us drew (the ReLeaf character buried in textbooks,
+captioned 不懂?), and **Containment** shows the sticker of the hollow fibre cartridge running protein
+into a jar, captioned 交給我. The team logo closes the page. Everything else on the page is a
+photograph; do not swap a photograph for a drawing unless the drawing is the artefact.
+
 ## The map, and why it is built out of layers
 
 The page ends on our own QGIS work, from `iGEM2026_Images/QGIS Uploads/All Taiwan Farmlands/`. The
@@ -145,32 +158,47 @@ Three things about that are worth keeping straight if you touch it:
   holes and is the wrong answer: a kernel small enough to keep the county boundaries honest does not
   fill them, and a kernel large enough to fill them redraws the regions.
 - **The legend is the control.** Pointing at a row scrims the map and holds that layer, with the
-  small parcels left in. It answers to pointing exactly the way the five steps do, which is the whole
+  small farms left in. It answers to pointing exactly the way the five steps do, which is the whole
   reason it reads as one page and not as a figure bolted to the end of one.
+- **The island sits on the trunk's axis.** It is the same centre line as the five step cards, and the
+  rail runs out of the last step, across the band edge, and into the map. The two halves are one
+  drawing. If an edit moves the map off centre, the connection is gone and the section reads as an
+  appendix again.
 
-## The dial
+## The dial, and what the map does when you move it
 
 Beside the map, a hundred hairlines with the first N inked. The dial moves a **share** of those small
-farms. A share is arithmetic: no count is implied and none is needed, because the rule is the
-percentage, drawn.
+farms, and **the map answers**: the parcels wash from pale to deep green as the share rises, so at
+100% the whole west coast floods green. That is the impact, felt rather than asserted.
 
-What the dial refuses to do is turn that share into a number of machines or a weight of protein, and
-it says why, in two notes underneath:
+The honest part is what the wash is. It is **a proportion painted over the whole layer, not a subset
+of farms**. No parcel on that map is being named as served, because we have no basis for naming one,
+and the note under the dial says so in one line rather than in a pair of warning boxes. A share is
+arithmetic: no count is implied and none is needed, because the rule is the percentage, drawn.
 
-- **How many machines.** The parcel layer can be counted. Nobody has counted it.
-- **How much protein.** No titre measured, no bill of materials totalled.
+What the dial still will not do is turn a share into a number of machines or a weight of protein.
+The parcel layer has not been counted and no titre has been measured. That is the shape every impact
+claim on this project should take: show the ground, move the share, and say plainly what is missing.
+Do not close that gap with an estimate.
 
-That is the shape every impact claim on this project should take: show the ground, move the share,
-name the two measurements standing between a share and a number. Do not close that gap with an
-estimate. The one large number allowed on the page is sourced rather than ours: 84% of the world's
-570 million farms are under two hectares (FAO), which is the same cut the parcels are drawn at.
+## The outro
+
+One frame, full bleed, with the closing sentence under it. The photograph is a **placeholder**: the
+team plans to shoot farmers and the reactor in the same picture, and that frame belongs here. Swap
+`assets/img/outro.jpg` and change the `alt`; nothing else needs to move. The current stand-in is two
+of us setting the reactor up under the green strip, 8 August 2026, which is the closest thing on file.
+
+The gradient runs to near-opaque at the bottom so the type always clears its ground, whatever the
+photograph underneath turns out to be. The three open conditions sit in a row under a hairline: the
+page ends on what is still missing, not on a flourish.
 
 ## Slots, and why they are drawn rather than left out
 
 Three numbers this page needs are not on record. **A slot is a designed element, not an omission.**
 Each one says what is missing and what would fill it, in the same type as everything else:
 
-how many small farms sit on that coast · what one machine costs to build · what one machine puts out.
+how many small farms sit on that coast · what one machine costs to build · what one machine puts
+out. The outro photograph is the fourth: a frame that does not exist yet.
 
 Do not fill a slot with a guess, and do not delete one to tidy the page up. Never invent a number, a
 quote, a date or a result: it is the project's main credibility asset, and this page is where a
@@ -248,11 +276,13 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 
 ## Merging into the homepage
 
-1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js`, the sixteen tile images in
-   `assets/img/` and the nine map layers in `assets/img/map/` into the wiki's `assets/`. The image paths in the markup are relative
+1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js`, the images in `assets/img/`
+   (sixteen tiles, the outro frame, the logo) and the ten map layers in `assets/img/map/` into the
+   wiki's `assets/`. The image paths in the markup are relative
    (`assets/img/*.jpg`), so they need no edit if the wiki keeps the same layout.
-2. Paste **both** `<section>` elements into `index.html`: the white `section.bpv2` and the tinted
-   `section.reach` that follows it, which carries the map, the dial and the claim. Include the `<svg class="sprite">` block at the top of
+2. Paste **all three** `<section>` elements into `index.html`, in order: the white `section.bpv2`,
+   the tinted `section.reach`, and the full-bleed `section.outro`. The rail runs across the first two
+   boundaries, so their order and their zero vertical padding at the join both matter. Include the `<svg class="sprite">` block at the top of
    the first one. The sprite has to travel with the section: a `<use href="external.svg#id">` does
    not resolve reliably, so the symbols are inlined.
 3. Add the stylesheet link and the script tag.
@@ -261,6 +291,9 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
    `.band__inner`, `.band--dark` and `h2.band__title`.
 5. `section.reach` is tinted (`--leaf-50` with hairline rules), so it must not sit directly after
    another `band--tint`. Explore our project is one, which is why the five steps sit between them.
+6. The three sections raise their own specificity (`section.bpv2`, `section.reach`, `section.outro`)
+   because `home.css` sets `.band { padding: var(--sp-8) 0 }` and a bare class would lose to it.
+   Keep the element selector or the rail will break at the band edge.
 
 It reads as the last band, after **Explore our project**, which is `band--tint`, so the white half
 stays on white and the ink half closes the page.

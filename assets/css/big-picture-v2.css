@@ -101,6 +101,7 @@
   --parcel-large: var(--slate-700);  /* and over */
 
   --hairline: rgb(0 0 0 / .16);
+  --ink:      #070b09;   /* the outro wash only; home.css already defines it */
   --lift:     0 1px 2px rgb(0 0 0 / .07);
 
   /* the ramp. Five stops, light to dark, down the trunk. */
@@ -110,10 +111,10 @@
   --rung-4: var(--leaf-700);
   --rung-5: var(--leaf-900);
 
-  --trunk:   516px;   /* the middle column: the five step cards */
-  --wingmax: 268px;   /* two tiles wide, so the trunk stays dead centre */
-  --chainmax: 1120px; /* the figure is a drawing, not a page width */
-  --tile-w:  130px;
+  --trunk:   484px;   /* the middle column: the five step cards */
+  --wingmax: 292px;   /* two tiles wide, so the trunk stays dead centre */
+  --chainmax: 1128px; /* the figure is a drawing, not a page width */
+  --tile-w:  130px;   /* per-step defaults; each step overrides both below */
   --tile-h:  80px;
   --v2-ease: cubic-bezier(.16, 1, .3, 1);
   --v2-dur:  210ms;
@@ -123,12 +124,12 @@
 
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
-.bpv2 { padding-top: var(--sp-6); padding-bottom: var(--sp-7); }
+section.bpv2 { padding-top: var(--sp-6); padding-bottom: 0; }
 h2.band__title { overflow-wrap: anywhere; min-width: 0; }
-.bpv2 h2.band__title { margin-bottom: var(--sp-5); max-width: none; }
+.bpv2 h2.band__title { margin-bottom: var(--sp-4); max-width: none; }
 
 .bpv2__kicker {
-  margin: 0 0 var(--sp-2);
+  margin: 0 0 var(--sp-1);
   font-size: var(--text-xs); font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; color: var(--leaf-700);
 }
@@ -153,7 +154,7 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 
 /* the segment between two nodes. It belongs to the gap, not to either node,
    which is why it carries its own data-flow rather than a data-lit. */
-.link { height: 24px; }
+.link { height: 18px; }
 .link__rail {
   grid-column: 2; justify-self: center; position: relative;
   width: 2px; height: 100%; background: var(--leaf-200);
@@ -167,6 +168,9 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 }
 .link[data-flow] .link__rail { background: var(--leaf-500); }
 .link[data-flow] .link__rail::after { border-top-color: var(--leaf-500); }
+.link--tail { height: var(--sp-7); }
+.link--tail .link__rail { background: var(--leaf-200); }
+.link--tail .link__rail::after { display: none; }
 
 /* ── a node ────────────────────────────────────────────────────────────── */
 
@@ -216,6 +220,18 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 .strip { display: flex; column-gap: var(--sp-2); }
 .strip--l { grid-column: 1; justify-content: flex-end; }
 .strip--r { grid-column: 3; justify-content: flex-start; }
+
+/* Each step sets its own tile format, and the format is the step's signature.
+   A plot, a person kneeling and an island are all upright, so THE STRESS runs
+   portrait. A trajectory and a page of working are wide, so THE PROTEIN does.
+   Plates and gels are square, benches are landscape, a field is a horizon. It
+   is the same discipline as the ramp: the shape carries meaning, so it varies
+   for a reason rather than for relief. */
+.node[data-node="1"] { --tile-w:  96px; --tile-h: 118px; }
+.node[data-node="2"] { --tile-w: 150px; --tile-h:  88px; }
+.node[data-node="3"] { --tile-w: 104px; --tile-h:  96px; }
+.node[data-node="4"] { --tile-w: 128px; --tile-h:  82px; }
+.node[data-node="5"] { --tile-w: 142px; --tile-h:  72px; }
 
 .task {
   position: relative; flex: none; width: var(--tile-w);
@@ -317,14 +333,20 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 /* =============================================================================
    WHERE IT WOULD LAND.  Macrostructure 19 · Map / Diagram.
    -----------------------------------------------------------------------------
-   One spatial composition on tinted paper. The map is our own QGIS work pulled
-   apart into layers and recoloured to this page's palette; the legend beside it
-   is the control, and it answers to pointing the same way the five steps do.
-   Nothing opens, nothing is hidden, and the dial moves a share rather than
-   inventing a count.
+   One spatial composition on tinted paper. The island sits on the trunk's own
+   axis, directly under the last step, so the line that ran down the five steps
+   carries on into the map and the two halves read as one drawing rather than a
+   figure with an appendix. The legend beside it is the control and answers to
+   pointing the same way the steps do.
+
+   The dial moves a SHARE, and the map answers: the parcels wash from pale to
+   green as the share rises. It is a proportion painted over the whole layer,
+   not a list of farms, and the note under the dial says so. Nothing here
+   invents a count.
    ========================================================================== */
 
-.reach {
+section.reach {
+  padding-top: 0;
   background: var(--leaf-50);
   border-block: 1px solid var(--leaf-200);
 }
@@ -333,28 +355,40 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
   font-size: var(--text-xs); font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; color: var(--leaf-700);
 }
-.reach h2.band__title { margin-bottom: var(--sp-7); max-width: none; }
+.reach h2.band__title { margin-bottom: var(--sp-4); max-width: 14ch; }
+.reach__lede {
+  margin: 0; font-size: var(--text-lede); line-height: 1.5; color: var(--gray-700);
+}
 
+/* Three columns, and the middle one is the trunk continued. The map is the same
+   width as a step card and sits on the same centre line, so the eye runs
+   straight from THE FIELD into the island. */
 .plate {
   display: grid;
-  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
-  column-gap: var(--sp-8); row-gap: var(--sp-6);
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--map-w)) minmax(0, 1fr);
+  column-gap: var(--sp-6);
   align-items: start;
+  --map-w: 360px;
+}
+.plate__say { grid-column: 1; padding-top: calc(var(--sp-7) + var(--sp-5)); }
+.plate__fig { grid-column: 2; margin: 0; }
+.plate__read { grid-column: 3; }
+
+/* the trunk, carried across the band edge and into the island */
+.plate__stem {
+  display: block; width: 2px; height: var(--sp-7); margin: 0 auto var(--sp-3);
+  background: var(--leaf-200);
 }
 
 /* ── the atlas ──────────────────────────────────────────────────────────
-   Nine layers stacked in one box. The base carries the whole map; the rest sit
+   Ten layers stacked in one box. The base carries the whole map; the rest sit
    above a scrim and come up only while a legend row is held, so holding a band
-   reads as that band with the small parcels left in place rather than as a
+   reads as that band with the small farms left in place rather than as a
    different picture. The parcel layers sit above the band layers because the
    bands are cut out where a parcel was drawn over them; keeping the parcels on
    top fills those gaps exactly. */
-.plate__fig { margin: 0; }
 .atlas { position: relative; width: 100%; aspect-ratio: 800 / 1267; }
-.atlas__l {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: contain;
-}
+.atlas__l { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .atlas__base { position: relative; }
 .atlas__l[data-layer] { opacity: 0; transition: opacity var(--v2-dur) var(--v2-ease); }
 .atlas__scrim {
@@ -362,28 +396,28 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
   opacity: 0; pointer-events: none;
   transition: opacity var(--v2-dur) var(--v2-ease);
 }
+
+/* the share wash, which is the resting state of the map */
+.atlas__l[data-layer="smalldim"] { opacity: 1; }
+.atlas__l[data-layer="small"] { opacity: var(--share, .25); }
+
+/* holding a legend row */
 .atlas[data-hold] .atlas__scrim { opacity: .78; }
 .atlas[data-hold] .atlas__l[data-layer="edge"] { opacity: .5; }
+.atlas[data-hold] .atlas__l[data-layer="smalldim"] { opacity: 0; }
 .atlas[data-hold="v1"] .atlas__l[data-layer="v1"],
 .atlas[data-hold="v2"] .atlas__l[data-layer="v2"],
 .atlas[data-hold="v3"] .atlas__l[data-layer="v3"],
 .atlas[data-hold="v4"] .atlas__l[data-layer="v4"],
 .atlas[data-hold="v5"] .atlas__l[data-layer="v5"] { opacity: 1; }
-.atlas[data-hold^="v"] .atlas__l[data-layer="small"] { opacity: 1; }
+.atlas[data-hold^="v"] .atlas__l[data-layer="small"],
 .atlas[data-hold="small"] .atlas__l[data-layer="small"] { opacity: 1; }
 .atlas[data-hold="large"] .atlas__l[data-layer="large"] { opacity: 1; }
+.atlas[data-hold="large"] .atlas__l[data-layer="small"] { opacity: 0; }
 
 .plate__fig figcaption {
-  margin-top: var(--sp-3); max-width: 46ch;
+  margin-top: var(--sp-3);
   font-size: var(--text-xs); line-height: 1.5; color: var(--gray-600);
-}
-
-/* ── the reading column ─────────────────────────────────────────────── */
-
-.plate__read { max-width: 56ch; }
-.plate__lede {
-  margin: 0 0 var(--sp-6);
-  font-size: var(--text-lede); line-height: 1.55; color: var(--black);
 }
 
 /* ── the legend, which is the control ───────────────────────────────── */
@@ -397,7 +431,7 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 }
 .key__grp:first-child { margin-top: 0; }
 .key__row {
-  display: grid; grid-template-columns: 14px 13ch minmax(0, 1fr);
+  display: grid; grid-template-columns: 14px 11.5rem minmax(0, 1fr);
   align-items: baseline; column-gap: var(--sp-3);
   padding: var(--sp-1) 0; cursor: default;
   border-bottom: 1px solid transparent;
@@ -415,7 +449,7 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 .key__row[data-lit] { border-bottom-color: var(--leaf-700); }
 .key[data-focus] .key__row:not([data-lit]) { opacity: .44; }
 .key__row:focus-visible { outline: 2px solid var(--leaf-700); outline-offset: 3px; transition: none; }
-.key__hint { margin: var(--sp-3) 0 var(--sp-7); font-size: var(--text-sm); color: var(--gray-600); }
+.key__hint { margin: var(--sp-3) 0 var(--sp-6); font-size: var(--text-sm); color: var(--gray-600); }
 
 /* ── the dial ───────────────────────────────────────────────────────────
    A hundred hairlines, and the first N inked. No count is implied and none is
@@ -447,47 +481,50 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 .dial__rule i[data-on] { background: var(--leaf-700); }
 .dial__rule i:nth-child(10n+1) { background: var(--leaf-400); }
 .dial__rule i[data-on]:nth-child(10n+1) { background: var(--leaf-900); }
-.dial__read { margin: 0; max-width: 48ch; font-size: var(--text-sm); line-height: 1.6; color: var(--gray-600); }
+.dial__read { margin: 0 0 var(--sp-3); font-size: var(--text-base); line-height: 1.55; color: var(--black); }
+.dial__note { margin: 0; font-size: var(--text-sm); line-height: 1.55; color: var(--gray-600); }
 
-/* ── what is still owed ─────────────────────────────────────────────── */
+/* =============================================================================
+   THE OUTRO. One frame, full bleed, and the sentence it is under.
+   ========================================================================== */
 
-.owed { margin: var(--sp-6) 0 0; padding: 0; list-style: none; display: grid; row-gap: var(--sp-4); }
-.owed li {
-  padding-left: var(--sp-4); border-left: 2px solid var(--amber-700);
-  font-size: var(--text-sm); line-height: 1.6; color: var(--gray-600);
+section.outro {
+  position: relative; isolation: isolate;
+  padding: 0; overflow: hidden;
+  min-height: 560px; display: grid; align-items: end;
 }
-.owed b {
-  display: block; font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
-  text-transform: uppercase; color: var(--amber-700);
+.outro__shot {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 42%;
 }
-
-/* ── the close ──────────────────────────────────────────────────────── */
-
-.close {
-  display: grid; grid-template-columns: 232px minmax(0, 1fr);
-  column-gap: var(--sp-7); align-items: center;
-  margin-top: var(--sp-8); padding-top: var(--sp-7);
-  border-top: 1px solid var(--leaf-200);
-  --dest-far:  var(--leaf-200);
-  --dest-mid:  var(--leaf-mid);
-  --dest-near: var(--leaf-500);
-  --dest-crop: var(--leaf-900);
-  --dest-line: var(--leaf-500);
-  --dest-box:  var(--white);
+.outro__wash {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, var(--ink) 4%, rgb(4 8 6 / .82) 46%, rgb(4 8 6 / .34) 100%);
 }
-.dest { width: 232px; height: auto; }
-.close__line {
-  margin: 0 0 var(--sp-3);
-  font-family: var(--font-display); font-size: var(--text-h2); font-weight: 700;
-  line-height: 1.14; letter-spacing: -.02em; color: var(--leaf-900);
+.outro__inner { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+.outro__logo { width: 72px; height: 72px; margin-bottom: var(--sp-5); border-radius: 999px; }
+.outro__line {
+  margin: 0 0 var(--sp-5); max-width: 18ch;
+  overflow-wrap: anywhere; min-width: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1.1rem + 4.4vw, 4.5rem); font-weight: 700;
+  line-height: 1.02; letter-spacing: -.034em; color: var(--white);
 }
-.close__sub { margin: 0 0 var(--sp-5); max-width: 56ch; font-size: var(--text-base); line-height: 1.6; color: var(--gray-700); }
-.close__open { margin: 0; max-width: 60ch; font-size: var(--text-sm); line-height: 1.6; color: var(--gray-600); }
-.close__open b {
-  display: block; margin-bottom: var(--sp-1);
+.outro__sub {
+  margin: 0 0 var(--sp-6); max-width: 54ch;
+  font-size: var(--text-lede); line-height: 1.5; color: rgb(255 255 255 / .84);
+}
+.outro__lab {
+  margin: 0 0 var(--sp-3); padding-top: var(--sp-5);
+  border-top: 1px solid rgb(255 255 255 / .22);
   font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
-  text-transform: uppercase; color: var(--leaf-700);
+  text-transform: uppercase; color: var(--leaf-500);
 }
+.outro__open {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; column-gap: var(--sp-7); row-gap: var(--sp-2);
+}
+.outro__open li { font-size: var(--text-sm); line-height: 1.5; color: rgb(255 255 255 / .78); }
 
 /* =============================================================================
    DIMMING. One highlight primitive: while something is pointed at, everything
@@ -513,6 +550,11 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 .will-rise.in .node:nth-child(5)  .node__core, .will-rise.in .node:nth-child(5)  .task { transition-delay: 120ms; }
 .will-rise.in .node:nth-child(7)  .node__core, .will-rise.in .node:nth-child(7)  .task { transition-delay: 180ms; }
 .will-rise.in .node:nth-child(9)  .node__core, .will-rise.in .node:nth-child(9)  .task { transition-delay: 240ms; }
+/* the tiles in a row arrive one after another, outward from the trunk */
+.will-rise.in .strip--l .task:nth-last-child(2),
+.will-rise.in .strip--r .task:nth-child(2) { transition-delay: 90ms; }
+.will-rise.in .strip--l .task:nth-last-child(3),
+.will-rise.in .strip--r .task:nth-child(3) { transition-delay: 130ms; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
@@ -526,7 +568,12 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
    ========================================================================== */
 
 @media (max-width: 1180px) {
-  :root { --trunk: 440px; --wingmax: 236px; --tile-w: 114px; --tile-h: 74px; }
+  :root { --trunk: 420px; --wingmax: 252px; }
+  .node[data-node="1"] { --tile-w:  92px; --tile-h: 110px; }
+  .node[data-node="2"] { --tile-w: 132px; --tile-h:  86px; }
+  .node[data-node="3"] { --tile-w:  98px; --tile-h:  90px; }
+  .node[data-node="4"] { --tile-w: 112px; --tile-h:  78px; }
+  .node[data-node="5"] { --tile-w: 122px; --tile-h:  70px; }
 }
 
 /* Below 900px the trunk moves to the left edge and each step's work wraps
@@ -547,14 +594,27 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
   .strip--l, .strip--r { justify-content: flex-start; }
   .strip--l .task:last-child::after,
   .strip--r .task:first-child::after { display: none; }
-  .plate { grid-template-columns: 1fr; row-gap: var(--sp-7); }
-  .plate__fig { max-width: 340px; }
-  .close { grid-template-columns: 1fr; row-gap: var(--sp-5); }
+  .plate { grid-template-columns: 1fr; row-gap: var(--sp-6); }
+  .plate__say, .plate__fig, .plate__read { grid-column: 1; }
+  .plate__say { padding-top: 0; }
+  .plate__stem { display: none; }
+  .plate__fig { max-width: 320px; }
+  .outro { min-height: 460px; }
+  .outro__open { flex-direction: column; }
 }
 
 @media (max-width: 560px) {
   .node__core { grid-template-columns: 1fr; row-gap: var(--sp-2); }
-  :root { --tile-w: 88px; --tile-h: 62px; }
+  /* Stacked, the rows no longer have to share a height, so a long name wraps
+     rather than being clipped. */
+  .task__name { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+  .task__label { align-items: flex-start; }
+  .task__mark { margin-top: 1px; }
+  .node[data-node="1"] { --tile-w: 118px; --tile-h: 138px; }
+  .node[data-node="2"] { --tile-w: 146px; --tile-h:  90px; }
+  .node[data-node="3"] { --tile-w: 126px; --tile-h: 114px; }
+  .node[data-node="4"] { --tile-w: 138px; --tile-h:  90px; }
+  .node[data-node="5"] { --tile-w: 146px; --tile-h:  76px; }
 }
 
 @media print {

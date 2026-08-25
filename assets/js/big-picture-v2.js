@@ -88,12 +88,10 @@
     for (i = 0; i < 100; i++) ticks.push(document.createElement("i"));
     ticks.forEach(function (t) { rule.appendChild(t); });
 
-    var WORDS = ["None of", "Five percent of", "A tenth of", "Fifteen percent of",
-                 "A fifth of", "A quarter of", "Thirty percent of", "Thirty five percent of",
-                 "A third of", "Forty five percent of", "Half", "Fifty five percent of",
-                 "Three fifths of", "Sixty five percent of", "Seventy percent of",
-                 "Three quarters of", "Eighty percent of", "Eighty five percent of",
-                 "Ninety percent of", "Ninety five percent of", "All"];
+    /* The map answers the dial. The green parcel layer fades up over the pale
+       one, so the coast fills in as the share rises. It is a proportion painted
+       over the whole layer, never a subset: no farm on this map is being named. */
+    var atlas = document.getElementById("atlas");
 
     function paint() {
       var n = Number(input.value), k;
@@ -102,10 +100,13 @@
         else ticks[k].removeAttribute("data-on");
       }
       if (val) val.innerHTML = n + "<i>%</i>";
+      if (atlas) atlas.style.setProperty("--share", n / 100);
       if (read) {
-        read.textContent = WORDS[n / 5] + " the small-farm land on that coast. That is all the " +
-          "number says. Turning a share into machines or into protein takes two measurements we " +
-          "have not made.";
+        read.textContent = n === 0
+          ? "None of them, which is where we are. Move it and watch the coast fill in."
+          : n === 100
+            ? "All of them. Green is a farm with a reactor, pale is one without."
+            : "Green is a farm with a reactor, pale is one without.";
       }
     }
     input.addEventListener("input", paint);
