@@ -4,27 +4,33 @@
    Three jobs, and no fourth.
 
      1  reveal      the one-shot entrance, matching .rise elsewhere on the page
-     2  emphasis    pointing at something lights the run it belongs to
-     3  the dial    the share at the end, and the hundred squares under it
+     2  emphasis    pointing at something holds the run it belongs to
+     3  the map     the legend drives the layers; the dial draws a share
 
    NOTHING OPENS. There is no panel to build, no state to remember and no route
    to change. Every word on this page is in the markup before this file runs, so
    the page is complete with scripting off. If a future edit starts storing
    content in here, the section has stopped doing its job.
 
-   THE LIGHTING RULES, IN FULL
+   ON FLICKER. An earlier build wired pointerenter and pointerleave to every
+   tile. Crossing from one tile to its neighbour fired leave-then-enter, and the
+   frame in between had everything un-held, so a slow drag across a row strobed.
+   This version listens once, on the container, using pointerover, which bubbles:
+   moving between two tiles is a single event and the held set is swapped in one
+   pass with no blank frame between. Leaving is handled by pointerleave on the
+   container, which does not fire while you are still inside it.
 
-     a step       lights itself and the work that feeds it, and the moments in
-                  the week at the end that come out of it
-     a tile       lights itself, the step it feeds, every step after that one
-                  and the segments between them. That is the answer to the only
+   THE HOLDING RULES, IN FULL
+
+     a step       holds itself and the work that feeds it
+     a tile       holds itself, the step it feeds, every step after that one and
+                  the segments between them. That is the answer to the only
                   question worth asking of a figure like this: how does my work
                   reach a farm. It also MARKS, in amber, the pieces it talks to
                   elsewhere, so the web of who-talks-to-whom shows without
                   permanent lines turning the trunk into a hairball. Cross-links
                   live in data-with.
-     a moment     lights the step it came out of, so a reader who scrolls back
-                  finds the part of the machine that produced it
+     a legend row holds its layer on the map, with the small parcels left in
 
    Segments carry data-flow rather than data-lit, because a segment belongs to
    the gap after a step rather than to the step itself.
@@ -33,25 +39,56 @@
 (function () {
   "use strict";
 
-  var spine = document.getElementById("spine");
+  var reduced = window.matchMedia &&
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ------------------------------------------------------------- 3  dial --- */
-  /* Built first, because it is independent of the figure and must work even if
-     the figure is not on the page. The hundred squares are drawn here rather
-     than sitting in the markup as a hundred empty elements. */
+  /* ------------------------------------------------------------- 3a  map --- */
+
+  (function () {
+    var key   = document.getElementById("key");
+    var atlas = document.getElementById("atlas");
+    if (!key || !atlas) return;
+
+    function hold(row) {
+      [].forEach.call(key.querySelectorAll(".key__row"), function (r) {
+        r.removeAttribute("data-lit");
+      });
+      if (row) {
+        row.setAttribute("data-lit", "");
+        key.setAttribute("data-focus", "1");
+        atlas.setAttribute("data-hold", row.getAttribute("data-hold"));
+      } else {
+        key.removeAttribute("data-focus");
+        atlas.removeAttribute("data-hold");
+      }
+    }
+
+    key.addEventListener("pointerover", function (e) {
+      hold(e.target.closest ? e.target.closest(".key__row") : null);
+    });
+    key.addEventListener("pointerleave", function () { hold(null); });
+    key.addEventListener("focusin",  function (e) {
+      hold(e.target.closest ? e.target.closest(".key__row") : null);
+    });
+    key.addEventListener("focusout", function (e) {
+      if (!key.contains(e.relatedTarget)) hold(null);
+    });
+  })();
+
+  /* ------------------------------------------------------------ 3b  dial --- */
 
   (function () {
     var input = document.getElementById("share");
-    var grid  = document.getElementById("dial-grid");
+    var rule  = document.getElementById("dial-rule");
     var val   = document.getElementById("dial-val");
     var read  = document.getElementById("dial-read");
-    if (!input || !grid) return;
+    if (!input || !rule) return;
 
-    var cells = [], i;
-    for (i = 0; i < 100; i++) cells.push(document.createElement("i"));
-    cells.forEach(function (c) { grid.appendChild(c); });
+    var ticks = [], i;
+    for (i = 0; i < 100; i++) ticks.push(document.createElement("i"));
+    ticks.forEach(function (t) { rule.appendChild(t); });
 
-    var WORDS = ["No", "Five percent of", "A tenth of", "Fifteen percent of",
+    var WORDS = ["None of", "Five percent of", "A tenth of", "Fifteen percent of",
                  "A fifth of", "A quarter of", "Thirty percent of", "Thirty five percent of",
                  "A third of", "Forty five percent of", "Half", "Fifty five percent of",
                  "Three fifths of", "Sixty five percent of", "Seventy percent of",
@@ -59,47 +96,41 @@
                  "Ninety percent of", "Ninety five percent of", "All"];
 
     function paint() {
-      var n = Number(input.value);
-      for (var k = 0; k < 100; k++) {
-        if (k < n) cells[k].setAttribute("data-on", "");
-        else cells[k].removeAttribute("data-on");
+      var n = Number(input.value), k;
+      for (k = 0; k < 100; k++) {
+        if (k < n) ticks[k].setAttribute("data-on", "");
+        else ticks[k].removeAttribute("data-on");
       }
-      if (val) val.textContent = n + "%";
+      if (val) val.innerHTML = n + "<i>%</i>";
       if (read) {
-        read.innerHTML = "<b>What that buys, honestly</b>" + WORDS[n / 5] +
-          " the small-farm land in that band, and nothing more than that yet. " +
-          "The share is true by construction. The two things that would turn it into a " +
-          "quantity are below, and both are ours to close.";
+        read.textContent = WORDS[n / 5] + " the small-farm land on that coast. That is all the " +
+          "number says. Turning a share into machines or into protein takes two measurements we " +
+          "have not made.";
       }
     }
     input.addEventListener("input", paint);
     paint();
   })();
 
+  /* --------------------------------------------------------------- spine --- */
+
+  var spine = document.getElementById("spine");
   if (!spine) return;
 
-  var nodes   = [].slice.call(spine.querySelectorAll(".node"));
-  var links   = [].slice.call(spine.querySelectorAll(".link"));
-  var tasks   = [].slice.call(spine.querySelectorAll(".task"));
-  var moments = [].slice.call(document.querySelectorAll(".moment"));
+  var nodes = [].slice.call(spine.querySelectorAll(".node"));
+  var links = [].slice.call(spine.querySelectorAll(".link"));
+  var tasks = [].slice.call(spine.querySelectorAll(".task"));
 
-  /* The trajectory in the tile for "Design and docking". Forty-six frames of
-     our own 30 ns run live in data attributes on the SVG, so with scripting off
-     the drawing is a still frame and nothing on this page moves on its own. The
-     frames are stepped here rather than by SMIL, which wedges its timeline if
-     you pause it before it has ever run. It plays only while the tile it
-     belongs to is pointed at or focused, which folds it into the highlight
-     primitive rather than adding a third one that never stops. */
+  /* The trajectory in the tile for Docking. Forty-six frames of our own 30 ns
+     run live in data attributes on the SVG, so with scripting off the drawing is
+     a still frame and nothing on this page moves on its own. It plays only while
+     its tile is held, which folds it into the highlight primitive rather than
+     adding a third one that never stops. */
   var mdSvg   = document.querySelector(".task--md .mdanim");
   var mdOwner = document.getElementById("t-docking");
   var mdOn    = false;
-
-  /* ---------------------------------------------------------- 1  reveal --- */
-
-  var reduced = window.matchMedia &&
-                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   var mdFrames, mdChain, mdTip, mdX, mdY, mdRaf = 0, mdT0 = 0, mdAt = -1;
+
   if (mdSvg && !reduced) {
     mdFrames = (mdSvg.getAttribute("data-frames") || "").split(";");
     mdX      = (mdSvg.getAttribute("data-tipx")   || "").split(";");
@@ -136,6 +167,8 @@
     }
   }
 
+  /* ---------------------------------------------------------- 1  reveal --- */
+
   if (!reduced && "IntersectionObserver" in window) {
     spine.classList.add("will-rise");
     new IntersectionObserver(function (entries, obs) {
@@ -154,19 +187,22 @@
 
   /* -------------------------------------------------------- 2  emphasis --- */
 
-  function clear() {
-    md(false);
-    spine.removeAttribute("data-focus");
+  function at(el) { return Number(el.getAttribute("data-at") || el.getAttribute("data-node") || 0); }
+
+  function strip() {
     nodes.forEach(function (n) { n.removeAttribute("data-lit"); });
     links.forEach(function (l) { l.removeAttribute("data-flow"); });
     tasks.forEach(function (t) { t.removeAttribute("data-lit"); t.removeAttribute("data-rel"); });
-    moments.forEach(function (m) { m.removeAttribute("data-lit"); });
   }
 
-  function at(el) { return Number(el.getAttribute("data-at") || el.getAttribute("data-node") || 0); }
+  function clear() {
+    md(false);
+    spine.removeAttribute("data-focus");
+    strip();
+  }
 
   /* the quiet half. A tile names the pieces of work it talks to, usually in
-     another part of the team, and pointing at it marks them. Marked, not lit,
+     another part of the team, and pointing at it marks them. Marked, not held,
      so the run down the trunk stays the loud thing. */
   function relate(el) {
     (el.getAttribute("data-with") || "").split(/\s+/).forEach(function (id) {
@@ -176,54 +212,48 @@
     });
   }
 
-  /* light the trunk from one step downward, segments included */
-  function runOut(from) {
+  function show(el) {
+    strip();                             /* swap the held set, never blank first */
+    spine.setAttribute("data-focus", "1");
+
+    if (el.classList.contains("node")) {
+      el.setAttribute("data-lit", "");
+      var here = at(el);
+      tasks.forEach(function (t) { if (at(t) === here) t.setAttribute("data-lit", ""); });
+      md(false);
+      return;
+    }
+
+    el.setAttribute("data-lit", "");     /* a tile */
+    md(el === mdOwner);
+    var from = at(el);
     nodes.forEach(function (n) { if (at(n) >= from) n.setAttribute("data-lit", ""); });
     links.forEach(function (l) {
       if (Number(l.getAttribute("data-seg")) >= from) l.setAttribute("data-flow", "");
     });
+    relate(el);                          /* after, so a held step is never marked */
   }
 
-  function show(el) {
-    clear();
-    spine.setAttribute("data-focus", "1");
-
-    if (el.classList.contains("moment")) {                /* a moment in the week */
-      el.setAttribute("data-lit", "");
-      var n = nodes[at(el) - 1];
-      if (n) n.setAttribute("data-lit", "");
-      return;
-    }
-
-    if (el.classList.contains("node")) {                  /* a step */
-      el.setAttribute("data-lit", "");
-      var here = at(el);
-      tasks.forEach(function (t) { if (at(t) === here) t.setAttribute("data-lit", ""); });
-      moments.forEach(function (m) { if (at(m) === here) m.setAttribute("data-lit", ""); });
-      return;
-    }
-
-    if (el.classList.contains("task")) {                  /* a piece of work */
-      el.setAttribute("data-lit", "");
-      if (el === mdOwner) md(true);
-      runOut(at(el));
-      relate(el);                  /* after, so a lit step is never also marked */
-    }
+  /* One listener, on the container. pointerover bubbles, so crossing from one
+     tile to the next is a single event and a single swap. */
+  function resolve(t) {
+    if (!t || !t.closest) return null;
+    var task = t.closest(".task");
+    if (task) return task;
+    var core = t.closest(".node__core");
+    return core ? core.parentNode : null;
   }
 
-  /* Pointer and keyboard reach the same code path. Touch lands on pointerenter
-     in every browser we have, and because nothing is hidden behind the
-     emphasis, a device that never fires it loses nothing. */
-  function wire(el, target) {
-    el.addEventListener("pointerenter", function () { show(target); });
-    el.addEventListener("pointerleave", clear);
-    el.addEventListener("focus", function () { show(target); });
-    el.addEventListener("blur", clear);
-  }
-
-  nodes.forEach(function (n) { wire(n.querySelector(".node__core"), n); });
-  tasks.forEach(function (t) { wire(t, t); });
-  moments.forEach(function (m) { wire(m, m); });
-
+  spine.addEventListener("pointerover", function (e) {
+    var el = resolve(e.target);
+    if (el) show(el); else clear();
+  });
   spine.addEventListener("pointerleave", clear);
+  spine.addEventListener("focusin", function (e) {
+    var el = resolve(e.target);
+    if (el) show(el);
+  });
+  spine.addEventListener("focusout", function (e) {
+    if (!spine.contains(e.relatedTarget)) clear();
+  });
 })();

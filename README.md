@@ -39,34 +39,40 @@ Two rules produced those five, and they are worth keeping:
 five, and the chevrons between them point one way; that is enough. A numbered list says "process
 diagram" when this is meant to say "here is the thing".
 
-Under the five sit **one week on one plot**, which is the mechanism at a single farm, and then
-**the map**, which is where the argument stops being about a machine and starts being about ground.
-Zoom in, then all the way out.
+Under the five sits **the map**, which is where the argument stops being about a machine and starts
+being about ground. An earlier build put a hypothetical week on a hypothetical plot between them.
+It was cut: it was the only part of the page describing something that had not happened, and it made
+the reader wade through a projection to reach the evidence.
 
 ## Reading it
 
 - **Nothing opens.** No panel, no modal, no drawer, no page change. Every label is on screen before
   you touch anything.
-- **Point at a step** and the work that feeds it lights up, along with the moments in the week at
-  the end that come out of it.
+- **Point at a step** and the work that feeds it lights up.
 - **Point at a piece of work** and it lights the step it feeds, every step after that one, and the
   segments between them. Its photograph comes up to full colour and a line draws into the step it
   serves. That is the answer to the only question worth asking of a figure like this: how does my
   work reach a farm.
+- **Point at a row of the map legend** and the map holds that layer on its own, with the small
+  parcels left in place.
 - **Point at anything and its cross-links are marked in amber.** That is the quiet half. The model
   marks the baselines, the light array and the tandem run. The business plan marks the map,
   regulation and the farmers. The run down the trunk stays the loud thing, and the web of
   who-talks-to-whom sits underneath it rather than being drawn as permanent lines that would turn
   the trunk into a hairball. Cross-links live in `data-with` on each tile.
-- **Point at a moment in the week** and the step it came out of lights, up the page.
+Keyboard reaches all of it: twenty-eight focusable elements plus the dial, and focus runs the same
+code path as pointing.
 
-Keyboard reaches all of it: twenty-seven focusable elements plus the dial, and focus runs the same
-code path as hover.
+**One listener, on the container.** An earlier build wired `pointerenter` and `pointerleave` to
+every tile. Crossing from one tile to its neighbour fired leave-then-enter, and the frame in between
+had everything un-held, so dragging along a row strobed. Pointing is now handled once, on the
+container, with `pointerover`, which bubbles: moving between two tiles is a single event and a single
+swap with no blank frame. If you ever see the figure flicker again, this is the thing that broke.
 
 ## A piece of work is its own photograph
 
-There is no card beside the picture. **The tile is the picture**, with the name under it, and that
-is the whole thing: no pill, no icon, no subtitle. Sixteen of them, fifteen photographs from
+There is no card beside the picture. **The tile is the picture**, with a mark in its corner and the
+name under it. Sixteen of them, fifteen photographs from
 `iGEM2026_Images` (filenames are `YYYYMMDD_Subteam_Type_Description`, and the date is the day the
 photograph was taken) plus the one tile that moves.
 
@@ -83,11 +89,14 @@ there:
    contact sheet feeding the trunk rather than sixteen pictures competing with it.
 4. **No captions.** The name under the tile is the caption. The detail, including the date, lives in
    `alt`, where a screen reader gets it and the drawing does not have to carry it.
+5. **A mark in the corner, from our own CAD.** A photograph at this size tells you the mood of a day
+   and not much else; the glyph says what the thing is before the name is read. It sits in the corner
+   of the frame like a plate number rather than floating over the middle of it, and it warms when the
+   tile is held. This is what the sprite is for, and it is why the icons came back after a pass that
+   dropped them.
 
-**The dark half has no photographs at all.** The five steps are the record and the pictures are
-evidence for them. The week is a projection: none of it has happened, so there is nothing to
-photograph, and putting real pictures beside a hypothetical week would be the one dishonest thing on
-the page. The only image down there is the map, which is a measurement.
+**The closing band carries no photographs.** The five steps are the record and the pictures are
+evidence for them. The only image down there is the map, which is a measurement rather than a day.
 
 ## The trajectory
 
@@ -110,60 +119,59 @@ beside the page: `tools_md_extract.py` reads the parm7 and the DCD with no MD li
 and writes the Cα coordinates, and `tools_md_svg.py` superposes, projects, picks the loop window and
 emits the SVG. Neither runs at page load; the reader only ever gets the finished drawing.
 
-## The week at the end
+## The map, and why it is built out of layers
 
-One call, one plot, one week, on ink. The mechanism is concrete and every number carries where it
-came from in the same sentence, at the same size:
+The page ends on our own QGIS work, from `iGEM2026_Images/QGIS Uploads/All Taiwan Farmlands/`. The
+finding is in the overlay rather than in either layer: **the parcels under two hectares and the top
+bands of the volatility index are the same coast.** The farms least able to buy their way out of a
+bad season are sitting on the worst of it.
 
-- **roughly 105 minutes** to half maximum, **borrowed, not ours**: a different organism at a
-  different wavelength, and it is not on record which output it describes.
-- **1 mU/mL** of ACC deaminase in neat cell-free permeate, the gate we set ourselves, which is at
-  once the ACC-cleaving capacity of a 10⁸ CFU/mL colonisation by *P. putida* UW4 and a 39 hour
-  clearance half-life in the reservoir. From `28_ACCD_Permeate_Threshold`.
-- **2.4 mU/mL** at the reactor, for a 5 L reservoir and 60 mL/h of permeate.
-- **K_M 3.4 mM** (Hontzeas 2004), three orders above anything a root zone holds, which is why
-  clearance runs first order and why we never had to guess a concentration nobody has measured. The
-  same paper is the reason the pH risk is stated next to it.
-- **Nothing at the plant.** No plant has received anything from this system.
+It is not a screenshot. The QGIS export was quantised to its own legend colours and pulled apart
+into nine layers, which the page stacks and drives:
 
-Then the sentence a judge will otherwise say first: **the forecast has to warn us earlier than the
-system takes to answer, and we have measured neither number.** If the warning is shorter than the
-answer, the protein arrives after the stress.
+`base` · `v1`–`v5` (the five index classes) · `small` and `large` (the parcels) · `edge` (county
+lines). Regenerating them is `tools_map_layers.sh` beside the page.
 
-Then it widens back out to the country, on the scale-out model from the
-[invariant explorer](https://timmy97-tw.github.io/releaf-invariant-explorer/): adding modules holds
-wall shear, Reynolds number, flux and fouling margin, and power is the one thing that does not
-scale. Model output, none of it measured.
+Three things about that are worth keeping straight if you touch it:
 
-## The reach, and the dial
+- **The colours are this page's, the breaks are the analysis's.** QGIS drew navy through yellow with
+  red and blue parcels, which fights the leaf palette and reads as a foreign object dropped into the
+  page. The five classes were recoloured to a pale-to-rust ramp and the parcels to leaf and slate.
+  Recolouring a choropleth is ordinary cartography; moving a class break would not be, and none moved.
+  The caption says so on the page.
+- **The band layers have parcel-shaped holes in them**, because the parcels were drawn on top of the
+  choropleth before the export was flattened. They are never visible, because the band layers are
+  only ever drawn as *overlays* above a scrim with the parcel layer above them, which fills the holes
+  exactly. Do not try to use a band layer as a base. A morphological close was tried to fill the
+  holes and is the wrong answer: a kernel small enough to keep the county boundaries honest does not
+  fill them, and a kernel large enough to fill them redraws the regions.
+- **The legend is the control.** Pointing at a row scrims the map and holds that layer, with the
+  small parcels left in. It answers to pointing exactly the way the five steps do, which is the whole
+  reason it reads as one page and not as a figure bolted to the end of one.
 
-The page ends on **our own QGIS map**: farm parcels under two hectares in red, parcels over two in
-blue, over a five step choropleth of the climate volatility index, which is computed from mean
-diurnal temperature range, seasonal temperature range and the coefficient of variation of
-precipitation. The finding is in the overlay rather than in either layer: **the small parcels and
-the top band of the index are the same ground.** The farms least able to buy their way out of a bad
-season are sitting on the worst of it.
+## The dial
 
-Beside it is a dial, and the dial is the honest part. It moves a **share** of those small farms, and
-a hundred squares fill to match. A share is true by construction: no count is implied and none is
-needed, because the grid is the percentage, drawn. What the dial refuses to do is turn that share
-into a number of machines or a quantity of protein, and it says why, in two boxes underneath:
+Beside the map, a hundred hairlines with the first N inked. The dial moves a **share** of those small
+farms. A share is arithmetic: no count is implied and none is needed, because the rule is the
+percentage, drawn.
 
-- **How many machines.** Our own parcel layer can be counted. It has not been counted.
-- **How much protein.** No titre has been measured, and there is no bill of materials total.
+What the dial refuses to do is turn that share into a number of machines or a weight of protein, and
+it says why, in two notes underneath:
+
+- **How many machines.** The parcel layer can be counted. Nobody has counted it.
+- **How much protein.** No titre measured, no bill of materials totalled.
 
 That is the shape every impact claim on this project should take: show the ground, move the share,
-and name the two measurements standing between a share and a number. Do not close the gap with a
-guess. The one number that is allowed to be large is sourced rather than ours: 84% of the world's
-570 million farms are under two hectares (FAO), which is the same cut the red on the map is drawn at.
+name the two measurements standing between a share and a number. Do not close that gap with an
+estimate. The one large number allowed on the page is sourced rather than ours: 84% of the world's
+570 million farms are under two hectares (FAO), which is the same cut the parcels are drawn at.
 
 ## Slots, and why they are drawn rather than left out
 
-Seven numbers this page needs are not on record. **A slot is a designed element, not an omission.**
+Three numbers this page needs are not on record. **A slot is a designed element, not an omission.**
 Each one says what is missing and what would fill it, in the same type as everything else:
 
-forecast lead time · the dose policy · the permeate rate Q_p · end-to-end latency · how many small
-farms sit in that band · what one machine costs to build · what one machine puts out.
+how many small farms sit on that coast · what one machine costs to build · what one machine puts out.
 
 Do not fill a slot with a guess, and do not delete one to tidy the page up. Never invent a number, a
 quote, a date or a result: it is the project's main credibility asset, and this page is where a
@@ -175,7 +183,8 @@ so the page does not name a place.
 ## Two colour systems, and they do not overlap
 
 **The ramp** says direction. The five accent bars walk light to dark down the trunk. With the step
-numbers gone it is the only cue in the figure that says which way to read it.
+numbers gone it is the only cue in the figure that says which way to read it, which is why it is
+three pixels of leaf rather than a hairline.
 
 **Amber** marks a cross-link, and never means anything else.
 
@@ -186,6 +195,11 @@ on the page is in the same voice as the glyphs.
 V1 had a third system, a zone colour saying which subteam owned a card, read off a key at the top of
 the figure. **The key was cut and the colour went with it** rather than sitting on the page
 unexplained. An unlabelled code is worse than no code, and the figure got quieter for losing it.
+
+The map runs its own palette on top of these, and it is data rather than decoration: five index
+classes from pale to rust, leaf for a parcel under two hectares, slate for one over. Those seven
+values live as tokens (`--vol-1` to `--vol-5`, `--parcel-small`, `--parcel-large`) because the raster
+layers were rendered to exactly them, and a legend swatch that drifts from its layer is a lie.
 
 ## The icons
 
@@ -220,33 +234,34 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
   never wider than the column. V1 needed a scroll frame and a line of text telling you to drag it;
   this one does not, which is the quiet practical win of turning the figure ninety degrees.
 - **Under 900px** the trunk moves to the left edge and each step's work wraps underneath it, step
-  first. Same markup, no second copy of the content to keep in sync.
+  first, and the map plate stacks above its legend. Same markup, no second copy of the content.
+- **Verified at 320, 375, 414, 768, 900, 1280, 1440 and 1920.** No horizontal scroll at any of them,
+  and no clickable label wraps to two lines.
 - **The five steps fit one laptop screen.** That is a constraint, not an accident: a judge should
   see the whole chain without scrolling and then choose where to look. If an edit pushes the fifth
   step below the fold, cut writing rather than shrinking type.
 - **Two motion primitives only**: one entrance on first sight, one highlight on point. The
-  trajectory belongs to the second of those, because it runs only while its card is pointed at. It
-  is deliberately not a third, always-on animation. Nothing scales, nothing bounces, and focus rings
-  are never transitioned.
+  trajectory and the map both belong to the second, because both run only while something is being
+  pointed at. Nothing scales, nothing bounces, and focus rings are never transitioned.
 - The trajectory is stepped on `requestAnimationFrame`, so a background tab costs nothing. SMIL was
   tried first and dropped: pausing a SMIL timeline before it has ever run wedges it at zero.
 - `prefers-reduced-motion` turns every transition off, including the entrance.
 
 ## Merging into the homepage
 
-1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js` and the sixteen files in
-   `assets/img/` into the wiki's `assets/`. The image paths in the markup are relative
+1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js`, the sixteen tile images in
+   `assets/img/` and the nine map layers in `assets/img/map/` into the wiki's `assets/`. The image paths in the markup are relative
    (`assets/img/*.jpg`), so they need no edit if the wiki keeps the same layout.
-2. Paste **both** `<section>` elements into `index.html`: the white `section.bpv2` and the ink
-   `section.band--dark.act` that follows it, which carries the week, the map and the claim. Include the `<svg class="sprite">` block at the top of
+2. Paste **both** `<section>` elements into `index.html`: the white `section.bpv2` and the tinted
+   `section.reach` that follows it, which carries the map, the dial and the claim. Include the `<svg class="sprite">` block at the top of
    the first one. The sprite has to travel with the section: a `<use href="external.svg#id">` does
    not resolve reliably, so the symbols are inlined.
 3. Add the stylesheet link and the script tag.
 4. Delete the `<div class="shell">` element and the inline `<style>` block in the head. Both exist
    only so the standalone page has a body to sit in. `home.css` already supplies `.band`,
    `.band__inner`, `.band--dark` and `h2.band__title`.
-5. Delete the three lines in the stylesheet that declare `--ink`, `--ink-2` and `--sig-green`.
-   `home.css` already defines all three for the dark act.
+5. `section.reach` is tinted (`--leaf-50` with hairline rules), so it must not sit directly after
+   another `band--tint`. Explore our project is one, which is why the five steps sit between them.
 
 It reads as the last band, after **Explore our project**, which is `band--tint`, so the white half
 stays on white and the ink half closes the page.
@@ -264,14 +279,16 @@ Everything readable is in `index.html`. The script holds no content of its own.
 
 - **A step** is a `.node` with `data-node="1"` to `"5"`, containing a `.strip--l`, a `.node__core`
   and a `.strip--r`. Two short sentences in `.node__note`, claim then limit. Never three.
+- **A legend row** is a `.key__row` with `data-hold` naming a layer id. Adding a layer is one image,
+  one row and one line of CSS.
 - **A piece of work** is a `.task` with an `id`, `data-at="<step number>"`, an optional
-  `data-with="<space separated ids>"`, a `<figure class="task__shot">` holding one image, and a
-  `.task__name`. Adding one is a single element and no JavaScript. Keep the name to one line;
+  `data-with="<space separated ids>"`, a `<figure class="task__shot">` holding one image, a
+  `.task__mark` pointing at a sprite symbol, and a `.task__name`. Adding one is a single element and no JavaScript. Keep the name to one line;
   it is clipped rather than wrapped on purpose, so a long one will tell you.
 - Swapping a photograph is one `src` and one `alt`. The `alt` names what is in the frame and the
   date, and nothing more.
 - **A segment** is a `.link` with `data-seg`, matching the node it leaves.
-- **A moment** in the week is a `.moment` with `data-node`, naming the step it came out of.
+
 - **A slot** is a `.slot` with a `<b>` label and one sentence saying what would fill it.
 
 Related pages: the [judging session board](https://timmy97-tw.github.io/judging-session-prep/), the
