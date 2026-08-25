@@ -89,11 +89,10 @@ there:
    contact sheet feeding the trunk rather than sixteen pictures competing with it.
 4. **No captions.** The name under the tile is the caption. The detail, including the date, lives in
    `alt`, where a screen reader gets it and the drawing does not have to carry it.
-5. **A mark in the corner, from our own CAD.** A photograph at this size tells you the mood of a day
-   and not much else; the glyph says what the thing is before the name is read. It sits in the corner
-   of the frame like a plate number rather than floating over the middle of it, and it warms when the
-   tile is held. This is what the sprite is for, and it is why the icons came back after a pass that
-   dropped them.
+5. **A mark on the caption line, from our own CAD.** A photograph at this size tells you the mood of
+   a day and not much else; the glyph says what the thing is before the name is read. It sits beside
+   the name, **never over the picture**. A badge floating on the frame was tried first and it fussed
+   up every photograph it landed on: the photo is the evidence and nothing should sit on top of it.
 
 **The closing band carries no photographs.** The five steps are the record and the pictures are
 evidence for them. The only image down there is the map, which is a measurement rather than a day.

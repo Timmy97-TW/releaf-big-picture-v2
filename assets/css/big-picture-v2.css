@@ -237,28 +237,29 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 .task__shot .mdanim { background: var(--leaf-50); opacity: 1; }
 
 /* The mark. A photograph at this size tells you the mood of a day and not much
-   else; the glyph tells you what the thing IS before you read the name. Drawn
-   from our own CAD, sitting in the corner of the frame like a plate number
-   rather than floating over the middle of it. */
+   else; the glyph tells you what the thing IS before you read the name. It sits
+   on the caption line beside the name, never over the picture. A badge floating
+   on the frame was tried and it fussed up every photograph it landed on. */
 .task__mark {
-  position: absolute; top: var(--sp-1); left: var(--sp-1); z-index: 1;
-  display: grid; place-items: center; width: 24px; height: 24px;
-  background: var(--white); border: 1px solid var(--gray-200);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--lift);
-  transition: background-color var(--v2-dur) var(--v2-ease),
-              border-color var(--v2-dur) var(--v2-ease);
+  flex: none; display: grid; place-items: center;
+  width: 18px; height: 18px;
+  opacity: .74;
+  transition: opacity var(--v2-dur) var(--v2-ease);
 }
-.task__mark .ico { width: 17px; height: 17px; }
-.task[data-lit] .task__mark { background: var(--leaf-100); border-color: var(--leaf-700); }
-.task[data-rel] .task__mark { background: var(--amber-100); border-color: var(--amber-700); }
+.task__mark .ico { width: 18px; height: 18px; }
+.task[data-lit] .task__mark,
+.task[data-rel] .task__mark { opacity: 1; }
 
 /* One line, always, so every row of the chain is exactly as tall as every other
    and the tiles sit on a single grid rather than a ragged one. Labels are terse
    for the same reason: under a photograph, "Photometer" reads faster than "The
    photometer" and leaves the sentence-making to the step card. */
+.task__label {
+  display: flex; align-items: center; column-gap: 6px;
+  margin-top: var(--sp-2); min-width: 0;
+}
 .task__name {
-  display: block; margin-top: var(--sp-2); padding-bottom: 2px;
+  min-width: 0; padding-bottom: 2px;
   font-size: var(--text-xs); line-height: 1.25; color: var(--gray-600);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   border-bottom: 1.5px solid transparent;
