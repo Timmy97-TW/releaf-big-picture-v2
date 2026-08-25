@@ -214,10 +214,15 @@ page. **Do not put a number of machines or a weight of protein next to that dial
 
 ## The outro
 
-**陳惠雯 in her plot, 21 July 2026**, bled off the left edge and feathered into the paper on the other
-three sides, with one sentence and a signature beside it. She is the farmer who moved our dosing off
-a wall clock and onto soil-moisture state, so ending on her rather than on our bench is the right way
-round.
+**陳惠雯 in her plot, 21 July 2026**: one landscape band the full width of the viewport, feathered top
+and bottom into the paper, with one sentence and a signature across the row underneath. She is the
+farmer who moved our dosing off a wall clock and onto soil-moisture state, so ending on her rather
+than on our bench is the right way round.
+
+The source frame is portrait and carries EXIF orientation 8. It is cropped to a 2:1 band around her
+head and shoulders at export time (`-auto-orient -crop 4128x2050+0+1380`) rather than being cropped
+in CSS, so the file that ships is the picture that shows and nothing depends on the browser reading
+the EXIF tag. Re-crop from the original if the band ever changes shape.
 
 Three things hold it together and are easy to break:
 
@@ -225,9 +230,9 @@ Three things hold it together and are easy to break:
   whose letters are filled black; on ink it disappears. Paper also means the band above needs no
   seam, which is what makes the photograph read as part of the page rather than a block dropped on
   the end.
-- **The photograph is masked, not cropped.** Two gradients, one fading the right edge and one the top
-  and bottom, composited with `mask-composite: intersect`. If a browser ignores the composite the
-  worst case is a softer fade, not a hard edge.
+- **The photograph is feathered, not cut.** One gradient mask fades the top and bottom edges into
+  white. That is what lets the band above it need no seam and stops the picture reading as a block
+  dropped on the end of the page.
 - **The sign-off is a student drawing, not the logo.** The circular team logo was there first and got
   swapped: the wordmark is warmer, it is the same hand as the two sticker tiles above, and it does
   not read as corporate furniture at the end of a page about farmers.

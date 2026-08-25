@@ -514,44 +514,36 @@ section.reach {
 /* =============================================================================
    THE OUTRO.
    -----------------------------------------------------------------------------
-   The page stays on paper to the end. The photograph bleeds off the left edge
-   and is feathered into white on its other three sides, so it joins the page
-   instead of sitting on it as a block, and the band above it needs no seam.
-   The sign-off is the hand-drawn wordmark, which is why the ground has to stay
-   light: the letters are filled black and vanish on ink.
+   One landscape band the full width of the viewport, then one line and a
+   signature under it. The photograph is feathered top and bottom into the paper
+   rather than cut, so the band above needs no seam and the picture reads as
+   part of the page instead of a block dropped on the end.
+
+   The ground stays light. The sign-off is the hand-drawn wordmark and its
+   letters are filled black; on ink they disappear.
    ========================================================================== */
 
-section.outro {
-  position: relative; isolation: isolate; overflow: hidden;
-  padding: 0; background: var(--white);
-  min-height: 620px; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center;
+section.outro { padding: 0 0 var(--sp-8); background: var(--white); }
+
+.outro__frame {
+  margin: 0 0 var(--sp-7);
+  width: 100%; aspect-ratio: 1900 / 944; max-height: 68vh;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 88%, transparent 100%);
 }
-.outro__shot {
-  position: absolute; inset: 0 auto 0 0; z-index: -1;
-  width: 54%; height: 100%; object-fit: cover; object-position: 46% 50%;
-  -webkit-mask-image:
-    linear-gradient(to left,  transparent 0%, #000 46%),
-    linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
-  mask-image:
-    linear-gradient(to left,  transparent 0%, #000 46%),
-    linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-}
+.outro__shot { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+
 .outro__inner {
-  width: 100%;                      /* margin:0 auto stops a grid item stretching */
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
-  column-gap: var(--sp-6);
+  display: flex; flex-wrap: wrap; align-items: flex-end;
+  justify-content: space-between; column-gap: var(--sp-7); row-gap: var(--sp-5);
 }
-.outro__say { grid-column: 2; }
 .outro__line {
-  margin: 0 0 var(--sp-6); max-width: 18ch;
-  overflow-wrap: normal; min-width: 0;
+  margin: 0; max-width: 22ch; min-width: 0; overflow-wrap: normal;
   font-family: var(--font-display);
-  font-size: clamp(2.125rem, 1.1rem + 3vw, 3.25rem); font-weight: 700;
-  line-height: 1.03; letter-spacing: -.034em; color: var(--leaf-900);
+  font-size: clamp(2.125rem, 1rem + 3.4vw, 4rem); font-weight: 700;
+  line-height: 1.02; letter-spacing: -.034em; color: var(--leaf-900);
 }
-.outro__mark { display: block; width: 232px; height: auto; }
+.outro__mark { display: block; width: 216px; height: auto; margin-bottom: 4px; }
 
 /* =============================================================================
    DIMMING. One highlight primitive: while something is pointed at, everything
@@ -626,14 +618,9 @@ section.outro {
   .plate__say { padding-top: 0; }
   .plate__stem { display: none; }
   .plate__fig { max-width: 320px; }
-  section.outro { min-height: 0; padding-block: var(--sp-7); }
-  .outro__shot {
-    position: relative; inset: auto; width: 100%; height: 240px; margin-bottom: var(--sp-6);
-    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
-  }
-  .outro__inner { grid-template-columns: 1fr; }
-  .outro__say { grid-column: 1; }
+  .outro__frame { aspect-ratio: 4 / 3; max-height: none; margin-bottom: var(--sp-6); }
+  .outro__inner { flex-direction: column; align-items: flex-start; }
+  .outro__mark { width: 168px; }
 }
 
 @media (max-width: 560px) {
