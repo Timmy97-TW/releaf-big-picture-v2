@@ -71,8 +71,8 @@ swap with no blank frame. If you ever see the figure flicker again, this is the 
 
 ## A piece of work is its own photograph
 
-There is no card beside the picture. **The tile is the picture**, with a mark in its corner and the
-name under it. Sixteen of them, fifteen photographs from
+There is no card beside the picture. **The tile is the picture**, with the name and a mark under it.
+Twenty-five of them, twenty-four photographs from
 `iGEM2026_Images` (filenames are `YYYYMMDD_Subteam_Type_Description`, and the date is the day the
 photograph was taken) plus the one tile that moves.
 
@@ -95,9 +95,11 @@ there:
    because a wall of perfectly square crops reads as a database and this is a record of a year of
    somebody's Saturdays. Saturation sits at 0.9 rather than the 0.68 an earlier pass used: faces
    should look like faces.
-2. **One line per label, always**, terse and with the definite articles dropped. Under a photograph
-   "Photometer" reads faster than "The photometer", and a fixed one-line label means every row of
-   the chain is exactly as tall as every other. Ragged rows were what read as mess.
+2. **Two lines per label, fixed**, terse and with the definite articles dropped. Under a photograph
+   "Photometer" reads faster than "The photometer". The box is a fixed two lines whether the name
+   uses them or not, so every row of the chain is exactly as tall as every other; ragged rows were
+   what read as mess. Names are plain on purpose: "Cloning", "Pressure", "Schools", not the internal
+   shorthand a subteam would use.
 3. **They sit held back until wanted.** Desaturated and slightly down in opacity, so they read as a
    contact sheet feeding the trunk rather than sixteen pictures competing with it.
 4. **No captions.** The name under the tile is the caption. The detail, including the date, lives in
@@ -131,13 +133,9 @@ beside the page: `tools_md_extract.py` reads the parm7 and the DCD with no MD li
 and writes the Cα coordinates, and `tools_md_svg.py` superposes, projects, picks the loop window and
 emits the SVG. Neither runs at page load; the reader only ever gets the finished drawing.
 
-## Two student drawings
-
-Two tiles are illustrations rather than photographs, and in both cases the drawing **is** the work:
-**Education** shows the outreach sticker one of us drew (the ReLeaf character buried in textbooks,
-captioned 不懂?), and **Containment** shows the sticker of the hollow fibre cartridge running protein
-into a jar, captioned 交給我. The team logo closes the page. Everything else on the page is a
-photograph; do not swap a photograph for a drawing unless the drawing is the artefact.
+**Every tile is a photograph.** Two of them were briefly student stickers and both were put back:
+in a record of what a year of work looked like, a drawing of the thing is not the thing. Illustration
+belongs at the end of the page, not in the evidence.
 
 ## The map, and the claim it can actually carry
 
@@ -214,15 +212,15 @@ page. **Do not put a number of machines or a weight of protein next to that dial
 
 ## The outro
 
-**陳惠雯 in her plot, 21 July 2026**: one landscape band the full width of the viewport, feathered top
-and bottom into the paper, with one sentence and a signature across the row underneath. She is the
-farmer who moved our dosing off a wall clock and onto soil-moisture state, so ending on her rather
-than on our bench is the right way round.
+**All of us walking up the row into 陳惠雯's plot, 21 July 2026**: one landscape band the full width of
+the viewport, no fade, with one sentence and a signature across the row underneath. She is the farmer
+who moved our dosing off a wall clock and onto soil-moisture state, and the frame is a line of
+high-schoolers in team shirts following her into her own field. That is the argument the page has
+been making, in one picture.
 
-The source frame is portrait and carries EXIF orientation 8. It is cropped to a 2:1 band around her
-head and shoulders at export time (`-auto-orient -crop 4128x2050+0+1380`) rather than being cropped
-in CSS, so the file that ships is the picture that shows and nothing depends on the browser reading
-the EXIF tag. Re-crop from the original if the band ever changes shape.
+Earlier versions cropped in close on her and feathered the band into the paper. Both were dropped:
+the close crop lost the group, and the feather made the picture look uncertain about being there. A
+hard-edged full-width band is the stronger ending.
 
 Three things hold it together and are easy to break:
 
@@ -230,9 +228,6 @@ Three things hold it together and are easy to break:
   whose letters are filled black; on ink it disappears. Paper also means the band above needs no
   seam, which is what makes the photograph read as part of the page rather than a block dropped on
   the end.
-- **The photograph is feathered, not cut.** One gradient mask fades the top and bottom edges into
-  white. That is what lets the band above it need no seam and stops the picture reading as a block
-  dropped on the end of the page.
 - **The sign-off is a student drawing, not the logo.** The circular team logo was there first and got
   swapped: the wordmark is warmer, it is the same hand as the two sticker tiles above, and it does
   not read as corporate furniture at the end of a page about farmers.
@@ -312,7 +307,9 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 - **Under 900px** the trunk moves to the left edge and each step's work wraps underneath it, step
   first, and the map plate stacks above its legend. Same markup, no second copy of the content.
 - **Verified at 320, 375, 414, 768, 900, 1280, 1440 and 1920.** No horizontal scroll at any of them,
-  and no clickable label wraps to two lines.
+  and no label overflows its two-line box.
+- **The five steps no longer fit one screen**, and that was a deliberate trade: the chain carries
+  twenty-five pieces of work rather than sixteen. If it has to fit again, cut tiles, not type.
 - **The five steps fit one laptop screen.** That is a constraint, not an accident: a judge should
   see the whole chain without scrolling and then choose where to look. If an edit pushes the fifth
   step below the fold, cut writing rather than shrinking type.
