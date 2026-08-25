@@ -217,21 +217,29 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
    everything that feeds it occupy one line of the page and the whole chain
    fits a laptop screen without scrolling. */
 
-.strip { display: flex; column-gap: var(--sp-2); }
+.strip { display: flex; align-items: flex-end; column-gap: var(--sp-3); }
 .strip--l { grid-column: 1; justify-content: flex-end; }
 .strip--r { grid-column: 3; justify-content: flex-start; }
 
 /* Each step sets its own tile format, and the format is the step's signature.
    A plot, a person kneeling and an island are all upright, so THE STRESS runs
    portrait. A trajectory and a page of working are wide, so THE PROTEIN does.
-   Plates and gels are square, benches are landscape, a field is a horizon. It
-   is the same discipline as the ramp: the shape carries meaning, so it varies
-   for a reason rather than for relief. */
-.node[data-node="1"] { --tile-w:  96px; --tile-h: 118px; }
-.node[data-node="2"] { --tile-w: 150px; --tile-h:  88px; }
-.node[data-node="3"] { --tile-w: 104px; --tile-h:  96px; }
-.node[data-node="4"] { --tile-w: 128px; --tile-h:  82px; }
-.node[data-node="5"] { --tile-w: 142px; --tile-h:  72px; }
+   Plates and gels are square, benches are landscape, a field is a horizon.
+
+   Inside a step, ONE PHOTOGRAPH LEADS. It is the one with people in it wherever
+   there is a choice, it is larger than the rest, and it is not always on the
+   same side. That is what turns a row of evidence into somewhere for the eye to
+   land first, and it is why the strips are not a grid. */
+.node[data-node="1"] { --tile-w:  96px; --tile-h:  96px; }
+.node[data-node="2"] { --tile-w: 118px; --tile-h:  68px; }
+.node[data-node="3"] { --tile-w: 104px; --tile-h:  78px; }
+.node[data-node="4"] { --tile-w: 108px; --tile-h:  64px; }
+.node[data-node="5"] { --tile-w: 118px; --tile-h:  58px; }
+.node[data-node="1"] .task[data-lead] { --tile-w: 102px; --tile-h: 126px; }
+.node[data-node="2"] .task[data-lead] { --tile-w: 146px; --tile-h:  88px; }
+.node[data-node="3"] .task[data-lead] { --tile-w: 108px; --tile-h: 100px; }
+.node[data-node="4"] .task[data-lead] { --tile-w: 126px; --tile-h:  82px; }
+.node[data-node="5"] .task[data-lead] { --tile-w: 142px; --tile-h:  72px; }
 
 .task {
   position: relative; flex: none; width: var(--tile-w);
@@ -239,17 +247,29 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
   transition: opacity var(--v2-dur) var(--v2-ease);
 }
 
-.task__shot { margin: 0; }
+/* A print, not a thumbnail: a white mat, a hairline, a soft drop, and a degree
+   or so of tilt so the row reads as laid out by hand rather than filled into a
+   grid. The tilt is a static transform, not motion, and it never changes. */
+.task__shot {
+  margin: 0; padding: 5px; background: var(--white);
+  border: 1px solid var(--gray-200); border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(23 23 23 / .06), 0 6px 14px -8px rgb(23 23 23 / .3);
+  transition: border-color var(--v2-dur) var(--v2-ease), box-shadow var(--v2-dur) var(--v2-ease);
+}
+.strip--l .task:nth-child(1) .task__shot { transform: rotate(-1.1deg); }
+.strip--l .task:nth-child(2) .task__shot { transform: rotate(.8deg); }
+.strip--r .task:nth-child(1) .task__shot { transform: rotate(1deg); }
+.strip--r .task:nth-child(2) .task__shot { transform: rotate(-.7deg); }
+.node[data-node="3"] .strip--l .task:nth-child(1) .task__shot { transform: rotate(.9deg); }
+.node[data-node="5"] .strip--r .task:nth-child(1) .task__shot { transform: rotate(-1deg); }
+
 .task__shot img,
 .task__shot .mdanim {
   display: block; width: 100%; height: var(--tile-h);
-  border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
   background: var(--gray-100);
-  transition: filter var(--v2-dur) var(--v2-ease),
-              opacity var(--v2-dur) var(--v2-ease),
-              border-color var(--v2-dur) var(--v2-ease);
+  transition: filter var(--v2-dur) var(--v2-ease), opacity var(--v2-dur) var(--v2-ease);
 }
-.task__shot img { object-fit: cover; filter: saturate(.68) contrast(1.03); opacity: .88; }
+.task__shot img { object-fit: cover; filter: saturate(.9); opacity: .94; }
 .task__shot .mdanim { background: var(--leaf-50); opacity: 1; }
 
 /* The mark. A photograph at this size tells you the mood of a day and not much
@@ -287,17 +307,20 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
    parallel lines into the same card. */
 .strip--l .task:last-child::after,
 .strip--r .task:first-child::after {
-  content: ""; position: absolute; top: calc(var(--tile-h) / 2); width: var(--sp-5); height: 1px;
+  content: ""; position: absolute; top: calc(var(--tile-h) / 2 + 6px); width: var(--sp-5); height: 1px;
   background: var(--gray-300);
   transition: background-color var(--v2-dur) var(--v2-ease);
 }
-.strip--l .task:last-child::after  { left: 100%; }
-.strip--r .task:first-child::after { right: 100%; }
+.strip--l .task:last-child::after  { left: calc(100% + 2px); }
+.strip--r .task:first-child::after { right: calc(100% + 2px); }
 
 .task[data-lit] .task__shot img,
-.task[data-lit] .task__shot .mdanim {
-  filter: none; opacity: 1; border-color: var(--leaf-700);
+.task[data-lit] .task__shot .mdanim { filter: none; opacity: 1; }
+.task[data-lit] .task__shot {
+  border-color: var(--leaf-700);
+  box-shadow: 0 1px 2px rgb(23 23 23 / .08), 0 10px 20px -8px rgb(20 64 43 / .38);
 }
+.task[data-rel] .task__shot { border-color: var(--amber-700); }
 .task[data-lit] .task__name { color: var(--black); border-bottom-color: var(--leaf-700); }
 
 /* The connector belongs to the strip rather than to one tile, so pointing at
@@ -306,7 +329,7 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 .strip--r:has(.task[data-lit]) .task:first-child::after { background: var(--leaf-700); }
 
 /* the quiet half: the pieces this one talks to elsewhere */
-.task[data-rel] .task__shot img { opacity: 1; border-color: var(--amber-700); }
+.task[data-rel] .task__shot img { opacity: 1; }
 .task[data-rel] .task__name { color: var(--amber-700); border-bottom-color: var(--amber-700); }
 
 /* ── the icon wells ────────────────────────────────────────────────────── */
@@ -347,18 +370,19 @@ h2.band__title { overflow-wrap: anywhere; min-width: 0; }
 
 section.reach {
   padding-top: 0;
-  background: var(--leaf-50);
-  border-block: 1px solid var(--leaf-200);
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
 }
 .reach__kicker {
   margin: 0 0 var(--sp-2);
   font-size: var(--text-xs); font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; color: var(--leaf-700);
 }
-.reach h2.band__title { margin-bottom: var(--sp-4); max-width: 14ch; }
+.reach h2.band__title { margin-bottom: var(--sp-4); max-width: 16ch; }
 .reach__lede {
   margin: 0; font-size: var(--text-lede); line-height: 1.5; color: var(--gray-700);
 }
+.reach__lede b { color: var(--leaf-900); font-weight: 650; }
 
 /* Three columns, and the middle one is the trunk continued. The map is the same
    width as a step card and sits on the same centre line, so the eye runs
@@ -391,15 +415,24 @@ section.reach {
 .atlas__l { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .atlas__base { position: relative; }
 .atlas__l[data-layer] { opacity: 0; transition: opacity var(--v2-dur) var(--v2-ease); }
+.atlas__band { transition: opacity var(--v2-dur) var(--v2-ease); }
 .atlas__scrim {
-  position: absolute; inset: 0; background: var(--leaf-50);
+  position: absolute; inset: 0; background: var(--white);
   opacity: 0; pointer-events: none;
   transition: opacity var(--v2-dur) var(--v2-ease);
 }
 
-/* the share wash, which is the resting state of the map */
+/* The roll-out. Every parcel is drawn pale; the five band layers on top are the
+   same parcels split by the volatility of the ground they sit on, and they come
+   up worst band first as the dial rises. Somebody deploying would start where
+   the weather is hardest, so that is the order the map fills in. */
 .atlas__l[data-layer="smalldim"] { opacity: 1; }
-.atlas__l[data-layer="small"] { opacity: var(--share, .25); }
+.atlas__band { opacity: 0; }
+.atlas__band[data-band="5"] { opacity: var(--b5, 0); }
+.atlas__band[data-band="4"] { opacity: var(--b4, 0); }
+.atlas__band[data-band="3"] { opacity: var(--b3, 0); }
+.atlas__band[data-band="2"] { opacity: var(--b2, 0); }
+.atlas__band[data-band="1"] { opacity: var(--b1, 0); }
 
 /* holding a legend row */
 .atlas[data-hold] .atlas__scrim { opacity: .78; }
@@ -410,10 +443,10 @@ section.reach {
 .atlas[data-hold="v3"] .atlas__l[data-layer="v3"],
 .atlas[data-hold="v4"] .atlas__l[data-layer="v4"],
 .atlas[data-hold="v5"] .atlas__l[data-layer="v5"] { opacity: 1; }
-.atlas[data-hold^="v"] .atlas__l[data-layer="small"],
-.atlas[data-hold="small"] .atlas__l[data-layer="small"] { opacity: 1; }
+.atlas[data-hold^="v"] .atlas__band,
+.atlas[data-hold="small"] .atlas__band { opacity: 1; }
 .atlas[data-hold="large"] .atlas__l[data-layer="large"] { opacity: 1; }
-.atlas[data-hold="large"] .atlas__l[data-layer="small"] { opacity: 0; }
+.atlas[data-hold="large"] .atlas__band { opacity: 0; }
 
 .plate__fig figcaption {
   margin-top: var(--sp-3);
@@ -425,7 +458,7 @@ section.reach {
 .key { margin: 0 0 var(--sp-2); padding: 0; list-style: none; }
 .key__grp {
   margin-top: var(--sp-4); padding-bottom: var(--sp-1);
-  border-bottom: 1px solid var(--leaf-200);
+  border-bottom: 1px solid var(--gray-200);
   font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
   text-transform: uppercase; color: var(--gray-600);
 }
@@ -455,7 +488,7 @@ section.reach {
    A hundred hairlines, and the first N inked. No count is implied and none is
    needed: the rule IS the percentage, drawn. */
 
-.dial { padding-top: var(--sp-6); border-top: 1px solid var(--leaf-200); }
+.dial { padding-top: var(--sp-6); border-top: 1px solid var(--gray-200); }
 .dial__lab {
   display: block; margin-bottom: var(--sp-3);
   font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em;
@@ -491,18 +524,22 @@ section.reach {
 section.outro {
   position: relative; isolation: isolate;
   padding: 0; overflow: hidden;
-  min-height: 560px; display: grid; align-items: end;
+  min-height: 720px; display: grid; align-items: end;
 }
 .outro__shot {
   position: absolute; inset: 0; z-index: -2;
-  width: 100%; height: 100%; object-fit: cover; object-position: center 42%;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 28%;
 }
 .outro__wash {
   position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(to top, var(--ink) 4%, rgb(4 8 6 / .82) 46%, rgb(4 8 6 / .34) 100%);
+  background: linear-gradient(to top, var(--ink) 0%, rgb(4 8 6 / .8) 32%, rgb(4 8 6 / .34) 60%, rgb(4 8 6 / .06) 100%);
 }
-.outro__inner { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
-.outro__logo { width: 72px; height: 72px; margin-bottom: var(--sp-5); border-radius: 999px; }
+.outro__inner { position: relative; padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+/* bottom right, out of the way of the people in the frame */
+.outro__logo {
+  position: absolute; right: var(--sp-6); bottom: var(--sp-8);
+  width: 76px; height: 76px; border-radius: 999px;
+}
 .outro__line {
   margin: 0 0 var(--sp-5); max-width: 18ch;
   overflow-wrap: anywhere; min-width: 0;
@@ -599,8 +636,9 @@ section.outro {
   .plate__say { padding-top: 0; }
   .plate__stem { display: none; }
   .plate__fig { max-width: 320px; }
-  .outro { min-height: 460px; }
+  .outro { min-height: 520px; }
   .outro__open { flex-direction: column; }
+  .outro__logo { position: static; margin-bottom: var(--sp-4); width: 60px; height: 60px; }
 }
 
 @media (max-width: 560px) {

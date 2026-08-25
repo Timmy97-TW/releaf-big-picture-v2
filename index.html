@@ -437,7 +437,7 @@
                    loading="lazy" decoding="async" alt="Two Arabidopsis agar boxes held up to the light in our lab, 5 July 2026." /></figure>
               <span class="task__label"><span class="task__mark"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-dish"/></svg></span><span class="task__name">Baselines</span></span>
             </div>
-            <div class="task" id="t-farmers" tabindex="0" data-at="1" data-with="t-plan t-edu">
+            <div class="task" data-lead id="t-farmers" tabindex="0" data-at="1" data-with="t-plan t-edu">
               <figure class="task__shot"><img src="assets/img/farmers.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="陳惠雯 on her knees in her plot, showing two of us the soil, 21 July 2026." /></figure>
               <span class="task__label"><span class="task__mark"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-log"/></svg></span><span class="task__name">Farmers</span></span>
@@ -461,7 +461,7 @@
         <div class="link" data-seg="1"><span class="link__rail"></span></div>
         <div class="node" data-node="2">
           <div class="strip strip--l">
-            <div class="task task--md" id="t-docking" tabindex="0" data-at="2" data-with="t-cassette t-model">
+            <div class="task task--md" data-lead id="t-docking" tabindex="0" data-at="2" data-with="t-cassette t-model">
               <figure class="task__shot">
                 <svg class="mdanim" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" role="img"
                                  aria-label="Thirty nanoseconds of molecular dynamics we ran: the BoPep4 backbone moving in the PEPR1 groove, Asn23 in green and Arg487 in amber. Still until it is pointed at."
@@ -501,7 +501,7 @@
                    loading="lazy" decoding="async" alt="The light circuit explained on the board in our lab, 17 May 2026." /></figure>
               <span class="task__label"><span class="task__mark"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-construct"/></svg></span><span class="task__name">Cassette</span></span>
             </div>
-            <div class="task" id="t-blot" tabindex="0" data-at="3" data-with="t-cassette t-photometer">
+            <div class="task" data-lead id="t-blot" tabindex="0" data-at="3" data-with="t-cassette t-photometer">
               <figure class="task__shot"><img src="assets/img/blot.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="A gel on the transilluminator, 10 June 2026." /></figure>
               <span class="task__label"><span class="task__mark"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-blot"/></svg></span><span class="task__name">Expression</span></span>
@@ -544,7 +544,7 @@
             </span>
           </div>
           <div class="strip strip--r">
-            <div class="task" id="t-harvest" tabindex="0" data-at="4" data-with="t-shield t-photometer t-scaleout">
+            <div class="task" data-lead id="t-harvest" tabindex="0" data-at="4" data-with="t-shield t-photometer t-scaleout">
               <figure class="task__shot"><img src="assets/img/harvest.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="The first time the pressure sensor put live data on a screen, 12 July 2026." /></figure>
               <span class="task__label"><span class="task__mark"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-gauge"/></svg></span><span class="task__name">Harvest</span></span>
@@ -559,7 +559,7 @@
         <div class="link" data-seg="4"><span class="link__rail"></span></div>
         <div class="node" data-node="5">
           <div class="strip strip--l">
-            <div class="task" id="t-tandem" tabindex="0" data-at="5" data-with="t-model t-baselines">
+            <div class="task" data-lead id="t-tandem" tabindex="0" data-at="5" data-with="t-model t-baselines">
               <figure class="task__shot"><img src="assets/img/tandem.jpg" width="340" height="255"
                    loading="lazy" decoding="async" alt="The reactor running in the incubator, yellow culture in the bottle, 20 July 2026." /></figure>
               <span class="task__label"><span class="task__mark"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-tandem"/></svg></span><span class="task__name">Tandem run</span></span>
@@ -618,16 +618,17 @@
     <div class="plate">
 
       <div class="plate__say">
-        <p class="reach__kicker">Two hectares, and the same coast</p>
-        <h2 class="band__title" id="reach-title">Where a machine like this would land.</h2>
-        <p class="reach__lede">Two layers, one island. Farms under two hectares, and how much the
-        weather swings from one day and one season to the next. They sit on the same coast.</p>
+        <p class="reach__kicker">The map</p>
+        <h2 class="band__title" id="reach-title">Almost every farm in Taiwan is a small farm.</h2>
+        <p class="reach__lede">We mapped every farm parcel under two hectares, then mapped how hard the
+        weather swings. On this map, <b>97% of the farmland is under two hectares</b>. On the ground
+        that swings hardest it is <b>99.8%</b>. There is no other kind of farmer to build for.</p>
       </div>
 
       <figure class="plate__fig">
         <span class="plate__stem" aria-hidden="true"></span>
         <div class="atlas" id="atlas" role="img"
-             aria-label="Taiwan. Farms under two hectares run in a dense belt down the west coast and the western plain. The climate volatility index sits underneath, palest in the north and east and deepest through the central west.">
+             aria-label="Taiwan. Farm parcels under two hectares run down the west coast and the western plain. Underneath sits the climate volatility index, palest in the north and east and deepest through the central west.">
           <img class="atlas__l atlas__base" src="assets/img/map/base.webp" width="800" height="1267" alt="" />
           <span class="atlas__scrim"></span>
           <img class="atlas__l" data-layer="v1"    src="assets/img/map/v1.webp"    width="800" height="1267" loading="lazy" alt="" />
@@ -638,10 +639,14 @@
           <img class="atlas__l" data-layer="edge"  src="assets/img/map/edge.webp"  width="800" height="1267" loading="lazy" alt="" />
           <img class="atlas__l" data-layer="large" src="assets/img/map/large.webp" width="800" height="1267" loading="lazy" alt="" />
           <img class="atlas__l" data-layer="smalldim" src="assets/img/map/smalldim.webp" width="800" height="1267" loading="lazy" alt="" />
-          <img class="atlas__l" data-layer="small" src="assets/img/map/small.webp" width="800" height="1267" loading="lazy" alt="" />
+          <img class="atlas__l atlas__band" data-band="5" src="assets/img/map/sb5.webp" width="800" height="1267" loading="lazy" alt="" />
+          <img class="atlas__l atlas__band" data-band="4" src="assets/img/map/sb4.webp" width="800" height="1267" loading="lazy" alt="" />
+          <img class="atlas__l atlas__band" data-band="3" src="assets/img/map/sb3.webp" width="800" height="1267" loading="lazy" alt="" />
+          <img class="atlas__l atlas__band" data-band="2" src="assets/img/map/sb2.webp" width="800" height="1267" loading="lazy" alt="" />
+          <img class="atlas__l atlas__band" data-band="1" src="assets/img/map/sb1.webp" width="800" height="1267" loading="lazy" alt="" />
         </div>
         <figcaption>Ours, in QGIS. The colours belong to this page. The class breaks are the ones we
-        drew.</figcaption>
+        drew. Every parcel is counted against the band of the ground around it.</figcaption>
       </figure>
 
       <div class="plate__read">
@@ -650,14 +655,14 @@
           <li class="key__grp">Farms</li>
           <li class="key__row" data-hold="small" tabindex="0">
             <span class="key__sw" style="--sw: var(--parcel-small)"></span><b>Under two hectares</b>
-            <span class="key__gloss">the cut FAO uses for a smallholding</span>
+            <span class="key__gloss">97% of the farmland here</span>
           </li>
           <li class="key__row" data-hold="large" tabindex="0">
             <span class="key__sw" style="--sw: var(--parcel-large)"></span><b>Over two hectares</b>
-            <span class="key__gloss">there is very little of it</span>
+            <span class="key__gloss">the other 3%, mostly inland</span>
           </li>
 
-          <li class="key__grp">How much the weather swings</li>
+          <li class="key__grp">How hard the weather swings</li>
           <li class="key__row" data-hold="v1" tabindex="0">
             <span class="key__sw" style="--sw: var(--vol-1)"></span><b>0.38 to 0.49</b>
             <span class="key__gloss">steadiest</span>
@@ -679,17 +684,18 @@
         <p class="key__hint">Point at a row to hold it on its own.</p>
 
         <div class="dial">
-          <label class="dial__lab" for="share">Small farms running a reactor</label>
+          <label class="dial__lab" for="share">Small farms running a reactor, hardest ground first</label>
           <div class="dial__row">
             <output class="dial__val" id="dial-val" for="share">25<i>%</i></output>
-            <input class="dial__input" id="share" type="range" min="0" max="100" step="5" value="25"
+            <input class="dial__input" id="share" type="range" min="0" max="100" step="1" value="25"
                    aria-describedby="dial-read" />
           </div>
           <div class="dial__rule" id="dial-rule" aria-hidden="true"></div>
-          <p class="dial__read" id="dial-read">Move it and watch the coast fill in. Green is a farm
-          with a reactor, pale is one without.</p>
-          <p class="dial__note">The wash is a proportion, not a list of farms. We have not counted the
-          parcels and we have not measured what one machine makes.</p>
+          <p class="dial__read" id="dial-read">Reaching a quarter of the small-farm land means every
+          farm on ground that swings 0.71 or harder, and part of the band below it.</p>
+          <p class="dial__note">Somebody rolling this out would start where the weather is worst, so
+          the map fills from the top band down. The share is area on this map, not a count of farms:
+          nobody has counted the parcels, and we have not measured what one machine makes.</p>
         </div>
       </div>
     </div>
@@ -709,9 +715,7 @@
        alt="Two of us setting up the reactor on a bench under a strip of green light, with the project drawn on the whiteboard behind." />
   <div class="outro__wash" aria-hidden="true"></div>
   <div class="band__inner outro__inner">
-    <img class="outro__logo" src="assets/img/logo.webp" width="200" height="200" loading="lazy"
-         alt="The ReLeaf team logo, drawn by one of us." />
-    <h2 class="outro__line" id="outro-title">Every farmer<br />a biomanufacturer.</h2>
+        <h2 class="outro__line" id="outro-title">Every farmer<br />a biomanufacturer.</h2>
     <p class="outro__sub">Not a farmer who owns a machine. A farmer whose cooperative owns the
     irrigation line, and for whom nobody outside decides what gets made.</p>
     <p class="outro__lab">Still open</p>
@@ -720,6 +724,8 @@
       <li>A classification a Taiwanese regulator accepts.</li>
       <li>A cooperative willing to run the thing.</li>
     </ol>
+    <img class="outro__logo" src="assets/img/logo.webp" width="200" height="200" loading="lazy"
+         alt="The ReLeaf team logo, drawn by one of us." />
   </div>
 </section>
 

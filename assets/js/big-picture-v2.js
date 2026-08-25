@@ -88,10 +88,22 @@
     for (i = 0; i < 100; i++) ticks.push(document.createElement("i"));
     ticks.forEach(function (t) { rule.appendChild(t); });
 
-    /* The map answers the dial. The green parcel layer fades up over the pale
-       one, so the coast fills in as the share rises. It is a proportion painted
-       over the whole layer, never a subset: no farm on this map is being named. */
+    /* The map answers the dial, and it answers it in the order somebody would
+       actually deploy: hardest ground first. Each band holds a known share of
+       the small-farm area on our own layer, so the dial walks down the index
+       and the readout names how far it got. The shares are measured, not
+       assumed; band_assign.py in the repo is what measured them. */
     var atlas = document.getElementById("atlas");
+
+    /* small-farm area per volatility band, worst first, as a share of all
+       small-farm area on the map. Measured off the layer itself. */
+    var BANDS = [
+      { id: 5, label: "0.82 to 0.93", share: 0.004 },
+      { id: 4, label: "0.71 to 0.82", share: 0.145 },
+      { id: 3, label: "0.60 to 0.71", share: 0.240 },
+      { id: 2, label: "0.49 to 0.60", share: 0.504 },
+      { id: 1, label: "0.38 to 0.49", share: 0.107 }
+    ];
 
     function paint() {
       var n = Number(input.value), k;
@@ -100,13 +112,27 @@
         else ticks[k].removeAttribute("data-on");
       }
       if (val) val.innerHTML = n + "<i>%</i>";
-      if (atlas) atlas.style.setProperty("--share", n / 100);
-      if (read) {
-        read.textContent = n === 0
-          ? "None of them, which is where we are. Move it and watch the coast fill in."
-          : n === 100
-            ? "All of them. Green is a farm with a reactor, pale is one without."
-            : "Green is a farm with a reactor, pale is one without.";
+
+      var left = n / 100, done = [], edge = null;
+      BANDS.forEach(function (b) {
+        var fill = Math.max(0, Math.min(1, left / b.share));
+        if (atlas) atlas.style.setProperty("--b" + b.id, fill.toFixed(3));
+        if (fill >= 1) done.push(b);
+        else if (fill > 0 && !edge) edge = b;
+        left -= b.share;
+      });
+
+      if (!read) return;
+      if (n === 0) {
+        read.textContent = "None yet. Move it and the map fills from the hardest ground down.";
+      } else if (n >= 100) {
+        read.textContent = "Every small farm on the island, down to the steadiest ground in the north and east.";
+      } else if (!done.length) {
+        read.textContent = "Still inside the hardest band, " + edge.label + ", which is a sliver of ground in the centre west.";
+      } else {
+        var last = done[done.length - 1];
+        read.textContent = "Every small farm on ground that swings " + last.label.slice(0, 4) +
+          " or harder" + (edge ? ", and part of " + edge.label + " below it." : ".");
       }
     }
     input.addEventListener("input", paint);

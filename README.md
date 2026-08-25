@@ -87,6 +87,14 @@ there:
    working are wide, so **The protein** does. Plates and gels are square, benches are landscape, a
    field is a horizon. Uniform tiles read as a spreadsheet; these vary for a reason, the same way the
    ramp does. Change a format in one line: `.node[data-node="3"] { --tile-w; --tile-h }`.
+1c. **One photograph leads each step**, marked `data-lead` and set larger. It is the one with people
+   in it wherever there is a choice, and it is deliberately not always on the same side, so the eye
+   lands somewhere first and the strips do not read as a grid.
+1d. **They are prints, not thumbnails.** A white mat, a hairline, a soft drop and about a degree of
+   tilt, laid on a common bottom edge. The tilt is a static transform and never changes; it is there
+   because a wall of perfectly square crops reads as a database and this is a record of a year of
+   somebody's Saturdays. Saturation sits at 0.9 rather than the 0.68 an earlier pass used: faces
+   should look like faces.
 2. **One line per label, always**, terse and with the definite articles dropped. Under a photograph
    "Photometer" reads faster than "The photometer", and a fixed one-line label means every row of
    the chain is exactly as tall as every other. Ragged rows were what read as mess.
@@ -131,18 +139,33 @@ captioned 不懂?), and **Containment** shows the sticker of the hollow fibre ca
 into a jar, captioned 交給我. The team logo closes the page. Everything else on the page is a
 photograph; do not swap a photograph for a drawing unless the drawing is the artefact.
 
-## The map, and why it is built out of layers
+## The map, and the claim it can actually carry
 
-The page ends on our own QGIS work, from `iGEM2026_Images/QGIS Uploads/All Taiwan Farmlands/`. The
-finding is in the overlay rather than in either layer: **the parcels under two hectares and the top
-bands of the volatility index are the same coast.** The farms least able to buy their way out of a
-bad season are sitting on the worst of it.
+The page ends on our own QGIS work, from `iGEM2026_Images/QGIS Uploads/All Taiwan Farmlands/`.
+
+**An earlier draft of this section said the wrong thing, and the correction is worth keeping on
+record.** It claimed the small parcels and the worst volatility bands were the same ground, which is
+the tidy story. Measuring the layer said otherwise: small-farm density by band, calmest to worst,
+runs 33.6, 30.0, 15.3, 23.6, 8.9 percent. There is no trend, and the calmest band is the densest.
+
+What the layer does support is stronger for this project anyway, so the section now says that
+instead:
+
+- **97% of the farmland on this map is under two hectares** (181,026 px against 4,705 px of parcels
+  over two hectares).
+- **On the ground that swings hardest it is 99.8%.** The little large-farm land there is sits in the
+  calm middle band, where it holds 1.4% of the land against 0.01 to 0.14% everywhere else.
+
+So the argument is not that small farms got the worst weather. It is that **there is no other kind
+of farmer in Taiwan to build for**, and that this holds hardest exactly where the weather is worst.
+`tools_band_assign.py` is what measured it; re-run it before changing any number here.
 
 It is not a screenshot. The QGIS export was quantised to its own legend colours and pulled apart
 into nine layers, which the page stacks and drives:
 
-`base` · `v1`–`v5` (the five index classes) · `small` and `large` (the parcels) · `edge` (county
-lines). Regenerating them is `tools_map_layers.sh` beside the page.
+`base` · `v1`–`v5` (the five index classes) · `smalldim` (every parcel, pale) · `sb1`–`sb5` (the same
+parcels split by the band they sit on) · `large` · `edge` (county lines). Regenerating them is
+`tools_map_layers.sh` and `tools_band_assign.py` beside the page.
 
 Three things about that are worth keeping straight if you touch it:
 
@@ -157,36 +180,48 @@ Three things about that are worth keeping straight if you touch it:
   exactly. Do not try to use a band layer as a base. A morphological close was tried to fill the
   holes and is the wrong answer: a kernel small enough to keep the county boundaries honest does not
   fill them, and a kernel large enough to fill them redraws the regions.
-- **The legend is the control.** Pointing at a row scrims the map and holds that layer, with the
-  small farms left in. It answers to pointing exactly the way the five steps do, which is the whole
+- **The legend is the control.** Pointing at a row scrims the map and holds that layer, with every
+  small farm left in at full strength. It answers to pointing exactly the way the five steps do, which is the whole
   reason it reads as one page and not as a figure bolted to the end of one.
 - **The island sits on the trunk's axis.** It is the same centre line as the five step cards, and the
   rail runs out of the last step, across the band edge, and into the map. The two halves are one
   drawing. If an edit moves the map off centre, the connection is gone and the section reads as an
   appendix again.
 
-## The dial, and what the map does when you move it
+## The dial, and why the map fills in that order
 
-Beside the map, a hundred hairlines with the first N inked. The dial moves a **share** of those small
-farms, and **the map answers**: the parcels wash from pale to deep green as the share rises, so at
-100% the whole west coast floods green. That is the impact, felt rather than asserted.
+Beside the map, a hundred hairlines with the first N inked. The dial moves a **share** of the
+small-farm land, and **the map answers by filling in from the hardest ground down**, because that is
+the order anybody deploying this would work in. An earlier version washed the whole layer green in
+proportion, which looked fine and meant nothing: it connected the slider to a percentage rather than
+to the map underneath it.
 
-The honest part is what the wash is. It is **a proportion painted over the whole layer, not a subset
-of farms**. No parcel on that map is being named as served, because we have no basis for naming one,
-and the note under the dial says so in one line rather than in a pair of warning boxes. A share is
-arithmetic: no count is implied and none is needed, because the rule is the percentage, drawn.
+Every parcel is assigned the volatility band of the ground around it, which is recoverable even
+though the export is flat: the parcels were drawn over the choropleth, the choropleth is by
+administrative area, and a parcel is tiny next to one, so the band that surrounds a parcel is that
+parcel's band. `tools_band_assign.py` grows the band labels into the parcel holes one pixel at a
+time until they are full, then counts. The five shares, worst band first, are **0.4, 14.5, 24.0,
+50.4 and 10.7 percent** of small-farm area, and those five numbers are what the dial walks through.
+They are hard-coded in the script that drives it; if the layer is ever re-rendered, re-run the tool
+and update them together.
 
-What the dial still will not do is turn a share into a number of machines or a weight of protein.
-The parcel layer has not been counted and no titre has been measured. That is the shape every impact
-claim on this project should take: show the ground, move the share, and say plainly what is missing.
-Do not close that gap with an estimate.
+The readout names the threshold rather than a quantity: *every small farm on ground that swings 0.71
+or harder, and part of the band below it*. What the dial still will not do is turn a share into a
+number of machines or a weight of protein. The parcel layer has not been counted and no titre has
+been measured, and one line under the dial says so. That is the shape every impact claim on this
+project should take: show the ground, move the share, and say plainly what is missing. Do not close
+that gap with an estimate.
 
 ## The outro
 
-One frame, full bleed, with the closing sentence under it. The photograph is a **placeholder**: the
-team plans to shoot farmers and the reactor in the same picture, and that frame belongs here. Swap
-`assets/img/outro.jpg` and change the `alt`; nothing else needs to move. The current stand-in is two
-of us setting the reactor up under the green strip, 8 August 2026, which is the closest thing on file.
+One frame, full bleed, with the closing sentence under it: **陳惠雯 cooking in her kitchen with two
+of us, 21 July 2026.** She is the farmer who moved our dosing off a wall clock and onto soil-moisture
+state, so ending on her kitchen rather than on our bench is the right way round. The team logo, drawn
+by one of us, sits bottom right as a colophon.
+
+**Consent is not on record.** The project brief lists image consent and release for 陳惠雯 as
+outstanding. This page is public. Get her agreement before the wiki goes live, or swap the frame.
+Nothing else about the section depends on which photograph is in it.
 
 The gradient runs to near-opaque at the bottom so the type always clears its ground, whatever the
 photograph underneath turns out to be. The three open conditions sit in a row under a hairline: the
@@ -277,8 +312,8 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 ## Merging into the homepage
 
 1. Copy `assets/css/big-picture-v2.css`, `assets/js/big-picture-v2.js`, the images in `assets/img/`
-   (sixteen tiles, the outro frame, the logo) and the ten map layers in `assets/img/map/` into the
-   wiki's `assets/`. The image paths in the markup are relative
+   (sixteen tiles, the outro frame, the logo) and the fourteen map layers in `assets/img/map/` into
+   the wiki's `assets/`. The image paths in the markup are relative
    (`assets/img/*.jpg`), so they need no edit if the wiki keeps the same layout.
 2. Paste **all three** `<section>` elements into `index.html`, in order: the white `section.bpv2`,
    the tinted `section.reach`, and the full-bleed `section.outro`. The rail runs across the first two
@@ -289,8 +324,7 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 4. Delete the `<div class="shell">` element and the inline `<style>` block in the head. Both exist
    only so the standalone page has a body to sit in. `home.css` already supplies `.band`,
    `.band__inner`, `.band--dark` and `h2.band__title`.
-5. `section.reach` is tinted (`--leaf-50` with hairline rules), so it must not sit directly after
-   another `band--tint`. Explore our project is one, which is why the five steps sit between them.
+5. `section.reach` is white with a hairline above it, so it can follow anything.
 6. The three sections raise their own specificity (`section.bpv2`, `section.reach`, `section.outro`)
    because `home.css` sets `.band { padding: var(--sp-8) 0 }` and a bare class would lose to it.
    Keep the element selector or the rail will break at the band edge.
