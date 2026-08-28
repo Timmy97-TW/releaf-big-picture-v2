@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 310" width="330" height="310">
+<polyline points="24,268 54,268 84,268 114,268 144,268 174,268" fill="none" stroke="#3f5468" stroke-width="9" stroke-linecap="round"/>
+<polyline points="233,268 245,239 256,210 262,182 261,153 254,124 238,95 216,66" fill="none" stroke="#23684a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="24" cy="268" r="15" fill="#3f5468"/><circle cx="54" cy="268" r="15" fill="#3f5468"/><circle cx="84" cy="268" r="15" fill="#3f5468"/><circle cx="114" cy="268" r="15" fill="#3f5468"/><circle cx="144" cy="268" r="15" fill="#3f5468"/><circle cx="174" cy="268" r="15" fill="#3f5468"/><circle cx="233" cy="268" r="15" fill="#23684a"/><circle cx="245" cy="239" r="15" fill="#23684a"/><circle cx="256" cy="210" r="15" fill="#23684a"/><circle cx="262" cy="182" r="15" fill="#23684a"/><circle cx="261" cy="153" r="15" fill="#23684a"/><circle cx="254" cy="124" r="15" fill="#23684a"/><circle cx="238" cy="95" r="15" fill="#23684a"/><circle cx="216" cy="66" r="15" fill="#23684a"/>
+<g stroke="#9a3d22" stroke-width="9" stroke-linecap="round">
+  <line x1="197" y1="236" x2="225" y2="296"/>
+  <line x1="225" y1="236" x2="197" y2="296"/>
+</g>
+</svg>

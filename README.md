@@ -23,7 +23,7 @@ judge can follow with one finger, down a single trunk, with the work converging 
 | **The stress** | Heat and salt. The smallest farms sit where they are worst. |
 | **The protein** | One of three, chosen against that stress. Not yet made. |
 | **The cells** | *B. subtilis*, engineered to make it and let it out. No output measured. |
-| **The reactor** | Ours, built from nothing. It has never stood at a farm. |
+| **The bioreactor** | Ours, built from nothing. It has never stood at a farm. |
 | **The field** | The dose arrives where the crop is. No plant has had one. |
 
 Two rules produced those five, and they are worth keeping:
@@ -31,7 +31,7 @@ Two rules produced those five, and they are worth keeping:
 1. **Every step is a thing you can point at**, not a stage of a process. An earlier pass used verbs
    (*see it coming, pick what to make, make it, hand it over, do it again*) and it was clever in a
    way that cost clarity: a judge had to build the object back out of the verb before they could
-   place a piece of work against it. Nouns let sixteen pieces of work find their step in one look.
+   place a piece of work against it. Nouns let twenty-nine pieces of work find their step in one look.
 2. **Each step carries its claim and its limit in one breath**, at the same size, and then stops.
    Two short sentences, never three. If a step needs a paragraph, the step is wrong.
 
@@ -69,52 +69,78 @@ had everything un-held, so dragging along a row strobed. Pointing is now handled
 container, with `pointerover`, which bubbles: moving between two tiles is a single event and a single
 swap with no blank frame. If you ever see the figure flicker again, this is the thing that broke.
 
-## A piece of work is its own photograph
+## A piece of work is its own picture, and the picture is cut out
 
-There is no card beside the picture. **The tile is the picture**, with the name and a mark under it.
-Twenty-five of them, twenty-four photographs from
+There is no card beside the picture and, since 2026-08-28, **no rectangle around it either**. The
+tile is the thing itself with its own outline, the name and a mark under it, and nothing behind it.
+**Twenty-nine of them.**
+
+**Why the mat came off.** With a white mat, a hairline and a crop, twenty-nine different pieces of
+work looked like one thing repeated twenty-nine times: same box, same drop, same tilt. You could not
+tell the Taiwan layer from a gel without reading, which meant the pictures were decoration and the
+labels were doing all the work. **Cut out, the silhouette is the label before the label is read** —
+the island is island-shaped, the PEPR1 ectodomain is a V, the folded mRNA is a cloverleaf, a page of
+Dr Pak's working is ink on nothing. That is the single change that made this figure legible at this count.
+
+**What each tile is made of, and how.** `tools_tiles.sh` regenerates every one from its source, and
+the treatment is chosen by what the source *is*:
+
+| treatment | what it does | used for |
+|---|---|---|
+| `photo` | subject lifted with the macOS Vision framework (`tools_lift.swift`, `VNGenerateForegroundInstanceMaskRequest`). Offline, no model to download, no service. | the twenty photographs of days people worked |
+| `ink` | near-white flood-filled to transparent, so plot lines and pen survive and the paper does not | our own result figures and schematics |
+| `board` | ink separated by luminance rather than by flood fill, because a photographed page is not uniformly white | handwritten working shot on a desk |
+| `plain` | trim only | `tools_render.py`, our own PyMOL renders, already transparent |
+
+**We re-rendered rather than cropped.** The docking tile is not `fig4_superposition.png` from the
+report: that figure is drawn on opaque white and carries burnt-in text labels that turn to mush at
+130px. `tools_render.py` loads **the same two PDB files** — `BoPep4-PEPR1_native-mode_top.pdb` and
+the `AtPep1-PEPR1_validation_top.pdb` control — aligns on the receptor, and renders BoPep4 in blue
+against AtPep1 in orange with `ray_opaque_background` off and no labels at all. Same science, right
+artwork.
+
+**The photographs come from the originals, not the old 340px derivatives.** A cut-out crops to its
+subject, so it starts from a fraction of the pixels a rectangle had. Sources are matched back to
 `iGEM2026_Images` (filenames are `YYYYMMDD_Subteam_Type_Description`, and the date is the day the
-photograph was taken) plus the one tile that moves.
+photograph was taken) and the paths are in `tools_tiles.sh`.
 
-An earlier pass put a photograph in the margin *next to* a labelled pill, and it read as two things
-about one subject. Collapsing them was the change that made the figure quiet. Four decisions hold it
-there:
+Six decisions hold the rest of it:
 
 1. **They run horizontally, not down.** A step and everything that feeds it occupy one line of the
-   page, which is what lets all five fit on a laptop screen with nothing scrolled.
-1b. **Each step sets its own tile format, and the format is the step's signature.** A plot, a person
-   kneeling and an island are all upright, so **The stress** runs portrait. A trajectory and a page of
-   working are wide, so **The protein** does. Plates and gels are square, benches are landscape, a
-   field is a horizon. Uniform tiles read as a spreadsheet; these vary for a reason, the same way the
-   ramp does. Change a format in one line: `.node[data-node="3"] { --tile-w; --tile-h }`.
-1c. **One photograph leads each step**, marked `data-lead` and set larger. It is the one with people
-   in it wherever there is a choice, and it is deliberately not always on the same side, so the eye
-   lands somewhere first and the strips do not read as a grid.
-1d. **They are prints, not thumbnails.** A white mat, a hairline, a soft drop and about a degree of
-   tilt, laid on a common bottom edge. The tilt is a static transform and never changes; it is there
-   because a wall of perfectly square crops reads as a database and this is a record of a year of
-   somebody's Saturdays. Saturation sits at 0.9 rather than the 0.68 an earlier pass used: faces
-   should look like faces.
-2. **Two lines per label, fixed**, terse and with the definite articles dropped. Under a photograph
-   "Photometer" reads faster than "The photometer". The box is a fixed two lines whether the name
-   uses them or not, so every row of the chain is exactly as tall as every other; ragged rows were
-   what read as mess. Names are plain on purpose: "Cloning", "Pressure", "Schools", not the internal
-   shorthand a subteam would use.
-3. **They sit held back until wanted.** Desaturated and slightly down in opacity, so they read as a
-   contact sheet feeding the trunk rather than sixteen pictures competing with it.
-4. **No captions.** The name under the tile is the caption. The detail, including the date, lives in
-   `alt`, where a screen reader gets it and the drawing does not have to carry it.
-5. **A mark on the caption line, from our own CAD.** A photograph at this size tells you the mood of
-   a day and not much else; the glyph says what the thing is before the name is read. It sits beside
-   the name, **never over the picture**. A badge floating on the frame was tried first and it fussed
-   up every photograph it landed on: the photo is the evidence and nothing should sit on top of it.
+   page. Four cut-outs a side is the ceiling: 486 + 352 + 486 with two 24px gaps is 1372, and 1372
+   plus the band's own padding is 1436, which is the narrowest laptop this has to survive. **If a
+   wing needs to grow, the trunk gives way — never the viewport.**
+2. **Only the height is shared. Widths follow the artwork.** `--tile-h` per step is a ground line
+   every cut-out in the row stands on; `--tile-max` is a ceiling so one 4:1 schematic cannot eat a
+   whole wing. That is what a row of specimens looks like and what a contact sheet does not.
+3. **One picture leads each step**, marked `data-lead` and set larger: the one with people in it
+   wherever there is a choice, and deliberately not always on the same side.
+4. **Three lines per label, fixed**, because the names stopped being one-word shorthand. "Sensors"
+   told a judge nothing; **"pH and DO sensors"** tells them what was actually wired. A name is now
+   what was done and what with — "Codon optimisation, ViennaRNA", "Docking BoPep4 on PEPR1",
+   "Replicating Pearce 2008". The box is a fixed three lines whether a name uses them or not, so
+   every row is as tall as every other. **`min-width` on `.task` is 104px and that number is load
+   bearing**: below it "benchmarking" breaks mid-word.
+5. **They sit held back until wanted.** Down in saturation and slightly in opacity, so they read as
+   a shelf feeding the trunk rather than twenty-nine pictures competing with it. Pointing at one can
+   no longer light a border, because there is no border: it deepens the contact shadow instead, and
+   a cross-link tints the name amber rather than a frame.
+6. **A mark on the caption line, never over the picture.** The cut-out says what *shape* the thing
+   is; the glyph says what *kind*.
 
-**The closing band carries no photographs.** The five steps are the record and the pictures are
-evidence for them. The only image down there is the map, which is a measurement rather than a day.
+**Result figures earned their place here.** The rule used to be "every tile is a photograph", and
+two student drawings were once put back as photographs on that basis. The rule is now narrower and
+better: **a result figure where the work produced one, a photograph where the work is a thing people
+did.** A drawing of a thing is still not the thing — but our own truncation cliff, our own ViennaRNA
+fold and our own docking render *are* the work, and hiding them behind a photo of the day we made
+them was throwing away the evidence.
+
+**The closing band carries no tiles.** The five steps are the record. The only image down there is
+the map, which is a measurement rather than a day.
 
 ## The trajectory
 
-The tile marked **Docking** is not a photograph. It is 46 frames of our own MD run,
+The tile marked **Molecular dynamics, 30 ns** is not a photograph. It is 46 frames of our own MD run,
 `R1_BoPep4_WT_PEPR1`: 30 ns of production, BoPep4 in the PEPR1 groove, drawn straight out of
 `21_MD_Simulation/results/R1_BoPep4_WT_PEPR1_out/stripped.dcd`.
 
@@ -213,7 +239,8 @@ page. **Do not put a number of machines or a weight of protein next to that dial
 ## The outro
 
 **All of us walking up the row into 陳惠雯's plot, 21 July 2026**: one landscape band the full width of
-the viewport, no fade, with one sentence and a signature across the row underneath. She is the farmer
+the viewport, no fade, **with the promise in its top-left corner and the wordmark in its
+bottom-right**. She is the farmer
 who moved our dosing off a wall clock and onto soil-moisture state, and the frame is a line of
 high-schoolers in team shirts following her into her own field. That is the argument the page has
 been making, in one picture.
@@ -222,15 +249,22 @@ Earlier versions cropped in close on her and feathered the band into the paper. 
 the close crop lost the group, and the feather made the picture look uncertain about being there. A
 hard-edged full-width band is the stronger ending.
 
-Three things hold it together and are easy to break:
+**The sign-off moved onto the picture on 2026-08-28.** Under it, *Every farmer a biomanufacturer*
+was a caption on a photograph; on it, it is what the photograph is for. Four things hold it together
+and are easy to break:
 
-- **The ground stays light.** An ink outro was tried and the sign-off is the hand-drawn wordmark,
-  whose letters are filled black; on ink it disappears. Paper also means the band above needs no
-  seam, which is what makes the photograph read as part of the page rather than a block dropped on
-  the end.
+- **Two corners, two different legibility problems, two different answers.** The top-left of this
+  frame is bright sky and light foliage, so the line gets a scrim — a dark wash anchored to that
+  corner, fading out well before the walkers, and it never crosses a face. The bottom-right is dark
+  grass and **the wordmark's letters are filled black**, so a scrim there would bury it; instead the
+  wordmark carries a white glow, which is what a hand-drawn mark on a photograph wants anyway.
+- **No plate behind the wordmark.** A white rounded box was tried and it read as a sticker on
+  somebody else's picture.
+- **The scrim only touches the corners.** If a future edit reaches for a full-frame darkening to
+  make the type easier, it will flatten the field and the shirts, which are the picture.
 - **The sign-off is a student drawing, not the logo.** The circular team logo was there first and got
-  swapped: the wordmark is warmer, it is the same hand as the two sticker tiles above, and it does
-  not read as corporate furniture at the end of a page about farmers.
+  swapped: the wordmark is warmer and it does not read as corporate furniture at the end of a page
+  about farmers.
 
 **Consent is not on record.** The project brief lists image consent and release for 陳惠雯 as
 outstanding. This page is public. Get her agreement before the wiki goes live, or change the
@@ -304,10 +338,14 @@ The drawing at the very end, the reactor standing at the head of an irrigation l
 - **No horizontal scroll, and no drag gesture to explain.** The trunk is vertical, so the drawing is
   never wider than the column. V1 needed a scroll frame and a line of text telling you to drag it;
   this one does not, which is the quiet practical win of turning the figure ninety degrees.
-- **Under 900px** the trunk moves to the left edge and each step's work wraps underneath it, step
+- **Under 1150px** the trunk moves to the left edge and each step's work wraps underneath it, step
   first, and the map plate stacks above its legend. Same markup, no second copy of the content.
-- **Verified at 320, 375, 414, 768, 900, 1280, 1440 and 1920.** No horizontal scroll at any of them,
-  and no label overflows its two-line box.
+  The turn used to sit at 900 and that was too low: four cut-outs a side is 4.32 tile widths plus
+  three gaps, and a tile under about 90px cannot hold a three-line name, so between 900 and 1150
+  four labels were being silently cut off by the clamp. 90px of tile solves back to 1150px of
+  viewport, and below it the honest move is a different layout rather than a smaller tile.
+- **Verified at 320, 375, 414, 420, 768, 900, 1000, 1080, 1150, 1240, 1280, 1440 and 1920.** No
+  horizontal scroll at any of them, and no label overflows its three-line box.
 - **The five steps no longer fit one screen**, and that was a deliberate trade: the chain carries
   twenty-five pieces of work rather than sixteen. If it has to fit again, cut tiles, not type.
 - **The five steps fit one laptop screen.** That is a constraint, not an accident: a judge should
@@ -352,19 +390,45 @@ over is an edit to two variables. If that swap happens, this section follows it 
 
 ## Editing the content
 
-Everything readable is in `index.html`. The script holds no content of its own.
+**The spine is generated. Do not hand-edit it.** At twenty-nine tiles a figure drifts the moment two
+copies of the truth exist — a tile renamed in one place and not the other, a `data-with` pointing at
+an id that was deleted. The five steps, the twenty-nine pieces of work, their labels, marks, alt text
+and cross-links live in **one readable table at the top of `tools_spine.py`**. Change the table, run
+`python3 tools_spine.py`, commit both. It re-splices the MD animation verbatim; its 46 frames are
+never retyped.
+
+Adding a piece of work is therefore two edits and no HTML:
+
+1. a row in `NODES` in `tools_spine.py` — key, label, sprite id, alt, cross-links, `True` if it leads
+2. a line in the `case` in `tools_tiles.sh` — key, treatment, source path
+
+then `./tools_tiles.sh <key> && python3 tools_spine.py`. **Bump the `?v=` on the stylesheet link in
+`index.html` when the CSS changes**; without it a browser that has the page cached will render new
+markup against old rules and the result looks broken in a way that is genuinely hard to diagnose.
+
+Everything else readable is still in `index.html` and the script holds no content of its own.
 
 - **A step** is a `.node` with `data-node="1"` to `"5"`, containing a `.strip--l`, a `.node__core`
   and a `.strip--r`. Two short sentences in `.node__note`, claim then limit. Never three.
 - **A legend row** is a `.key__row` with `data-hold` naming a layer id. Adding a layer is one image,
   one row and one line of CSS.
 - **A piece of work** is a `.task` with an `id`, `data-at="<step number>"`, an optional
-  `data-with="<space separated ids>"`, a `<figure class="task__shot">` holding one image, a
-  `.task__mark` pointing at a sprite symbol, and a `.task__name`. Adding one is a single element and no JavaScript. Keep the name to one line;
-  it is clipped rather than wrapped on purpose, so a long one will tell you.
-- Swapping a photograph is one `src` and one `alt`. The `alt` names what is in the frame and the
-  date, and nothing more.
+  `data-with="<space separated ids>"`, a `<figure class="task__shot">` holding one cut-out, a
+  `.task__mark` pointing at a sprite symbol, and a `.task__name`. Three lines, clipped rather than
+  wrapped, so a name that is too long will tell you.
 - **A segment** is a `.link` with `data-seg`, matching the node it leaves.
+
+## One thing on this page is a claim and not a workstream
+
+The project abstract calls ReLeaf *"an AIoT-driven optogenetic bioreactor system"*. **What exists
+behind that phrase is a threshold**: an SHT31 temperature and humidity sensor driving a green LED
+through PWM, demonstrated 20 June. There is no trained model, no forecast, no weather feed and no
+training data anywhere in the archive. The tile is therefore called **"Stress sensing electronics"**
+and its `alt` says in as many words that nothing here is a trained model.
+
+The real machine learning on this project is all protein-side and it is not on this figure yet:
+SecEff-Pred (ESM-2) for secretion efficiency, SignalP 6.0, and AlphaFold3 co-folding. **If anyone
+relabels that tile "AI", the sentence under it has to become true first.**
 
 - **A slot** is a `.slot` with a `<b>` label and one sentence saying what would fill it.
 

@@ -154,7 +154,7 @@
      its tile is held, which folds it into the highlight primitive rather than
      adding a third one that never stops. */
   var mdSvg   = document.querySelector(".task--md .mdanim");
-  var mdOwner = document.getElementById("t-docking");
+  var mdOwner = document.getElementById("t-md");
   var mdOn    = false;
   var mdFrames, mdChain, mdTip, mdX, mdY, mdRaf = 0, mdT0 = 0, mdAt = -1;
 
